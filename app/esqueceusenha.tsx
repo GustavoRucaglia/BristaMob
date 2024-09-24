@@ -1,105 +1,139 @@
-import { Link } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert, TouchableOpacity, Image } from 'react-native';
-const LoginScreen = () => {
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
+import { Link } from 'expo-router';
+
+export default function EsqueceuSenha(){
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const handleLogin = () => {
-    if (email === '' || password === '') {
-      Alert.alert('Erro', 'Por favor, preencha todos os campos.');
-      return;
+  const [message, setMessage] = useState('');
+
+  const handlePasswordReset = () => {
+    if (email) {
+      setMessage('Um link de recuperação foi enviado ao seu email.');
+      // Adicione sua lógica de recuperação de senha aqui
+    } else {
+      setMessage('Por favor, insira um email válido.');
     }
-    // Aqui você pode adicionar a lógica de autenticação
-    Alert.alert('Sucesso', 'Login realizado com sucesso!');
   };
 
   return (
-    <>
-        <StatusBar hidden={true} />
-        <View style={styles.container}>
-        <Text style={styles.titulo}>Esqueceu a senha?</Text>
-        <TextInput
+    <ScrollView style={{ backgroundColor: "#fff" }}>
+      <View style={styles.azul}>
+        <Image
+          source={require('@/assets/images/brazurismotuc.png')}
+          style={styles.logo}
+        
+        />
+      </View>
+      <View style={styles.container}>
+        <Text style={styles.title}>Recuperação de Senha</Text>
+        <Text style={styles.message}>{message}</Text>
+        <View style={styles.passwordContainer}>
+        
+        <Text style={styles.label}>Senha:</Text>
+          <TextInput
             style={styles.input}
-            placeholder="Email"
+            placeholder="exemplo@gmail.com"
             keyboardType="email-address"
             value={email}
-            onChangeText={setEmail} 
-            autoCapitalize="none"
-            />
-        <TouchableOpacity
-            style={styles.button}
-            onPress={handleLogin}
-            >
-            <Text style={styles.buttonText}>Voltar</Text>
-        </TouchableOpacity>
+            onChangeText={(text) => setEmail(text)}
+            accessibilityLabel="Campo de Email"
+            accessibilityHint="Insira seu endereço de email"
+          />
         </View>
-      </>
-);
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handlePasswordReset}
+        >
+          <Text style={styles.buttonText}>Enviar Link de Recuperação</Text>
+        </TouchableOpacity>
+        <View style={styles.backButton}>
+          <Link href="/login" style={styles.backButtonText}>Voltar para Login</Link>
+        </View>
+      </View>
+    </ScrollView>
+  );
 };
 
 const styles = StyleSheet.create({
+  message: {
+    fontSize: 16,
+    color: '#0056B3',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
   container: {
-    flex: 1,    
-    padding: 16,
-    backgroundColor: '#fff',
+    flex: 1,
+    padding: 20,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#fff',
+    marginTop: 30,
   },
-  titulo: {
-    fontSize: 35,
+  title: {
+    fontSize: 30,
     fontWeight: 'bold',
-    marginTop: 70,
-    marginBottom:40,
+    marginBottom: 20,
+    color: '#0056A6',
   },
- 
-  logo: {
-    width: 350,
-    height: 60,
-    marginBottom: 5, 
-    resizeMode: 'contain', 
-  },
- 
-    input: {
-      height: 28,
-      width: 250,
-      borderColor: '#0056B3',
-      borderWidth: 1,
-      marginBottom: 16,
-      paddingLeft: 8,
-      borderRadius: 5,
-      marginTop: 20,
-      marginHorizontal: 20,
-      marginVertical: 10,
-    },
- 
-    link:{
-      fontSize: 14,
+  instructions: {
+    fontSize: 20,
+    textAlign: 'center',
+    marginBottom: 40,
+    color: '#333',
     fontWeight: 'bold',
-    marginLeft:66,
-    marginBottom: 15,
-    },
- 
-  button:{
-    height: 28,
-    width: 180,
-    backgroundColor: '#0056B3',
-    borderRadius: 4,
+  },
+  input: {
+    height: 38,
+    width: 300,
+    borderColor: '#0056B6',
+    borderWidth: 1,
+    paddingLeft: 12,
+    borderRadius: 10,
+    marginBottom: 20,
+  },
+  button: {
+    height: 48,
+    width: 170,
+    backgroundColor: '#0056B6',
+    borderRadius: 10,
     alignItems: 'center',
-    marginBottom: 10,
+    justifyContent: 'center',
     marginTop: 20,
-    paddingVertical: 4,
-    paddingHorizontal: 20,
-    textAlign: 'center',
   },
- 
   buttonText: {
-    fontSize: 16,
+    fontSize: 20,
     color: '#fff',
-    textAlign: 'center',
-    fontWeight: 'normal',
-    
-},
- 
+    fontWeight: 'bold',
+  },
+  backButton: {
+    marginTop: 32,
+  },
+  backButtonText: {
+    color: '#0056B6',
+    fontSize: 20,
+  },
+  azul: {
+    backgroundColor: '#0056B3',
+    height: 150,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logo: {
+    width: 240,
+    height: 160,
+    marginTop:36,
+    borderRadius: 50,
+    marginHorizontal: 6,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  passwordContainer: {
+    width: '80%',
+    marginBottom: 20,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
 });
-export default LoginScreen;

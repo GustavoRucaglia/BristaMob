@@ -1,3 +1,4 @@
+import Header from '@/components/Header';
 import { Link } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
@@ -9,6 +10,7 @@ const { width } = Dimensions.get('window');
 const App = () => {
   return (
     <>
+    <Header />
       <StatusBar hidden={true} />
       <ScrollView style={styles.container}>
           <ImageBackground source={{ uri: 'https://tourb.com.br/img/lugares/rio-de-janeiro/praia-vermelha.jpg' }} style={styles.imageBig}>
@@ -25,10 +27,10 @@ const App = () => {
               </Link>
               <ImageBackground source={require('@/assets/images/saopaulo.jpg')} style={styles.imageSmall} >
               <Text style={styles.text}>São Paulo</Text></ImageBackground>
-             
               <ImageBackground source={require('@/assets/images/bahia.jpg')} style={styles.imageSmall} >
               <Text style={styles.text}>Salvador</Text></ImageBackground>
-              <ImageBackground source={require('@/assets/images/pernambuco.jpg')} style={styles.imageSmall} ><Text style={styles.text}>Pernambuco</Text></ImageBackground>
+              <ImageBackground source={require('@/assets/images/pernambuco.jpg')} style={styles.imageSmall} >
+              <Text style={styles.text}>Pernambuco</Text></ImageBackground>
             </ScrollView>
           </View>
           <View style={styles.col}>

@@ -32,13 +32,14 @@ export default function RootLayout() {
       <Stack  screenOptions={{
           header: () => <Header />,
         }}>
-        <Stack.Screen name="(tabs)" options={{ headerShown: true }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="buscar" options={{ headerShown: false }} />
         <Stack.Screen name="FaleConosco" options={{ headerShown: false }} />
-        <Stack.Screen name="login" options={{ headerShown: false }} />
-        <Stack.Screen name="Perfil" options={{ headerShown: false }} />
-        <Stack.Screen name="esqueceusenha" options={{ headerShown: true }} />
+        <Stack.Screen name="esqueceuSenha" options={{ headerShown: false }} />
         <Stack.Screen name="visiterj" options={{ headerShown: true }} />
+        <Stack.Screen name="cadastro" options={{ headerShown: false }} />
+        <Stack.Screen name="RecuperarSenha" options={{ headerShown: false }} />
+       
         <Stack.Screen name="+not-found" />
       </Stack>
     </ThemeProvider>

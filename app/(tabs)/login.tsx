@@ -1,9 +1,11 @@
 import { Link } from 'expo-router';
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground, ScrollView } from 'react-native';
+
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const handleLogin = () => {
     if (email === '' || password === '') {
       Alert.alert('Erro', 'Por favor, preencha todos os campos.');
@@ -14,121 +16,157 @@ const LoginScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.form}>
-      <Text style={styles.titulo}>Entre com sua conta do Brazurista</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        keyboardType="email-address"
-        value={email}
-        onChangeText={setEmail} 
-        autoCapitalize="none"
-        />
-      <TextInput
-        style={styles.input}
-        placeholder="Senha"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword} 
-        autoCapitalize="none"
-        />
-        <Link href="/esqueceusenha" style={styles.link}>Esqueceu senha? Redefinir senha</Link>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={handleLogin}
-        >
-        <Text style={styles.buttonText}  onPress={handleLogin}>Fazer Login</Text>
-      </TouchableOpacity>
+    <>
+    <ScrollView style={{backgroundColor: "#fff"}}>
+      <View style={styles.azul}>
+        <ImageBackground source={require('@/assets/images/brazurismotuc.png')} style={styles.imageSmall} />
       </View>
-      <View>
-       <Link href="/cadastro" style={styles.link2}>Não tem uma conta? Cadastre-se</Link>
-      </View>
+      <View style={styles.container}>
+        <View style={styles.form}>
+          <Text style={styles.titulo}>Que bom que você voltou ao Brazurista!</Text>
+            
 
+          <View style={styles.passwordContainer}>
+          <Text style={styles.label}>Email:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="exemplo@gmail.com"
+            keyboardType="email-address"
+            value={email}
+            onChangeText={setEmail} 
+            autoCapitalize="none"
+            placeholderTextColor="#888"
+          />
+          </View>
+          <View style={styles.passwordContainer}>
+            <Text style={styles.label}>Senha:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="**********"
+              secureTextEntry
+              value={password}
+              onChangeText={setPassword}
+              autoCapitalize="none"
+              placeholderTextColor="#888"
+            />
+          </View>
+          <Link href="/esqueceuSenha" style={styles.link}>Esqueceu senha? Redefinir senha</Link>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={handleLogin}
+          >
+            <Text style={styles.buttonText}>Entrar</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.ajudalink2}>
+          <Link href="/cadastro" style={styles.link2}>Não tem uma conta? Cadastre-se</Link>
+        </View>
       </View>
-);
+      </ScrollView>
+    </>
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,    
     padding: 16,
-    backgroundColor: '#fff',
+    marginTop: 30,
     justifyContent: 'space-between',
-    paddingTop: 140,
-    paddingBottom: 40,
     alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    paddingHorizontal: 50,
-    textAlign: 'center',
   },
   form: {
-    display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
   },
   titulo: {
-    fontSize: 26,
+    fontSize: 32,
     fontWeight: 'bold',
-    marginTop: 55,
-    marginBottom:25,
+    marginTop: 35,
+    marginBottom: 36,
     textAlign: 'center',
   },
- 
-  logo: {
-    width: 200,
-    height: 40,
-    marginBottom: 5, 
-   
+  input: {
+    height: 38,
+    width: 300,
+    borderColor: '#0056B3',
+    borderWidth: 1,
+    paddingLeft: 12,
+    borderRadius: 10,
+    marginTop: 10,
+    marginBottom: 10,
+    marginHorizontal: 20,
+    marginVertical: 10,
   },
- 
-    input: {
-      height: 30,
-      width: 275, // Largura da caixa de texto
-      borderColor: '#0056B3',
-      borderWidth: 1,
-      paddingLeft: 12,
-      borderRadius: 5,
-      marginTop: 20, //em cima
-      marginBottom: 8, //baixo
-      marginHorizontal: 20,
-      marginVertical: 10,
-    },
- 
-    link:{
-    fontSize: 14,
-    fontWeight: 'bold',
-    marginLeft:66,
-    marginBottom: 12,
-    marginTop:5,
-    },
- 
-  button:{
-    height: 28,
-    width: 180, // Largura da caixa de texto
-    backgroundColor: '#0056B3',
-    borderRadius: 4,
-    alignItems: 'center',
+  passwordContainer: {
+    width: '100%',
     marginBottom: 20,
-    marginTop: 20,
-    paddingVertical: 4, // Ajusta o padding vertical para reduzir o tamanho
-    paddingHorizontal: 20, // Ajusta o padding horizontal para reduzir o tamanho
-    textAlign: 'center',
   },
- 
-  buttonText: {
+  label: {
     fontSize: 16,
+    fontWeight: 'bold',
+    marginLeft: 20, // Ajuste a margem esquerda para alinhar o texto
+  },
+  link: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: '#0056B3',
+    textDecorationLine: 'underline',
+    marginBottom: 8,
+    marginTop: 14,
+  },
+  link2: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  button: {
+    height: 40,
+    width: 200,
+    backgroundColor: '#0056B3',
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+    marginTop: 30,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  buttonText: {
+    fontSize: 20,
     color: '#fff',
     textAlign: 'center',
     fontWeight: 'bold',
-},
+  },
+  imageSmall: {
+    width: 240,
+    height: 160,
+    marginTop:36,
+    borderRadius: 50,
+    marginHorizontal: 6,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  azul: {
+    backgroundColor: '#0056B3',
+    height:150, 
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 
-link2:{
-fontSize: 14,
-fontWeight: 'bold',
-},
- 
+
+
+  inputContainer: {
+    width: '100%',
+    maxWidth: 280,
+    marginBottom: 20,
+    paddingHorizontal: 20,
+    flexDirection: 'column',
+  },
+
+  ajudalink2:{
+    marginTop:60,
+  }
 });
+
 export default LoginScreen;
