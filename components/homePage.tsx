@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { ScrollView, View, Image, Text, StyleSheet, ImageBackground } from 'react-native';
 import { Dimensions } from 'react-native';
+import { Carrossel } from './carrossel';
 
 
 const { width } = Dimensions.get('window');
@@ -17,22 +18,7 @@ export const HomePage = () => {
             <Text style={styles.inicio}>Conheça os principais pontos turísticos do Rio de Janeiro</Text>
           </ImageBackground>
           <View style={styles.section}>
-          <View style={styles.col}>
-            <Text style={styles.title}>Conheça lugares incríveis!</Text>
-            <ScrollView horizontal={true} style={styles.row} showsHorizontalScrollIndicator={false}>
-              <Link href={'/visiterj'}>
-                <ImageBackground source={require('@/assets/images/cristo.jpg')} style={styles.imageSmall} >
-                  <Text style={styles.text}>Rio de Janeiro</Text>
-              </ImageBackground>
-              </Link>
-              <ImageBackground source={require('@/assets/images/saopaulo.jpg')} style={styles.imageSmall} >
-              <Text style={styles.text}>São Paulo</Text></ImageBackground>
-              <ImageBackground source={require('@/assets/images/bahia.jpg')} style={styles.imageSmall} >
-              <Text style={styles.text}>Salvador</Text></ImageBackground>
-              <ImageBackground source={require('@/assets/images/pernambuco.jpg')} style={styles.imageSmall} >
-              <Text style={styles.text}>Pernambuco</Text></ImageBackground>
-            </ScrollView>
-          </View>
+            <Carrossel title='Conheça lugares incríveis!' category='' />
           <View style={styles.col}>
             <Text style={styles.title}>Aproveite em família!</Text>
             <ScrollView horizontal={true} style={styles.row} showsHorizontalScrollIndicator={false}>
