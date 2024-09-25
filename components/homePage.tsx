@@ -19,28 +19,8 @@ export const HomePage = () => {
           </ImageBackground>
           <View style={styles.section}>
             <Carrossel title='Conheça lugares incríveis!' category='' />
-          <View style={styles.col}>
-            <Text style={styles.title}>Aproveite em família!</Text>
-            <ScrollView horizontal={true} style={styles.row} showsHorizontalScrollIndicator={false}>
-              <ImageBackground source={require('@/assets/images/portodegalinhas.jpg')} style={styles.imageSmall} ><Text style={styles.text}>Porto de Galinhas</Text></ImageBackground>
-
-              <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall} ><Text style={styles.text}>Restaurantes</Text></ImageBackground>
-              
-              <ImageBackground source={require('@/assets/images/curitiba.jpg')} style={styles.imageSmall} ><Text style={styles.text}>Curitiba</Text></ImageBackground>
-              <ImageBackground source={require('@/assets/images/df.jpg')} style={styles.imageSmall} ><Text style={styles.text}>Distrito Federal</Text></ImageBackground>
-            </ScrollView>
-          </View>
-          <View style={styles.col}>
-            <Text style={styles.title}>Sonhe com sua próxima viagem...</Text>
-            <ScrollView horizontal={true} style={styles.row} showsHorizontalScrollIndicator={false}>
-            <Link href={'/visiterj'}>
-              <ImageBackground source={require('@/assets/images/elevadorlacerda.jpg')} style={styles.imageSmall}><Text style={styles.text}>Elevador da Lacerda</Text></ImageBackground>
-            </Link>
-              <ImageBackground source={require('@/assets/images/sm.jpg')} style={styles.imageSmall}><Text style={styles.text}>Simplicio Mendes</Text></ImageBackground>
-              <ImageBackground source={require('@/assets/images/copacabana.jpg')} style={styles.imageSmall} ><Text style={styles.text}>Copacabana</Text></ImageBackground>
-              <ImageBackground source={require('@/assets/images/lapa.jpg')} style={styles.imageSmall}><Text style={styles.text}>Lapa</Text></ImageBackground>
-            </ScrollView>
-          </View>
+            <Carrossel title='Aproveite em família!' category='Parque' />
+            <Carrossel title='Conheça restaurantes' category='Restaurante' />
         </View>
       </ScrollView>
     </>
