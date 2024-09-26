@@ -17,6 +17,7 @@ const { width } = Dimensions.get('window');
 export const Carrossel = ({title, category}: propsCarrossel) => {
 
     
+  /*
     const { data, error, isLoading, refetch } = useQuery({
         queryKey: ["pontos", category],
         queryFn: () => getPontoInterreseFilter(category),
@@ -31,16 +32,17 @@ export const Carrossel = ({title, category}: propsCarrossel) => {
      
        
       };
+      */
   return (
    
           <View style={styles.col}>
             <Text style={styles.title}>{title }</Text>
             <ScrollView horizontal={true} style={styles.row} showsHorizontalScrollIndicator={false}>
-                {data?.map((pontos: PontoInterrese) => (
+                {/* {data?.map((pontos: PontoInterrese) => (
                     <ImageBackground key={pontos.id} source={{ uri: pontos.fotos }} style={styles.imageSmall} >
                       <Text style={styles.text}>{pontos.nome}</Text>
                   </ImageBackground>
-                ))}
+                ))} */}
             </ScrollView>
           </View>
          

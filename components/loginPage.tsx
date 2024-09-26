@@ -13,7 +13,7 @@ export  function LoginPage() {
   const handleSubmit = async (e: GestureResponderEvent) => {
     e.preventDefault();
     try {
-      const data = await loginRequest({ login, password });
+      //const data = await loginRequest({ login, password });
  
     } catch (error) {
       console.error('Erro ao fazer login:', error);
