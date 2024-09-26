@@ -17,8 +17,8 @@ const Buscar = () => {
                 <View style={styles.searchContainer}>
                     <AntDesign style={styles.icon} name="search1" size={24} color="black" />
                     <TextInput
-                        style={styles.searchInput}
-                        placeholder="Pesquise seu destino aqui..."
+                        style={styles.searchInput1}
+                        placeholder="Pesquise seu destino aqui..."placeholderTextColor="black" 
                     />
                 </View>
 
@@ -98,31 +98,31 @@ const Buscar = () => {
                     <Text style={styles.title}>Busque por regiões</Text>
                     <View style={styles.grid}>
                         <View style={styles.regiao}>
-                        <ImageBackground source={require('@/assets/images/df.jpg')} style={styles.regiaoImage} imageStyle={{ borderRadius: 10,  marginLeft:-55, }}>
+                        <ImageBackground source={require('@/assets/images/df.jpg')} style={styles.regiaoImage} imageStyle={{   marginLeft:-63, }}>
                             <Text style={styles.regiaoText}>Norte</Text>
                             </ImageBackground>
                         </View>
                         <View style={styles.regiao1}>
-                        <ImageBackground source={require('@/assets/images/df.jpg')} style={styles.regiaoImage} imageStyle={{ borderRadius: 10,  marginLeft:-55, }}>
+                        <ImageBackground source={require('@/assets/images/df.jpg')} style={styles.regiaoImage} imageStyle={{   marginLeft:-63, }}>
                             <Text style={styles.regiaoText}>Nordeste</Text>
                             </ImageBackground>
                         </View>
                     </View>
                     <View style={styles.grid}>
                         <View style={styles.regiao2}>
-                        <ImageBackground source={require('@/assets/images/df.jpg')} style={styles.regiaoImage} imageStyle={{ borderRadius: 10,  marginLeft:-55, }}>
-                            <Text style={styles.regiaoText}>Centro-Oeste</Text>
+                        <ImageBackground source={require('@/assets/images/df.jpg')} style={styles.regiaoImage} imageStyle={{  marginLeft:-63, }}>
+                            <Text style={styles.regiaoText}>Oeste</Text>
                             </ImageBackground>
                         </View>
                         <View style={styles.regiao3}>
-                        <ImageBackground source={require('@/assets/images/df.jpg')} style={styles.regiaoImage} imageStyle={{ marginLeft:-55,  }}>
+                        <ImageBackground source={require('@/assets/images/df.jpg')} style={styles.regiaoImage} imageStyle={{ marginLeft:-60,  }}>
                             <Text style={styles.regiaoText}>Sudeste</Text>
                             </ImageBackground>
                         </View>
                     </View>
                     <View style={styles.grid}>
                         <View style={styles.regiao4}>
-                        <ImageBackground source={require('@/assets/images/df.jpg')} style={styles.regiaoImage} imageStyle={{ borderRadius: 10,  marginLeft:-55, }}>
+                        <ImageBackground source={require('@/assets/images/df.jpg')} style={styles.regiaoImage} imageStyle={{  marginLeft:-63, }}>
                             <Text style={styles.regiaoText}>Sul</Text>
                             </ImageBackground>
                         </View>
@@ -188,6 +188,14 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'center',
     },
+    searchInput1: {
+        height: 40,
+        borderColor: 'gray',
+        fontSize: 18,
+        paddingLeft: 10, // Adicione padding para o texto não ficar colado na borda
+        color: 'black',  // Certifique-se que o texto do input seja visível
+      },
+      
     azul: {
         backgroundColor: '#0056B3',
         height: 120,
@@ -204,6 +212,10 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         marginTop: 15,
         height: 45,
+        width: '93%',
+        marginLeft: 15,
+        marginRight: 100,
+
     },
     regiaoImage: {
         width: 65,
@@ -220,6 +232,7 @@ const styles = StyleSheet.create({
     },
     icon: {
         marginRight: 8,
+
     },
     section: {
         marginBottom: 20,
@@ -244,7 +257,9 @@ const styles = StyleSheet.create({
         marginTop: 8,
         marginBottom: 3,
         padding: 13,
+        marginLeft: -9,
     },
+    
     horizontalScroll: {
         flexDirection: 'row',
     },
@@ -288,6 +303,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         flexWrap: 'wrap',
+        maxWidth: 380,
         
     },
     gridItem: {
@@ -319,6 +335,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         overflow: 'hidden',
+        marginLeft:6,
+       
     },
     regiao1: {
         width: '48%',
@@ -329,6 +347,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         overflow: 'hidden',
+        marginLeft:6,
+        
         
     },
     regiao2: {
@@ -340,6 +360,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         overflow: 'hidden',
+        marginLeft:6,
+        
     },
     regiao3: {
         width: '48%',
@@ -350,6 +372,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         overflow: 'hidden',
+        marginLeft:6,
+        
     },
     regiao4: {
         width: '48%',
@@ -360,6 +384,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         overflow: 'hidden',
+        marginLeft:6,
+    
     },
     regiaoText: {
         fontWeight: 'bold',
