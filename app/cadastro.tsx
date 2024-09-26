@@ -1,30 +1,34 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground, ScrollView } from 'react-native';
-import { Link } from 'expo-router';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground, ScrollView, GestureResponderEvent } from 'react-native';
+import { Link, router } from 'expo-router';
 import Checkbox from 'expo-checkbox';
+import { loginRequest, RegisterRequest } from './utils/auth';
 
 
 const LoginScreen = () => {
-  const [nome, setNome] = useState('');
-  const [email, setEmail] = useState('');
-  const [telefone, setTelefone] = useState('');
-  const [senha, setSenha] = useState('');
-  const [confirmarSenha, setConfirmarSenha] = useState('');
-  const [isChecked, setIsChecked] = useState(false); // Estado para CheckBox
-
-  const handleLogin = () => {
-    if (nome === '' || email === '' || senha === '' || confirmarSenha === '') {
-      Alert.alert('Erro', 'Por favor, preencha todos os campos.');
-      return;
+  const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('');
+    const [nome, setNome] = useState('');
+    const [telefone, setTelefone] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [passwordsMatch, setPasswordsMatch] = useState(true);
+    const [role] = useState('USER');
+   
+    
+ 
+    const handleSubmit = async (e:  GestureResponderEvent) => {
+      e.preventDefault();
+      try {
+        await RegisterRequest({ login, password, role });
+        await loginRequest({ login, password });
+        
+      } catch (error) {
+        console.error('Falha no registro:', error);
+      }
+     
     }
+   
 
-    if (senha !== confirmarSenha) {
-      Alert.alert('Erro', 'As senhas não coincidem.');
-      return;
-    }
-
-    Alert.alert('Sucesso', 'Cadastro realizado com sucesso!');
-  };
 
   return (
     <ScrollView style={{ backgroundColor: "#fff" }}>
@@ -52,8 +56,8 @@ const LoginScreen = () => {
               style={styles.input}
               placeholder="exemplo@gmail.com"
               keyboardType="email-address"
-              value={email}
-              onChangeText={setEmail}
+              value={login}
+              onChangeText={setLogin}
               autoCapitalize="none"
               placeholderTextColor="#888"
             />
@@ -74,8 +78,8 @@ const LoginScreen = () => {
               style={styles.input}
               placeholder="**********"
               secureTextEntry
-              value={senha}
-              onChangeText={setSenha}
+              value={password}
+              onChangeText={setPassword}
               autoCapitalize="none"
               placeholderTextColor="#888"
             />
@@ -86,24 +90,16 @@ const LoginScreen = () => {
               style={styles.input}
               placeholder="**********"
               secureTextEntry
-              value={confirmarSenha}
-              onChangeText={setConfirmarSenha}
+              value={confirmPassword}
+              onChangeText={setConfirmPassword}
               autoCapitalize="none"
               placeholderTextColor="#888"
             />
           </View>
-          <View style={styles.check}>
-            <Checkbox
-              value={isChecked}
-              onValueChange={setIsChecked}
-              style={styles.checkbox}
-            />
-            <Text style={styles.textoCheck}>Li e concordo com os termos de uso</Text>
-          </View>
           </View>
           <TouchableOpacity
             style={styles.button}
-            onPress={handleLogin}
+            onPress={handleSubmit}
           >
             <Text style={styles.buttonText}>Cadastre-se</Text>
           </TouchableOpacity>
