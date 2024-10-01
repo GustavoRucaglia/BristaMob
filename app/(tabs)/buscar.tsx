@@ -317,7 +317,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 0, // Alinha o texto na parte de baixo da imagem
         marginBottom: 10, // Espaço entre o texto e a borda inferior da imagem
-        color: '#E6E6E6',
+        color: 'white',
         fontSize: 20,
         fontWeight: '800',
         textAlign: 'center',
@@ -329,7 +329,7 @@ const styles = StyleSheet.create({
     regiao: {
         width: '48%',
         height: 50,
-        backgroundColor: 'green',
+    
         borderRadius: 10,
         marginBottom: 7,
         justifyContent: 'center',
@@ -341,7 +341,7 @@ const styles = StyleSheet.create({
     regiao1: {
         width: '48%',
         height: 50,
-        backgroundColor: 'darkred',
+
         borderRadius: 10,
         marginBottom: 7,
         justifyContent: 'center',
