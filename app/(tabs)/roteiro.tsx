@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ScrollView, View, Text, Image, StyleSheet,ImageBackground } from 'react-native';
+import { ScrollView, View, Text, Image, StyleSheet,ImageBackground, TouchableOpacity } from 'react-native';
 import Header from '@/components/Header';
  
 const App = () => {
@@ -44,6 +44,8 @@ const App = () => {
             <Text style={styles.visitedText}>Já visitado ✓</Text>
           </View>
         </View>
+      
+    
       </ScrollView>
       </>
   );

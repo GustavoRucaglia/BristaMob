@@ -39,6 +39,9 @@ export default function RootLayout() {
         <Stack.Screen name="visiterj" options={{ headerShown: true }} />
         <Stack.Screen name="cadastro" options={{ headerShown: false }} />
         <Stack.Screen name="RecuperarSenha" options={{ headerShown: false }} />
+        <Stack.Screen name="TermoDeUso" options={{ headerShown: false }} />
+        <Stack.Screen name="quemSomos" options={{ headerShown: false }} />
+        <Stack.Screen name="dentroRoteiro" options={{ headerShown: false }} />
        
         <Stack.Screen name="+not-found" />
       </Stack>

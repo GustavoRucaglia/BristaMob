@@ -1,9 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, ImageBackground } from 'react-native';
 
 export default function TabTwoScreen() {
   return (
     <ScrollView style={{ backgroundColor: '#fff' }}>
+       <View style={styles.azul}>
+        <ImageBackground source={require('@/assets/images/brazurismotuc.png')} style={styles.imageSmall} />
+      </View>
       {/* Seção "Quem Somos" */}
       <View style={styles.container}>
         <Text style={styles.title}>QUEM SOMOS?</Text>
@@ -23,6 +26,7 @@ export default function TabTwoScreen() {
           Junte-se a nós e comece a planejar a viagem dos seus sonhos com o Brazurista. Seu próximo destino espera por você!
         </Text>
       </View>
+      <View style={styles.line}></View>
 
      
       {/* Seção "Nossa Equipe" */}
@@ -55,20 +59,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
     color: '#0056A6',
-    marginTop:30,
+    marginTop:10,
   },
   instructions: {
     fontSize: 20, 
-      textAlign: 'left',
-      marginTop:17,
+    textAlign: 'left',
+    marginTop:6,
     marginBottom: 20,
     color: '#333',
     fontWeight: 'normal',
   },
   line: {
     height: 2.5, // Define a altura da linha
-    width:300,
-    backgroundColor: 'blue', // Cor da linha
+    width:360,
+    backgroundColor: '#0056B3', // Cor da linha
     marginVertical: 10,
     alignSelf: 'center',
   },
@@ -78,5 +82,20 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: '#333',
     fontWeight: 'normal',
+  },
+  azul: {
+    backgroundColor: '#0056B3',
+    height: 150,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imageSmall: {
+    width: 240,
+    height: 160,
+    marginTop: 36,
+    borderRadius: 50,
+    marginHorizontal: 6,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
 });

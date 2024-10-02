@@ -63,6 +63,9 @@ export default function Home() {
           </ImageBackground>
         </ScrollView>
       </View>
+
+      <View style={styles.blueLine} />
+      
     </ScrollView>
   );
 }

@@ -1,10 +1,10 @@
 import Checkbox from 'expo-checkbox';
 import React, { useState } from 'react';
-import { View, Text, ScrollView, StyleSheet, Button, TouchableOpacity} from 'react-native';
- 
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
+
 const TermsOfUseScreen = ({ navigation }: any) => {
   const [isChecked, setIsChecked] = useState(false);
- 
+
   const handleAccept = () => {
     if (isChecked) {
       navigation.navigate('HomeScreen');
@@ -12,12 +12,18 @@ const TermsOfUseScreen = ({ navigation }: any) => {
       alert('Você deve aceitar os termos para continuar.');
     }
   };
- 
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Termos de Uso</Text>
+    <>
+      
+
       <ScrollView style={styles.scrollView}>
-        <Text style={styles.content}>
+      <View style={styles.azul}>
+        <ImageBackground source={require('@/assets/images/brazurismotuc.png')} style={styles.imageSmall} />
+      </View>
+        <View style={styles.container}>
+          <Text style={styles.title}>Termos de Uso</Text>
+          <Text style={styles.content}>
           Bem-vindo ao nosso site de turismo. Ao acessar ou usar este site, você concorda em cumprir e ficar vinculado aos seguintes termos e condições.
           {'\n\n'}1. Propriedade Intelectual: Todo o conteúdo presente neste site, incluindo textos, imagens, gráficos, logotipos, vídeos e outros materiais, são protegidos por direitos autorais e outras leis de propriedade intelectual. Você concorda em não reproduzir, distribuir, modificar ou criar obras derivadas a partir desse conteúdo sem autorização prévia por escrito;
           {'\n\n'}2. Conteúdo do Usuário: Se você enviar conteúdo, como avaliações, comentários ou fotos, para o site, concede-nos o direito de usar, modificar, exibir e distribuir esse conteúdo em qualquer meio. No entanto, você é responsável pelo conteúdo que envia e concorda em não enviar material difamatório, obsceno, ilegal ou prejudicial;
@@ -30,41 +36,42 @@ const TermsOfUseScreen = ({ navigation }: any) => {
           {'\n\n'}9. Lei Aplicável e Jurisdição: Estes termos de uso são regidos e interpretados de acordo com as leis do Brasil. Qualquer disputa relacionada a estes termos será submetida à jurisdição exclusiva dos tribunais competentes da cidade de São Paulo, Estado de São Paulo;
           {'\n\n'}10. Política de Privacidade: É fundamental que os usuários revisem nossa política de privacidade para compreender como as informações pessoais são coletadas, utilizadas e protegidas pelo site. Esta política detalha os procedimentos adotados para garantir a segurança e a privacidade dos dados dos usuários. Ao utilizar o site, os usuários concordam com os termos estabelecidos em nossa política de privacidade;
           {'\n\n'}Contato: Se os usuários tiverem dúvidas ou preocupações sobre estes termos de uso, estamos à disposição para ajudar. Por favor, entrem em contato conosco através do seguinte endereço de e-mail: brazurista@gmail.com. Estamos comprometidos em fornecer suporte e esclarecimentos sempre que necessário.
-        </Text>
-      </ScrollView>
-      <View style={styles.checkboxContainer}>
-        <Checkbox
-          value={isChecked}
-          onValueChange={setIsChecked}
-        />
-        <Text style={styles.label}>Eu aceito os Termos de Uso</Text>
-        <TouchableOpacity
+          </Text>
 
-      >
-        <Text >Criar Conta</Text>
-      </TouchableOpacity>
-    </View>
-    </View>
+          <View style={styles.checkboxContainer}>
+            <Checkbox
+              value={isChecked}
+              onValueChange={setIsChecked}
+            />
+            <Text style={styles.label}>Eu aceito os Termos de Uso</Text>
+          </View>
+
+          <TouchableOpacity onPress={handleAccept} style={styles.button}>
+            <Text style={styles.buttonText}>Criar Conta</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </>
   );
 };
- 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    alignItems: 'center',
   },
   scrollView: {
-    marginVertical: 20,
+    backgroundColor: '#fff',
   },
   title: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: 'bold',
     marginBottom: 20,
-    textAlign: 'center'
+    textAlign: 'center',
   },
- 
   content: {
-    fontSize: 16,
+    fontSize: 18,
     lineHeight: 24,
     textAlign: 'justify',
   },
@@ -77,7 +84,37 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 16,
   },
+  azul: {
+    backgroundColor: '#0056B3',
+    height: 150,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imageSmall: {
+    width: 240,
+    height: 160,
+    marginTop: 36,
+    borderRadius: 50,
+    marginHorizontal: 6,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  button: {
+    height: 40,
+    width: 200,
+    backgroundColor: '#0056B3',
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+    marginTop: 30,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+  },
 });
- 
+
 export default TermsOfUseScreen;
- 
