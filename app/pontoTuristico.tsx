@@ -7,21 +7,29 @@ export default function Home() {
     <ScrollView contentContainerStyle={styles.container}>
       {/* Título principal e ícone */}
       <View style={styles.header}>
-        <Text style={styles.a}>Explore a região Sudeste</Text>
-        
+        <Text style={styles.a}>Museu Da Arte Moderna</Text>
+        <MaterialIcons name="bookmark-border" size={24} color="black" style={styles.icon} />
       </View>
 
       {/* Imagem principal */}
       <View style={styles.lugar2}>
-        <Image source={require('@/assets/images/saopaulo.jpg')} style={styles.image} />
+        <Image source={require('@/assets/images/MASP.jpg')} style={styles.image} />
       </View>
 
       {/* Texto descritivo */}
-      <Text style={styles.titulo}>O Pulso Econômico e Cultural do Brasil</Text>
+      <Text style={styles.titulo}>Informações Gerais sobre:</Text>
       <Text style={[styles.b, styles.textCenter]}>
-      A Região Sudeste do Brasil é a mais populosa e economicamente desenvolvida do país, composta pelos estados de São Paulo, Rio de Janeiro, Minas Gerais e Espírito Santo. É uma área estratégica tanto em termos de produção industrial quanto de serviços, além de possuir um papel central na história e na cultura brasileira.
+      O Museu de Arte de São Paulo Assis Chateaubriand (MASP) é um dos mais importantes e icônicos museus do Brasil e da América Latina. Fundado em 1947 por Assis Chateaubriand e o crítico de arte italiano Pietro Maria Bardi, o MASP se destaca por sua arquitetura modernista e por sua inovadora coleção de arte
       </Text>
 
+      <Text style={styles.titulo}>Localização e Contato</Text>
+      <Text style={[styles.b, styles.textCenter]}>
+      Av.Paulista,1578 - Bela Vista,São Paulo - SP     
+      </Text>
+      <view style={{padding:5}}/>
+      <Text style={[styles.b, styles.textCenter]}>
+      (11)95678-1353 
+      </Text>
 
  {/* Linha Azul */}
  <View style={styles.blueLine} />
@@ -47,7 +55,7 @@ export default function Home() {
 
       {/* Seção de restaurantes */}
       <View style={styles.col}>
-        <Text style={styles.title}>Restaurantes no Sudeste</Text>
+        <Text style={styles.title}>Restaurantes de São Paulo</Text>
         <ScrollView horizontal={true} style={styles.row} showsHorizontalScrollIndicator={false}>
           <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall}>
             <Text style={styles.text1}>Tembui</Text>
@@ -62,10 +70,8 @@ export default function Home() {
             <Text style={styles.text1}>Tembui</Text>
           </ImageBackground>
         </ScrollView>
+        <View style={styles.blueLine} />
       </View>
-
-      <View style={styles.blueLine} />
-      
     </ScrollView>
   );
 }
