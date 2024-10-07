@@ -1,10 +1,20 @@
 import React from 'react';
-import { Image, ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, ImageBackground, ScrollView, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { Link, useRouter } from 'expo-router';
 
-export default function Home() {
+export default function PontoTuristico() {
+  const router = useRouter(); // UseRouter sendo chamado corretamente
+
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView contentContainerStyle={styles.container1}>
+      <View style={styles.azul}>
+        {/* Exibindo a logo grande */}
+        <Image 
+          source={require('@/assets/images/brazurismotuc.png')} // Logo grande
+          style={styles.logoGrande} // Estilo ajustado para a logo grande
+        />
+      </View>
       {/* Título principal e ícone */}
       <View style={styles.header}>
         <Text style={styles.a}>Museu Da Arte Moderna</Text>
@@ -19,56 +29,71 @@ export default function Home() {
       {/* Texto descritivo */}
       <Text style={styles.titulo}>Informações Gerais sobre:</Text>
       <Text style={[styles.b, styles.textCenter]}>
-      O Museu de Arte de São Paulo Assis Chateaubriand (MASP) é um dos mais importantes e icônicos museus do Brasil e da América Latina. Fundado em 1947 por Assis Chateaubriand e o crítico de arte italiano Pietro Maria Bardi, o MASP se destaca por sua arquitetura modernista e por sua inovadora coleção de arte
+        O Museu de Arte de São Paulo Assis Chateaubriand (MASP) é um dos mais importantes e icônicos museus do Brasil e da América Latina. Fundado em 1947 por Assis Chateaubriand e o crítico de arte italiano Pietro Maria Bardi, o MASP se destaca por sua arquitetura modernista e por sua inovadora coleção de arte.
       </Text>
 
       <Text style={styles.titulo}>Localização e Contato</Text>
       <Text style={[styles.b, styles.textCenter]}>
-      Av.Paulista,1578 - Bela Vista,São Paulo - SP     
+        Av. Paulista, 1578 - Bela Vista, São Paulo - SP
       </Text>
-      <view style={{padding:5}}/>
       <Text style={[styles.b, styles.textCenter]}>
-      (11)95678-1353 
+        (11) 95678-1353
       </Text>
 
- {/* Linha Azul */}
- <View style={styles.blueLine} />
- 
+      {/* Linha Azul */}
+      <View style={styles.blueLine} />
+
       {/* Seção de pontos turísticos */}
       <View style={styles.col}>
-        <Text style={styles.title}>Turistando no Sudeste</Text>
+        <Text style={styles.title}>Pontos turísticos</Text>
         <ScrollView horizontal={true} style={styles.row} showsHorizontalScrollIndicator={false}>
-          <ImageBackground source={require('@/assets/images/cristo.jpg')} style={styles.imageSmall}>
-            <Text style={styles.text}>Cristo Redentor</Text>
-          </ImageBackground>
-          <ImageBackground source={require('@/assets/images/lapa.jpg')} style={styles.imageSmall}>
-            <Text style={styles.text}>Lapa</Text>
-          </ImageBackground>
-          <ImageBackground source={require('@/assets/images/museudoamanhajpg.jpg')} style={styles.imageSmall}>
-            <Text style={styles.text}>Museu do Amanhã</Text>
-          </ImageBackground>
-          <ImageBackground source={require('@/assets/images/bahia.jpg')} style={styles.imageSmall}>
-            <Text style={styles.text}>São Paulo</Text>
-          </ImageBackground>
+          <TouchableOpacity onPress={() => router.push('/pontoTuristico')}>
+            <ImageBackground source={require('@/assets/images/cristo.jpg')} style={styles.imageSmall}>
+              <Text style={styles.text}>Cristo Redentor</Text>
+            </ImageBackground>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => router.push('/pontoTuristico')}>
+            <ImageBackground source={require('@/assets/images/jalapao.jpg')} style={styles.imageSmall}>
+              <Text style={styles.text}>Jalapão</Text>
+            </ImageBackground>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => router.push('/pontoTuristico')}>
+            <ImageBackground source={require('@/assets/images/ilheus.jpg')} style={styles.imageSmall}>
+              <Text style={styles.text}>Museu do Amanhã</Text>
+            </ImageBackground>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => router.push('/pontoTuristico')}>
+            <ImageBackground source={require('@/assets/images/df.jpg')} style={styles.imageSmall}>
+              <Text style={styles.text}>Distrito Federal</Text>
+            </ImageBackground>
+          </TouchableOpacity>
         </ScrollView>
       </View>
 
       {/* Seção de restaurantes */}
       <View style={styles.col}>
-        <Text style={styles.title}>Restaurantes de São Paulo</Text>
+        <Text style={styles.title}>Restaurantes</Text>
         <ScrollView horizontal={true} style={styles.row} showsHorizontalScrollIndicator={false}>
-          <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall}>
-            <Text style={styles.text1}>Tembui</Text>
-          </ImageBackground>
-          <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall}>
-            <Text style={styles.text1}>Tembui</Text>
-          </ImageBackground>
-          <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall}>
-            <Text style={styles.text1}>Tembui</Text>
-          </ImageBackground>
-          <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall}>
-            <Text style={styles.text1}>Tembui</Text>
-          </ImageBackground>
+          <TouchableOpacity onPress={() => router.push('/pontoTuristico')}>
+            <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall}>
+              <Text style={styles.text1}>Tembui</Text>
+            </ImageBackground>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => router.push('/pontoTuristico')}>
+            <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall}>
+              <Text style={styles.text1}>Tembui</Text>
+            </ImageBackground>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => router.push('/pontoTuristico')}>
+            <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall}>
+              <Text style={styles.text1}>Tembui</Text>
+            </ImageBackground>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => router.push('/pontoTuristico')}>
+            <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall}>
+              <Text style={styles.text1}>Tembui</Text>
+            </ImageBackground>
+          </TouchableOpacity>
         </ScrollView>
         <View style={styles.blueLine} />
       </View>
@@ -77,8 +102,23 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 10,
+  container1: {
+    padding: 0,
+  },
+  logoGrande: {
+    width: 250,
+    height: 180,
+    marginTop: 36,
+    borderRadius: 50,
+    marginHorizontal: 6,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  azul: {
+    backgroundColor: '#0056B3',
+    height: 120,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   header: {
     flexDirection: 'row',
@@ -92,12 +132,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   blueLine: {
-    height: 2.5, // Define a altura da linha
-    width:300,
-    backgroundColor: 'blue', // Cor da linha
+    height: 2.5,
+    width: 300,
+    backgroundColor: 'blue',
     marginVertical: 10,
-    alignSelf: 'center', 
-  
+    alignSelf: 'center',
+    marginTop: 40,
+    marginBottom: 10,
   },
   titulo: {
     fontSize: 24,
@@ -107,7 +148,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   icon: {
-    marginRight: 15,
+    marginRight: 20,
   },
   a: {
     fontSize: 25,
@@ -115,13 +156,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   image: {
-    width: 350,
-    height: 210,
+    width: 337,
+    height: 230,
     borderRadius: 4,
     marginBottom: 10,
   },
   textCenter: {
-    textAlign: 'left', // Centraliza o texto
+    textAlign: 'left',
+    padding: 10,
   },
   b: {
     marginLeft: 10,
@@ -149,7 +191,7 @@ const styles = StyleSheet.create({
   },
   text1: {
     textAlign: 'center',
-    color: 'black',
+    color: 'white',
     marginBottom: 6,
     fontSize: 14,
     fontWeight: 'bold',

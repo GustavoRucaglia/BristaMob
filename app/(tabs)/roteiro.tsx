@@ -7,6 +7,7 @@ const App = () => {
   return (
 <>
 <Header />
+
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Seus Roteiros</Text>
       <View style={styles.filterContainer}>

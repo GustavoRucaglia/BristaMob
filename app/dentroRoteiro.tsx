@@ -14,16 +14,15 @@ const App = () => {
    
       <Text style={styles.title}>Roteiro para Rio de Janeiro</Text>
       <View style={styles.filterContainer}>
-        <Text style={styles.filterText}>Filtrar por:</Text>
-        <Text style={styles.filterValue}>Recentes ▼</Text>
+        
       </View>
  
       <View style={styles.roteiroContainer}>
         <View style={styles.roteiro}>
         <ImageBackground source={require('@/assets/images/copacabana.jpg')} style={styles.image}>
           </ImageBackground>
-          <Text style={styles.roteiroTitle}>Copa Cabana</Text>
-          <Text style={styles.reviewRating}>⭐ ⭐ ⭐</Text>
+          <Text style={styles.roteiroTitle}>Copacabana</Text>
+          
           <Text style={styles.roteiroDescription}>Copacabana é um bairro do Rio de Janeiro, famoso por sua praia em meia-lua, o calçadão com ondas de pedras portuguesas e sua vibrante vida cultural e turística.
 
 
@@ -32,27 +31,26 @@ const App = () => {
         <View style={styles.roteiro}>
         <ImageBackground source={require('@/assets/images/cristo.jpg')} style={styles.image} />
           <Text style={styles.roteiroTitle}>Cristo Redentor</Text>
-          <Text style={styles.reviewRating}>⭐ ⭐ ⭐</Text>
+          
           <Text style={styles.roteiroDescription}>
           O Cristo Redentor é uma estátua de 38 metros de altura, situada no Morro do Corcovado, no Rio de Janeiro. Inaugurada em 1931, é um ícone do Brasil e uma das Sete Maravilhas do Mundo Moderno.
 
 </Text>
         </View>
       </View>
- 
       <View style={styles.roteiroContainer}>
         <View style={styles.roteiro}>
         <ImageBackground source={require('@/assets/images/museudoamanhajpg.jpg')} style={styles.image}>
           </ImageBackground>
           <Text style={styles.roteiroTitle}>Museu do Amanhã </Text>
-          <Text style={styles.reviewRating}>⭐ ⭐ ⭐</Text>
+         
           <Text style={styles.roteiroDescription}>O Museu do Amanhã, no Rio de Janeiro, é um museu de ciência inaugurado em 2015, projetado por Santiago Calatrava. Focado em sustentabilidade e inovação, apresenta exposições interativas sobre desafios globais. Sua arquitetura futurista é um importante ponto turístico.
 </Text>
         </View>
         <View style={styles.roteiro}>
         <ImageBackground source={require('@/assets/images/ipanemarj.jpg')} style={styles.image} />
           <Text style={styles.roteiroTitle}>Praia de Ipanema</Text>
-          <Text style={styles.reviewRating}>⭐ ⭐ ⭐</Text>
+        
           <Text style={styles.roteiroDescription}>Ipanema é cenário de um belíssimo nascer e pôr-do-sol, diariamente apreciados por moradores e turistas, que costumam aplaudir o pôr- do-sol nos dias mais limpos. </Text>
         </View>
       </View>
@@ -128,11 +126,7 @@ const styles = StyleSheet.create({
     color:'#00b300',
     marginBottom:16,
   },
-  reviewRating: {
-    fontSize: 10,
-    color: '#FFA500',
-    marginBottom: 4,
-  },
+  
   imageSmall: {
     width: 240,
     height: 160,

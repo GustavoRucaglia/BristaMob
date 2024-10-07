@@ -43,6 +43,7 @@ export  function LoginPage() {
             placeholderTextColor="#888"
           />
           </View>
+          
           <View style={styles.passwordContainer}>
             <Text style={styles.label}>Senha:</Text>
             <TextInput
@@ -55,7 +56,7 @@ export  function LoginPage() {
               placeholderTextColor="#888"
             />
           </View>
-          <Link href="/esqueceuSenha" style={styles.link}>Esqueceu senha? Redefinir senha</Link>
+          <Link href="/redefinirSenha" style={styles.link}>Esqueceu senha? Redefinir senha</Link>
           <TouchableOpacity
             style={styles.button}
             onPress={handleSubmit}
@@ -117,7 +118,6 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: 'bold',
     color: '#0056B3',
-    textDecorationLine: 'underline',
     marginBottom: 8,
     marginTop: 14,
   },

@@ -2,6 +2,8 @@ import React from 'react';
 import { ScrollView, View, Image, Text, StyleSheet, TextInput, ImageBackground } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
+import { Link } from 'expo-router';
+
 
 const Buscar = () => {
     return (
@@ -14,8 +16,12 @@ const Buscar = () => {
                 </View>
 
                 {/* Barra de Pesquisa */}
+               
                 <View style={styles.searchContainer}>
-                    <AntDesign style={styles.icon} name="search1" size={24} color="black" />
+                <Link href="/resultadoBusca">
+                    <AntDesign style={styles.icon} name="search1" size={24} color="black"  />
+                    </Link>
+                    
                     <TextInput
                         style={styles.searchInput1}
                         placeholder="Pesquise seu destino aqui..."placeholderTextColor="black" 
@@ -29,36 +35,42 @@ const Buscar = () => {
                         <AntDesign name="rightcircleo" size={26} color="black" style={{ padding: 14 }} />
                     </View>
                     <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScroll}>
+                    <Link href="/pontoTuristico">
                         <View style={styles.card}>
                             <Image source={require('@/assets/images/cristo.jpg')} style={styles.image} />
                             <Text style={styles.cardText}>Cristo Redentor, RJ</Text>
-                            <Text style={styles.rating}>8.7 ★★★★★</Text>
                         </View>
+                        </Link>
+                        <Link href="/pontoTuristico">
                         <View style={styles.card}>
                             <Image source={require('@/assets/images/pernambuco.jpg')} style={styles.image} />
                             <Text style={styles.cardText}>Porto de Galinhas, PE</Text>
-                            <Text style={styles.rating}>8.7 ★★★★★</Text>
                         </View>
+                        </Link>
+                        <Link href="/pontoTuristico">
                         <View style={styles.card}>
                             <Image source={require('@/assets/images/lapa.jpg')} style={styles.image} />
                             <Text style={styles.cardText}>Lapa, RJ</Text>
-                            <Text style={styles.rating}>8.7 ★★★★★</Text>
                         </View>
+                        </Link>
+                        <Link href="/pontoTuristico">
                         <View style={styles.card}>
                             <Image source={require('@/assets/images/MASP.jpg')} style={styles.image} />
                             <Text style={styles.cardText}>MASP, SP</Text>
-                            <Text style={styles.rating}>8.7 ★★★★★</Text>
                         </View>
+                        </Link>
+                        <Link href="/pontoTuristico">
                         <View style={styles.card}>
                             <Image source={require('@/assets/images/copacabana.jpg')} style={styles.image} />
                             <Text style={styles.cardText}>Copacabana, RJ</Text>
-                            <Text style={styles.rating}>8.7 ★★★★★</Text>
                         </View>
+                        </Link>
+                        <Link href="/pontoTuristico">
                         <View style={styles.card}>
                             <Image source={require('@/assets/images/df.jpg')} style={styles.image} />
                             <Text style={styles.cardText}>Distrito Federal, GO</Text>
-                            <Text style={styles.rating}>8.7 ★★★★★</Text>
                         </View>
+                        </Link>
                     </ScrollView>
                 </View>
 
@@ -66,105 +78,130 @@ const Buscar = () => {
                 <View style={styles.container1}>
                     <View style={styles.section}>
                         <Text style={styles.title}>Descubra destinos</Text>
+                        
                         <View style={styles.grid}>
                             <View style={styles.gridItem}>
                                 <ImageBackground source={require('@/assets/images/MASP.jpg')} style={styles.image1}>
-                                    <Text style={styles.gridText}>Terra da garoa</Text>
+                                    <Text style={styles.gridText}>Museus</Text>
                                 </ImageBackground>
                             </View>
                             <View style={styles.gridItem}>
-                                <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.image1}>
+                                <ImageBackground source={require('@/assets/images/restaurante.jpg')} style={styles.image1}>
                                     <Text style={styles.gridText}>Restaurantes</Text>
                                 </ImageBackground>
                             </View>
                         </View>
                         <View style={styles.grid}>
                             <View style={styles.gridItem}>
-                                <ImageBackground source={require('@/assets/images/curitiba.jpg')} style={styles.image1}>
-                                    <Text style={styles.gridText}>Curitiba</Text>
+                                <ImageBackground source={require('@/assets/images/parque.jpg')} style={styles.image1}>
+                                    <Text style={styles.gridText}>Natureza</Text>
                                 </ImageBackground>
                             </View>
                             <View style={styles.gridItem}>
-                                <ImageBackground source={require('@/assets/images/df.jpg')} style={styles.image1}>
-                                    <Text style={styles.gridText}>Brasília</Text>
+                                <ImageBackground source={require('@/assets/images/igreja.jpg')} style={styles.image1}>
+                                    <Text style={styles.gridText}>Igrejas</Text>
+                                </ImageBackground>
+                            </View>
+                            <View style={styles.gridItem}>
+                                <ImageBackground source={require('@/assets/images/diversao.jpg')} style={styles.image1}>
+                                    <Text style={styles.gridText}>Parques</Text>
+                                </ImageBackground>
+                            </View>
+                            <View style={styles.gridItem}>
+                                <ImageBackground source={{ uri: 'https://tourb.com.br/img/lugares/rio-de-janeiro/praia-vermelha.jpg' }} style={styles.image1}>
+                                    <Text style={styles.gridText}>Praias</Text>
                                 </ImageBackground>
                             </View>
                         </View>
                     </View>
                 </View>
+               
 
-                {/* Seção: Busque por regiões */}
                 <View style={styles.section}>
-                    <Text style={styles.title}>Busque por regiões</Text>
-                    <View style={styles.grid}>
-                        <View style={styles.regiao}>
-                        <ImageBackground source={require('@/assets/images/df.jpg')} style={styles.regiaoImage} imageStyle={{   marginLeft:-63, }}>
-                            <Text style={styles.regiaoText}>Norte</Text>
-                            </ImageBackground>
-                        </View>
-                        <View style={styles.regiao1}>
-                        <ImageBackground source={require('@/assets/images/df.jpg')} style={styles.regiaoImage} imageStyle={{   marginLeft:-63, }}>
-                            <Text style={styles.regiaoText}>Nordeste</Text>
-                            </ImageBackground>
-                        </View>
+                    <View style={styles.row}>
+                        <Text style={styles.title}>Busque por Região</Text>
+                      
                     </View>
-                    <View style={styles.grid}>
-                        <View style={styles.regiao2}>
-                        <ImageBackground source={require('@/assets/images/df.jpg')} style={styles.regiaoImage} imageStyle={{  marginLeft:-63, }}>
-                            <Text style={styles.regiaoText}>Oeste</Text>
-                            </ImageBackground>
+                    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScroll}>
+                    <Link href="/regiaoSudeste">
+                        <View style={styles.card1}>
+                            <Image source={require('@/assets/images/lapa.jpg')} style={styles.image2} />
+                            <Text style={styles.regiaoText}>Sudeste</Text>  
                         </View>
-                        <View style={styles.regiao3}>
-                        <ImageBackground source={require('@/assets/images/df.jpg')} style={styles.regiaoImage} imageStyle={{ marginLeft:-60,  }}>
-                            <Text style={styles.regiaoText}>Sudeste</Text>
-                            </ImageBackground>
-                        </View>
-                    </View>
-                    <View style={styles.grid}>
-                        <View style={styles.regiao4}>
-                        <ImageBackground source={require('@/assets/images/df.jpg')} style={styles.regiaoImage} imageStyle={{  marginLeft:-63, }}>
+                        </Link>
+                        <Link href="/regiaoSul">
+                        <View style={styles.card1}>
+                            <Image source={require('@/assets/images/curitiba.jpg')} style={styles.image2} />
                             <Text style={styles.regiaoText}>Sul</Text>
-                            </ImageBackground>
+                              </View>
+                              </Link>
+                              <Link href="/regiaoCentro">
+                        <View style={styles.card1}>
+                            <Image source={require('@/assets/images/df.jpg')} style={styles.image2} />
+                            <Text style={styles.regiaoText}>Centro-Oeste</Text>
                         </View>
-                    </View>
-            
-        </View>
+                        </Link>
+                        <Link href="/regiaoNordeste">
+                        <View style={styles.card1}>
+                            <Image source={require('@/assets/images/sm.jpg')} style={styles.image2} />
+                            <Text style={styles.regiaoText}>Nordeste</Text>
+                        </View>
+                        </Link>
+                        <Link href="/regiaoNorte">
+                        <View style={styles.card1}>
+                            <Image source={require('@/assets/images/amazonia.jpg')} style={styles.image2} />
+                            <Text style={styles.regiaoText}>Norte</Text> 
+                        </View>
+                        </Link>
+                       
+                    </ScrollView>
+                </View>
         <View style={styles.section}>
                     <View style={styles.row}>
                         <Text style={styles.title}>Experimente Restaurantes</Text>
                         <AntDesign name="rightcircleo" size={26} color="black" style={{ padding: 14 }} />
                     </View>
                     <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScroll}>
+                    <Link href="/pontoTuristico">
                         <View style={styles.card}>
                             <Image source={require('@/assets/images/tembui.jpg')} style={styles.image} />
                             <Text style={styles.cardText}>Tembui,SP</Text>
-                            <Text style={styles.rating}>8.7 ★★★★★</Text>
                         </View>
+                        </Link>
+                        <Link href="/pontoTuristico">
                         <View style={styles.card}>
                             <Image source={require('@/assets/images/tembui.jpg')} style={styles.image} />
                             <Text style={styles.cardText}>Tembui,SP</Text>
-                            <Text style={styles.rating}>8.7 ★★★★★</Text>
+                            
                         </View>
+                        </Link>
+                        <Link href="/pontoTuristico">
                         <View style={styles.card}>
                             <Image source={require('@/assets/images/tembui.jpg')} style={styles.image} />
                             <Text style={styles.cardText}>Tembui,SP</Text>
-                            <Text style={styles.rating}>8.7 ★★★★★</Text>
+                                
                         </View>
+                        </Link>
+                        <Link href="/pontoTuristico">
                         <View style={styles.card}>
                             <Image source={require('@/assets/images/tembui.jpg')} style={styles.image} />
                             <Text style={styles.cardText}>Tembui,SP</Text>
-                            <Text style={styles.rating}>8.7 ★★★★★</Text>
+                                
                         </View>
+                        </Link>
+                        <Link href="/pontoTuristico">
                         <View style={styles.card}>
                             <Image source={require('@/assets/images/tembui.jpg')} style={styles.image} />
                             <Text style={styles.cardText}>Tembui,SP</Text>
-                            <Text style={styles.rating}>8.7 ★★★★★</Text>
                         </View>
+                        </Link>
+                        <Link href="/pontoTuristico">
                         <View style={styles.card}>
                             <Image source={require('@/assets/images/tembui.jpg')} style={styles.image} />
                             <Text style={styles.cardText}>Tembui,SP</Text>
-                            <Text style={styles.rating}>8.7 ★★★★★</Text>
+                           
                         </View>
+                        </Link>
                     </ScrollView>
                 </View>
 
@@ -180,8 +217,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     imageSmall: {
-        width: 240,
-        height: 160,
+        width: 250,
+        height: 180,
         marginTop: 36,
         borderRadius: 50,
         marginHorizontal: 6,
@@ -231,7 +268,8 @@ const styles = StyleSheet.create({
         color: 'black',
     },
     icon: {
-        marginRight: 8,
+        paddingLeft: 100,
+        
 
     },
     section: {
@@ -245,12 +283,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginLeft: 8,
     },
-    rating: {
-        color: '#f1c40f',
-        fontWeight: 'bold',
-        marginLeft: 10,
-        fontSize: 22,
-    },
+   
     title: {
         fontSize: 22,
         fontWeight: 'bold',
@@ -265,13 +298,19 @@ const styles = StyleSheet.create({
     },
     card: {
         width: 200,
-        marginLeft: 10,
+        marginLeft:7,
+        marginRight:7,
+        paddingLeft:7,
+        paddingRight:10,
     },
+   
+
     image: {
         width: '100%',
         height: 180,
         borderRadius: 8,
         paddingRight: 12,
+        paddingLeft:100,
     },
     image1: {
         width: 170,
@@ -286,6 +325,31 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         overflow: 'hidden', // Garantir que o conteúdo seja cortado pelo borderRadius
     },
+    card1: {
+    width: 170,
+    marginLeft: 7,
+    marginRight: 15,
+    paddingLeft: 7,
+    paddingRight: 13,
+    marginBottom: 10, 
+    alignItems:'center',
+},
+image2: {
+    width: 170,
+    height: 170,
+    borderRadius: 10,
+    marginBottom: 10, // Adiciona margem inferior para afastar as imagens verticalmente
+    marginHorizontal: 5, // Adiciona margem lateral para espaçar horizontalmente
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+    marginLeft: 7,
+    marginRight: 15,
+    paddingLeft: 7,
+    paddingRight: 13,
+    
+},
+
     roundedImage: {
         borderRadius: 10, // Arredondar a imagem de fundo
     },
@@ -388,11 +452,18 @@ const styles = StyleSheet.create({
     
     },
     regiaoText: {
-        fontWeight: 'bold',
-        fontSize: 12,
+        position: 'absolute',
+        bottom: 0, // Alinha o texto na parte de baixo da imagem
+        marginBottom: 10, // Espaço entre o texto e a borda inferior da imagem
         color: 'white',
+        fontSize: 20,
+        fontWeight: '800',
         textAlign: 'center',
-        paddingLeft:13,
+        width: '100%', // Garantir que o texto fique centralizado na largura da imagem
+        padding: 5,
+        marginLeft:3,
+
+    
     },
 });
 

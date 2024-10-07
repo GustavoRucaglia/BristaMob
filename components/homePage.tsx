@@ -11,8 +11,17 @@ const { width } = Dimensions.get('window');
 export const HomePage = () => {
   return (
     <>
+ <ScrollView>
+      {/* Título principal e ícone */}
+      <View style={styles.azul}>
+        {/* Exibindo a logo grande */}
+        <Image 
+          source={require('@/assets/images/brazurismotuc.png')} // Logo grande
+          style={styles.logoGrande} // Estilo ajustado para a logo grande
+        />
+      </View>
     <Header />
-      <StatusBar hidden={true} />
+      <StatusBar hidden={false} />
       <ScrollView style={styles.container}>
           <ImageBackground source={{ uri: 'https://tourb.com.br/img/lugares/rio-de-janeiro/praia-vermelha.jpg' }} style={styles.imageBig}>
             <Text style={styles.inicio}>Conheça os principais pontos turísticos do Rio de Janeiro</Text>
@@ -23,6 +32,7 @@ export const HomePage = () => {
             <Carrossel title='Conheça restaurantes' category='Restaurante' />
         </View>
       </ScrollView>
+      </ScrollView>
     </>
   );
 };
@@ -31,6 +41,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
+  },
+  logoGrande: {
+    width: 250,
+    height: 180,
+    marginTop: 36,
+    borderRadius: 50,
+    marginHorizontal: 6,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  azul: {
+    backgroundColor: '#0056B3',
+    height: 120,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   inicio: {
     color: '#E6E6E6',

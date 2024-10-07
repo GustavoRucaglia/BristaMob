@@ -5,6 +5,16 @@ import Entypo from '@expo/vector-icons/Entypo';
 export default function ProfilePage() {
   return (
     <View style={styles.container}>
+       <ScrollView>
+      {/* Título principal e ícone */}
+      <View style={styles.azul}>
+        {/* Exibindo a logo grande */}
+        <Image 
+          source={require('@/assets/images/brazurismotuc.png')} // Logo grande
+          style={styles.logoGrande} // Estilo ajustado para a logo grande
+        />
+      </View>
+
      
  
       {/* Profile Section */}
@@ -30,40 +40,70 @@ export default function ProfilePage() {
      
  
       {/* Reviews Section */}
-      <Text style={styles.sectionTitle}>Suas avaliações e comentários</Text>
+      <Text style={styles.sectionTitle}>Alguns de seus favoritos</Text>
       <ScrollView  horizontal={true} style={styles.reviewsSection} >
         <View style={styles.reviewItem}>
           <Image
-            source={require('@/assets/images/pernambuco.jpg')}
+            source={require('@/assets/images/cristo.jpg')}
             style={styles.reviewImage}
           />
           <View style={styles.reviewTextContainer}>
-            <View style={{flexDirection:'row', alignItems:'center', height:20, width:85, justifyContent:'space-between', marginBottom:5 }}>
-            <Text style={styles.reviewTitle}>MASP</Text>
-            <Text style={styles.reviewRating}>⭐ ⭐ ⭐</Text>
+            <View style={{flexDirection:'row', alignItems:'center', height:20, width:85, gap: 5, justifyContent:'space-between', marginBottom:5 }}>
+            <Text style={styles.reviewTitle}>Cristo Redentor</Text>
             </View>
             
             <Text style={styles.reviewText}>
-              Deixou muito a desejar. Fui recebida com indiferença por parte da equipe, que parecia mais interessada em conversar entre si.
+            O Cristo Redentor é um dos símbolos mais famosos do Brasil e uma das Sete Maravilhas do Mundo Moderno. 
             </Text>
           </View>
         </View>
         <View style={styles.reviewItem}>
-           <Image
-            source={require('@/assets/images/pernambuco.jpg')}
+          <Image
+            source={require('@/assets/images/MASP.jpg')}
             style={styles.reviewImage}
           />
           <View style={styles.reviewTextContainer}>
-            <View style={{flexDirection:'row', alignItems:'center', height:20, width:85, justifyContent:'space-between', marginBottom:5 }}>
-            <Text style={styles.reviewTitle}>Sala São Paulo</Text>
-            <Text style={styles.reviewRating}>⭐ ⭐ ⭐</Text>
+            <View style={{flexDirection:'row', alignItems:'center', height:20, width:100, gap: 5, justifyContent:'space-between', marginBottom:5 }}>
+            <Text style={styles.reviewTitle}>MASP</Text>
+           
             </View>
-            
+      
             <Text style={styles.reviewText}>
-              Deixou muito a desejar. Fui recebida com indiferença por parte da equipe, que parecia mais interessada em conversar entre si.
+            O Museu de Arte de São Paulo Assis Chateaubriand (MASP) é um dos mais importantes e icônicos museus do Brasil e da América Latina. 
             </Text>
           </View>
         </View>
+        <Image
+            source={require('@/assets/images/recife.jpg')}
+            style={styles.reviewImage}
+          />
+          <View style={styles.reviewTextContainer}>
+            <View style={{flexDirection:'row', alignItems:'center', height:20, width:85, gap: 5, justifyContent:'space-between', marginBottom:5 }}>
+            <Text style={styles.reviewTitle}>Recife</Text>
+            </View>
+            
+            <Text style={styles.reviewText}>
+            O Cristo Redentor é um dos símbolos mais famosos do Brasil e uma das Sete Maravilhas do Mundo Moderno. 
+            </Text>
+          </View>
+          <Image
+            source={require('@/assets/images/lapa.jpg')}
+            style={styles.reviewImage}
+          />
+          <View style={styles.reviewTextContainer}>
+            <View style={{flexDirection:'row', alignItems:'center', height:20, width:85, gap: 5, justifyContent:'space-between', marginBottom:5 }}>
+            <Text style={styles.reviewTitle}>Lapa</Text>
+            </View>
+            
+            <Text style={styles.reviewText}>
+            O Cristo Redentor é um dos símbolos mais famosos do Brasil e uma das Sete Maravilhas do Mundo Moderno. 
+            </Text>
+          </View>
+        
+        
+       
+        
+        </ScrollView>
       </ScrollView>
  
       {/* Bottom Section */}
@@ -75,14 +115,30 @@ export default function ProfilePage() {
           <Text style={styles.bottomLinkText}>Acesse seus roteiros</Text>
         </TouchableOpacity>
       </View>
-    </View>
-  );
+</View>
+
+)  ;
 }
  
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5F5F5',
+  },
+  logoGrande: {
+    width: 250,
+    height: 180,
+    marginTop: 36,
+    borderRadius: 50,
+    marginHorizontal: 6,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  azul: {
+    backgroundColor: '#0056B3',
+    height: 120,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
  
   profileSection: {
@@ -150,6 +206,7 @@ const styles = StyleSheet.create({
   reviewTextContainer: {
     marginLeft: 8,
     maxWidth: 300,
+    maxHeight:130,
   },
   reviewTitle: {
     fontSize: 16,
@@ -163,6 +220,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#FFA500',
     marginBottom: 4,
+    flexDirection: "row"
   },
   bottomSection: {
     padding: 20,

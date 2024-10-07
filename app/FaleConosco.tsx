@@ -74,7 +74,7 @@ const App: React.FC = () => {
       
       
       <View style={styles.linkContainer}>
-        <Link href="" style={styles.linkText}>Conheça nossa equipe!</Link>
+        
       </View>
     </ScrollView>
   );

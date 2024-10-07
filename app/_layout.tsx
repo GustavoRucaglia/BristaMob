@@ -36,15 +36,23 @@ export default function RootLayout() {
         <Stack.Screen name="buscar" options={{ headerShown: false }} />
         <Stack.Screen name="FaleConosco" options={{ headerShown: false }} />
         <Stack.Screen name="esqueceuSenha" options={{ headerShown: false }} />
-        <Stack.Screen name="visiterj" options={{ headerShown: true }} />
+        <Stack.Screen name="regiaoSudeste" options={{ headerShown: false }} />
         <Stack.Screen name="cadastro" options={{ headerShown: false }} />
-        <Stack.Screen name="RecuperarSenha" options={{ headerShown: false }} />
+        <Stack.Screen name="redefinirSenha" options={{ headerShown: false }} />
         <Stack.Screen name="TermoDeUso" options={{ headerShown: false }} />
         <Stack.Screen name="quemSomos" options={{ headerShown: false }} />
         <Stack.Screen name="dentroRoteiro" options={{ headerShown: false }} />
+        <Stack.Screen name="regiaoSul" options={{ headerShown: false }} />
+        <Stack.Screen name="regiaoCentro" options={{ headerShown: false }} />
+        <Stack.Screen name="regiaoNorte" options={{ headerShown: false }} />
+        <Stack.Screen name="regiaoNordeste" options={{ headerShown: false }} />
+        <Stack.Screen name="pontoTuristico" options={{ headerShown: false }} />
+        <Stack.Screen name="resultadoBusca" options={{ headerShown: false }} />
+        <Stack.Screen name="redefinirSenhad" options={{ headerShown: false }} />
        
         <Stack.Screen name="+not-found" />
       </Stack>
     </ThemeProvider>
+    
   );
 }
