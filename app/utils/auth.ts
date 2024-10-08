@@ -36,7 +36,7 @@ export const loginRequest = async (credentials: Credentials) => {
   };
  
   export const RegisterRequest = async (credentials: CredentialRegister ) => {
-    const response = await fetch('http://localhost:8080/auth/register', {
+    const response = await fetch('http://172.17.16.140:3000/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

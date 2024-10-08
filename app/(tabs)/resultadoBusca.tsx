@@ -133,9 +133,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  name:{
-    pa
-  },
+
   address: {
     fontSize: 14,
     color: '#555',

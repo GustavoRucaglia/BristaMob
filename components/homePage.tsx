@@ -20,7 +20,7 @@ export const HomePage = () => {
           style={styles.logoGrande} // Estilo ajustado para a logo grande
         />
       </View>
-    <Header />
+   
       <StatusBar hidden={false} />
       <ScrollView style={styles.container}>
           <ImageBackground source={{ uri: 'https://tourb.com.br/img/lugares/rio-de-janeiro/praia-vermelha.jpg' }} style={styles.imageBig}>
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   logoGrande: {
     width: 250,
     height: 180,
-    marginTop: 36,
+    marginTop: 46,
     borderRadius: 50,
     marginHorizontal: 6,
     justifyContent: 'flex-end',
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
   azul: {
     backgroundColor: '#0056B3',
-    height: 120,
+    height: 130,
     alignItems: 'center',
     justifyContent: 'center',
   },

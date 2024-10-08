@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
   logoGrande: {
     width: 250,
     height: 180,
-    marginTop: 36,
+    marginTop: 46,
     borderRadius: 50,
     marginHorizontal: 6,
     justifyContent: 'flex-end',
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   },
   azul: {
     backgroundColor: '#0056B3',
-    height: 120,
+    height: 160,
     alignItems: 'center',
     justifyContent: 'center',
     
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   blueLine: {
     height: 2.5,
     width: 300,
-    backgroundColor: 'blue',
+    backgroundColor: '#0056B3',
     marginVertical: 10,
     alignSelf: 'center',
     marginBottom: 10,

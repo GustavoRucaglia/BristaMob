@@ -7,7 +7,7 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const [ login, setLogin ] = useState(false);
+  const [ login, setLogin ] = useState(true);
 
   return (
     <Tabs

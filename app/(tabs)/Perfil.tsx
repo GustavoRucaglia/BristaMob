@@ -1,123 +1,82 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import Entypo from '@expo/vector-icons/Entypo';
+import { Link } from 'expo-router';
  
 export default function ProfilePage() {
   return (
     <View style={styles.container}>
-       <ScrollView>
-      {/* Título principal e ícone */}
-      <View style={styles.azul}>
-        {/* Exibindo a logo grande */}
+      <ScrollView>
+        {/* Title and Logo Section */}
+        <View style={styles.header}>
         <Image 
           source={require('@/assets/images/brazurismotuc.png')} // Logo grande
           style={styles.logoGrande} // Estilo ajustado para a logo grande
         />
-      </View>
-
-     
- 
-      {/* Profile Section */}
-      <View style={styles.profileSection}>
-        <Image
-          source={require('@/assets/images/pernambuco.jpg')}
-          style={styles.profileImage}
-        />
-        <View style={styles.profileInfo}>
-          <Text style={styles.profileName}>Yasmin Silva</Text>
-          <Text style={styles.profileHandle}>@yass.silva</Text>
-          <Text style={styles.profileStats}>10 Avaliações  2 Comentários</Text>
         </View>
-        <TouchableOpacity style={styles.editButton}>
-        <View style={styles.roteiroContainer1}>
-
-<Entypo style={styles.icon} name="pencil" size={24} color="black" />
-
-</View>
-        </TouchableOpacity>
-      </View>
-
-     
  
-      {/* Reviews Section */}
-      <Text style={styles.sectionTitle}>Alguns de seus favoritos</Text>
-      <ScrollView  horizontal={true} style={styles.reviewsSection} >
-        <View style={styles.reviewItem}>
-          <Image
-            source={require('@/assets/images/cristo.jpg')}
-            style={styles.reviewImage}
-          />
-          <View style={styles.reviewTextContainer}>
-            <View style={{flexDirection:'row', alignItems:'center', height:20, width:85, gap: 5, justifyContent:'space-between', marginBottom:5 }}>
-            <Text style={styles.reviewTitle}>Cristo Redentor</Text>
-            </View>
-            
-            <Text style={styles.reviewText}>
-            O Cristo Redentor é um dos símbolos mais famosos do Brasil e uma das Sete Maravilhas do Mundo Moderno. 
-            </Text>
-          </View>
-        </View>
-        <View style={styles.reviewItem}>
-          <Image
-            source={require('@/assets/images/MASP.jpg')}
-            style={styles.reviewImage}
-          />
-          <View style={styles.reviewTextContainer}>
-            <View style={{flexDirection:'row', alignItems:'center', height:20, width:100, gap: 5, justifyContent:'space-between', marginBottom:5 }}>
-            <Text style={styles.reviewTitle}>MASP</Text>
+        {/* Profile Section */}
+        <View style={styles.profileSection}>
+          <Image source={require('@/assets/images/brazurista2.png')} style={styles.profileImage} />
+          <View style={styles.profileInfo}>
+            <Text style={styles.profileName}>Yasmin Silva</Text>
+            <Text style={styles.profileHandle}>@yass.silva</Text>
            
-            </View>
-      
-            <Text style={styles.reviewText}>
-            O Museu de Arte de São Paulo Assis Chateaubriand (MASP) é um dos mais importantes e icônicos museus do Brasil e da América Latina. 
-            </Text>
           </View>
-        </View>
-        <Image
-            source={require('@/assets/images/recife.jpg')}
-            style={styles.reviewImage}
-          />
-          <View style={styles.reviewTextContainer}>
-            <View style={{flexDirection:'row', alignItems:'center', height:20, width:85, gap: 5, justifyContent:'space-between', marginBottom:5 }}>
-            <Text style={styles.reviewTitle}>Recife</Text>
-            </View>
-            
-            <Text style={styles.reviewText}>
-            O Cristo Redentor é um dos símbolos mais famosos do Brasil e uma das Sete Maravilhas do Mundo Moderno. 
-            </Text>
-          </View>
-          <Image
-            source={require('@/assets/images/lapa.jpg')}
-            style={styles.reviewImage}
-          />
-          <View style={styles.reviewTextContainer}>
-            <View style={{flexDirection:'row', alignItems:'center', height:20, width:85, gap: 5, justifyContent:'space-between', marginBottom:5 }}>
-            <Text style={styles.reviewTitle}>Lapa</Text>
-            </View>
-            
-            <Text style={styles.reviewText}>
-            O Cristo Redentor é um dos símbolos mais famosos do Brasil e uma das Sete Maravilhas do Mundo Moderno. 
-            </Text>
-          </View>
-        
-        
        
-        
-        </ScrollView>
-      </ScrollView>
+        </View>
  
-      {/* Bottom Section */}
-      <View style={styles.bottomSection}>
-        <TouchableOpacity style={styles.bottomLink}>
-          <Text style={styles.bottomLinkText}>Crie e altere seus roteiros de viagem</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.bottomLink}>
-          <Text style={styles.bottomLinkText}>Acesse seus roteiros</Text>
-        </TouchableOpacity>
-      </View>
-</View>
-
-)  ;
+        {/* Reviews Section */}
+        <Text style={styles.sectionTitle}>Alguns de seus favoritos</Text>
+        <ScrollView horizontal={true} style={styles.reviewsSection}>
+          {[
+            {
+              image: require('@/assets/images/cristo.jpg'),
+              title: 'Cristo Redentor',
+              text: 'O Cristo Redentor é um dos símbolos mais famosos do Brasil e uma das Sete Maravilhas do Mundo Moderno.',
+            },
+            {
+              image: require('@/assets/images/MASP.jpg'),
+              title: 'MASP',
+              text: 'O Museu de Arte de São Paulo Assis Chateaubriand (MASP) é um dos mais importantes e icônicos museus do Brasil e da América Latina.',
+            },
+            {
+              image: require('@/assets/images/recife.jpg'),
+              title: 'Recife',
+              text: 'Uma cidade vibrante com rica cultura e história.',
+            },
+            {
+              image: require('@/assets/images/lapa.jpg'),
+              title: 'Lapa',
+              text: 'Famosa por sua vida noturna e arquitetura histórica.',
+            },
+          ].map((review, index) => (
+            <View key={index} style={styles.reviewItem}>
+              <Image source={review.image} style={styles.reviewImage} />
+              <View style={styles.reviewTextContainer}>
+                <Text style={styles.reviewTitle}>{review.title}</Text>
+                <Text style={styles.reviewText}>{review.text}</Text>
+              </View>
+            </View>
+          ))}
+        </ScrollView>
+ 
+        {/* Bottom Section */}
+        <View style={styles.bottomSection}>
+        
+          <Link href="/novoRoteiro" style={styles.bottomLink}>
+            <Text style={styles.bottomLinkText}>Acesse seus roteiros</Text>
+          </Link>
+        </View>
+ 
+        
+<View style={styles.blueLine}/> 
+ 
+ 
+        
+      </ScrollView>
+    </View>
+  );
 }
  
 const styles = StyleSheet.create({
@@ -125,88 +84,76 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F5F5F5',
   },
-  logoGrande: {
+  logo: {
     width: 250,
     height: 180,
-    marginTop: 36,
+    marginTop: 10,
     borderRadius: 50,
-    marginHorizontal: 6,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
   },
-  azul: {
+  header: {
     backgroundColor: '#0056B3',
-    height: 120,
+    height: 140,
     alignItems: 'center',
     justifyContent: 'center',
   },
- 
   profileSection: {
     flexDirection: 'row',
     padding: 20,
     alignItems: 'center',
   },
+  
   profileImage: {
-    width: 50,
-    height: 50,
+    width: 90,
+    height: 90,
     borderRadius: 25,
   },
   profileInfo: {
-    marginLeft: 10,
+    marginLeft: 16,
     flex: 1,
   },
   profileName: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
   },
   profileHandle: {
-    fontSize: 14,
-    color: 'gray',
-  },
-  profileStats: {
-    fontSize: 14,
-    color: 'gray',
-  },
-  editButton: {
-    padding: 10,
-  },
-  editText: {
     fontSize: 18,
+    color: 'gray',
   },
+  
   reviewsSection: {
     padding: 20,
-    maxHeight: 280
+  
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: 'bold',
-    marginLeft: 20,
-    marginTop: 15,
+    marginLeft: 16,
+    marginTop: 8,
   },
   reviewItem: {
     flexDirection: 'column',
-    marginTop: 12,
+    marginTop: 8,
     backgroundColor: '#FFF',
-    paddingVertical: 12,
+    paddingVertical: 16,
+    paddingHorizontal: 12,
     borderRadius: 8,
-    height: 220,
-    gap: 5,
-    marginRight: 12,
+    height: 230,
+    marginRight: 18,
     shadowColor: '#000',
     shadowOpacity: 0.1,
-    shadowRadius: 5,
+    shadowRadius: 8,
     shadowOffset: { width: 0, height: 2 },
   },
   reviewImage: {
-    width: 255,
-    height: 105,
-    borderRadius: 4,
-    margin: 'auto',
+    width: '100%',
+    height: 130,
+    borderRadius: 6,
+    marginHorizontal: 'auto',
+    marginBottom: 10,
   },
   reviewTextContainer: {
     marginLeft: 8,
     maxWidth: 300,
-    maxHeight:130,
   },
   reviewTitle: {
     fontSize: 16,
@@ -214,59 +161,91 @@ const styles = StyleSheet.create({
   },
   reviewText: {
     fontSize: 14,
-    color: 'gray'
-  },
-  reviewRating: {
-    fontSize: 14,
-    color: '#FFA500',
-    marginBottom: 4,
-    flexDirection: "row"
+    color: 'gray',
   },
   bottomSection: {
     padding: 20,
   },
   bottomLink: {
-    marginTop: 10,
+    marginTop: 6,
   },
   bottomLinkText: {
-    fontSize: 16,
+    fontSize: 19,
     color: '#3366CC',
     textDecorationLine: 'underline',
   },
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+  
+  container2: {
+    flex: 1,
     padding: 20,
-    borderTopWidth: 1,
-    borderTopColor: '#DDD',
+    justifyContent: 'center',
   },
-  footerButton: {
+  textAtual: {
+    fontSize: 28,
+    marginBottom: 20,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 12,
+    paddingHorizontal: 8,
+    borderRadius: 4,
+  },
+  blueLine: {
+    height: 2.5,
+    width: 300,
+    backgroundColor:  '#0056B3',
+    marginVertical: 10,
+    alignSelf: 'center',
+    marginTop: 40,
+    marginBottom: 10,
+  },
+  input1: {
+    height: 36,
+    width: 240,
+    borderColor: '#0056B3',
+    borderWidth: 1,
+    paddingLeft: 12,
+    borderRadius: 10,
+    marginTop: 10,
+    marginBottom: 10,
+    marginHorizontal: 20,
+    marginVertical: 10,
+  },
+  logoGrande: {
+    width: 250,
+    height: 180,
+    marginTop: 46,
+    borderRadius: 50,
+    marginHorizontal: 6,
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  footerText: {
-    fontSize: 14,
-    color: '#3366CC',
+  button: {
+    height: 40,
+    width: '80%',
+    backgroundColor: '#0056B3',
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+    marginTop: 30,
+    paddingVertical: 10,
+    paddingHorizontal: 40,
   },
-
-
-
-  roteiroContainer1: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
-},
-
-icon: {
-  marginTop: 3,
-  marginLeft: 2,
-  marginBottom: 8,
-  marginRight:6,
-  
-},
-
-verMais: {
-  fontSize: 16,
-  fontWeight: 'semibold',
-},
+  buttonText: {
+    fontSize: 20,
+    color: '#fff',
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  secaoatuali:{
+    alignItems: 'center',
+    justifyContent: 'center',
+   
+    marginBottom: 20,
+  }
 });

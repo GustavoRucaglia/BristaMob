@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Link, useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { ScrollView, View, Image, Text, StyleSheet, ImageBackground } from 'react-native';
+import { ScrollView, View, Image, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 import { Dimensions } from 'react-native';
 
 interface propsCarrossel{
@@ -20,8 +20,7 @@ export const Carrossel = ({title, category}: propsCarrossel) => {
     const { data, error, isLoading, refetch } = useQuery({
         queryKey: ["pontos", category],
         queryFn: () => getPontoInterreseFilter(category),
-        staleTime: 5 * 60 * 1000,
-       
+        staleTime: 5 * 60 * 1000,     
       });
      
       const handleEditClick = (ponto: PontoInterrese) => {
@@ -29,7 +28,7 @@ export const Carrossel = ({title, category}: propsCarrossel) => {
           id: ponto.id.toString(),
         });
      
-       
+        router.push(`/explore?${queryParams}`);
       };
 
   return (
@@ -38,9 +37,11 @@ export const Carrossel = ({title, category}: propsCarrossel) => {
             <Text style={styles.title}>{title }</Text>
             <ScrollView horizontal={true} style={styles.row} showsHorizontalScrollIndicator={false}>
                  {data?.map((pontos: PontoInterrese) => (
-                    <ImageBackground key={pontos.id} source={{ uri: pontos.fotos }} style={styles.imageSmall} >
+                   <TouchableOpacity key={pontos.id} onPress={() => handleEditClick(pontos)}>
+                    <ImageBackground key={pontos.id} source={{ uri: pontos.fotos }} style={styles.imageSmall}>
                       <Text style={styles.text}>{pontos.nome}</Text>
                   </ImageBackground>
+                  </TouchableOpacity>
                 ))} 
             </ScrollView>
           </View>

@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   blueLine: {
     height: 2.5,
     width: 300,
-    backgroundColor: 'blue',
+    backgroundColor: '#0056B3',
     marginVertical: 10,
     alignSelf: 'center',
     marginTop: 40,

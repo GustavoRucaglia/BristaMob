@@ -6,9 +6,16 @@ import Header from '@/components/Header';
 const App = () => {
   return (
 <>
-<Header />
-
     <ScrollView style={styles.container}>
+    
+        {/* Title and Logo Section */}
+        <View style={styles.header}>
+        <Image 
+          source={require('@/assets/images/brazurismotuc.png')} // Logo grande
+          style={styles.logoGrande} // Estilo ajustado para a logo grande
+        />
+        </View>
+        <View style={styles.container2}>
       <Text style={styles.title}>Seus Roteiros</Text>
       <View style={styles.filterContainer}>
         <Text style={styles.filterText}>Filtrar por:</Text>
@@ -45,7 +52,7 @@ const App = () => {
             <Text style={styles.visitedText}>Já visitado ✓</Text>
           </View>
         </View>
-      
+        </View>
     
       </ScrollView>
       </>
@@ -54,6 +61,11 @@ const App = () => {
  
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  
+    backgroundColor: '#f5f5f5',
+  },
+  container2: {
     flex: 1,
     padding: 16,
     backgroundColor: '#f5f5f5',
@@ -113,6 +125,21 @@ const styles = StyleSheet.create({
     fontSize:14,
     color:'#00b300',
     marginBottom:16,
+  },
+  header: {
+    backgroundColor: '#0056B3',
+    height: 130,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logoGrande: {
+    width: 250,
+    height: 180,
+    marginTop: 46,
+    borderRadius: 50,
+    marginHorizontal: 6,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
 });
  
