@@ -7,14 +7,18 @@ const TokenVerificationScreen = () => {
   const [digit2, setDigit2] = useState('');
   const [digit3, setDigit3] = useState('');
   const [digit4, setDigit4] = useState('');
+  const [digit5, setDigit5] = useState('');
+  const [digit6, setDigit6] = useState('');
 
   // Refs para focar automaticamente no próximo campo
   const digit2Ref = useRef(null);
   const digit3Ref = useRef(null);
   const digit4Ref = useRef(null);
+  const digit5Ref = useRef(null);
+  const digit6Ref = useRef(null);
 
   const handleSubmit = () => {
-    const token = digit1 + digit2 + digit3 + digit4;
+    const token = digit1 + digit2 + digit3 + digit4 + digit5 + digit6;
 
     // Verifica se todos os campos estão preenchidos corretamente
     if (token.length !== 4) {
@@ -34,7 +38,7 @@ const TokenVerificationScreen = () => {
       <View style={styles.container}>
         <Text style={styles.titulo}>Verificação de código</Text>
         <Text style={styles.instructions}>
-          Digite o token de 4 dígitos que você recebeu.
+          Digite o token de 6 dígitos que você recebeu.
         </Text>
 
         {/* Quatro campos para o token, um dígito por campo */}
@@ -42,12 +46,7 @@ const TokenVerificationScreen = () => {
           <TextInput
             style={styles.input}
             value={digit1}
-            onChangeText={(text) => {
-              setDigit1(text);
-              if (text.length === 1) {
-                digit2Ref.current.focus(); // Move para o próximo campo automaticamente
-              }
-            }}
+           
             maxLength={1}
             keyboardType="numeric"
             placeholder="0"
@@ -57,12 +56,6 @@ const TokenVerificationScreen = () => {
             ref={digit2Ref}
             style={styles.input}
             value={digit2}
-            onChangeText={(text) => {
-              setDigit2(text);
-              if (text.length === 1) {
-                digit3Ref.current.focus();
-              }
-            }}
             maxLength={1}
             keyboardType="numeric"
             placeholder="0"
@@ -72,12 +65,8 @@ const TokenVerificationScreen = () => {
             ref={digit3Ref}
             style={styles.input}
             value={digit3}
-            onChangeText={(text) => {
-              setDigit3(text);
-              if (text.length === 1) {
-                digit4Ref.current.focus();
-              }
-            }}
+           
+           
             maxLength={1}
             keyboardType="numeric"
             placeholder="0"
@@ -88,6 +77,26 @@ const TokenVerificationScreen = () => {
             style={styles.input}
             value={digit4}
             onChangeText={(text) => setDigit4(text)}
+            maxLength={1}
+            keyboardType="numeric"
+            placeholder="0"
+            placeholderTextColor="#888"
+          />
+          <TextInput
+            ref={digit5Ref}
+            style={styles.input}
+            value={digit5}
+            
+            maxLength={1}
+            keyboardType="numeric"
+            placeholder="0"
+            placeholderTextColor="#888"
+          />
+          <TextInput
+            ref={digit6Ref}
+            style={styles.input}
+            value={digit6}
+           
             maxLength={1}
             keyboardType="numeric"
             placeholder="0"
@@ -133,13 +142,13 @@ marginTop:40,
   },
   azul: {
     backgroundColor: '#0056B3',
-    height: 120,
+    height: 150,
     alignItems: 'center',
     justifyContent: 'center',
   },
   imageSmall: {
-    width: 250,
-    height: 180,
+    width: 240,
+    height: 160,
     marginTop: 36,
     borderRadius: 50,
     marginHorizontal: 6,
@@ -161,7 +170,7 @@ marginTop:40,
   },
   input: {
     height: 48,
-    width: '20%', // Cada campo terá 20% da largura da tela
+    width: '15%', // Cada campo terá 20% da largura da tela
     borderColor: '#0056B3',
     borderWidth: 1,
     borderRadius: 10,

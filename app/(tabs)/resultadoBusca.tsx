@@ -74,13 +74,13 @@ const searchResults = [
 
 const SearchResults = () => {
   // Função para renderizar cada item da lista
-  const renderItem = ({ item }) => (
-    <Link href={item.link}>
+  const renderItem = () => (
+    <Link href='/'>
       <View style={styles.resultContainer}>
-        <Image source={item.image} style={styles.image} />
+        <Image source={require('@/assets/images/recife.jpg')} style={styles.image} />
         <View style={styles.infoContainer}>
-          <Text style={styles.title}>{item.name}</Text>
-          <Text style={styles.address}>{item.address}</Text>
+          <Text style={styles.title}>Recife</Text>
+          <Text style={styles.address}>Em recife</Text>
         </View>
       </View>
     </Link>
@@ -133,7 +133,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
-
   address: {
     fontSize: 14,
     color: '#555',

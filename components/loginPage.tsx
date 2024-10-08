@@ -4,11 +4,15 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackgr
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { loginRequest } from '@/app/utils/auth';
 
-export  function LoginPage() {
+export function LoginPage() {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState(''); // Adicionando o estado para armazenar o erro de e-mail
 
-  
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expressão regular para validar o formato do e-mail
+    return emailRegex.test(email);
+  };
 
   const handleSubmit = async (e: GestureResponderEvent) => {
     e.preventDefault();
@@ -30,20 +34,28 @@ export  function LoginPage() {
         <View style={styles.form}>
           <Text style={styles.titulo}>Que bom que você voltou ao Brazurista!</Text>
             
-
           <View style={styles.passwordContainer}>
-          <Text style={styles.label}>Email:</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="exemplo@gmail.com"
-            keyboardType="email-address"
-            value={login}
-            onChangeText={(e) => setLogin(e)} 
-            autoCapitalize="none"
-            placeholderTextColor="#888"
-          />
+            <Text style={styles.label}>Email:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="exemplo@gmail.com"
+              keyboardType="email-address" // Configura o teclado para e-mail
+              value={login}
+              onChangeText={(text) => {
+                setLogin(text);
+                if (!validateEmail(text)) {
+                  setEmailError('E-mail inválido'); // Mostra mensagem de erro se o e-mail não for válido
+                } else {
+                  setEmailError('');
+                }
+              }}
+              autoCapitalize="none"
+              placeholderTextColor="#888"
+            />
+         
+            {emailError ? <Text style={{ color: 'red' }}>{emailError}</Text> : null}
           </View>
-          
+
           <View style={styles.passwordContainer}>
             <Text style={styles.label}>Senha:</Text>
             <TextInput
@@ -56,7 +68,9 @@ export  function LoginPage() {
               placeholderTextColor="#888"
             />
           </View>
+          
           <Link href="/redefinirSenha" style={styles.link}>Esqueceu senha? Redefinir senha</Link>
+          
           <TouchableOpacity
             style={styles.button}
             onPress={handleSubmit}
@@ -64,6 +78,7 @@ export  function LoginPage() {
             <Text style={styles.buttonText}>Entrar</Text>
           </TouchableOpacity>
         </View>
+
         <View style={styles.ajudalink2}>
           <Link href="/cadastro" style={styles.link2}>Não tem uma conta? Cadastre-se</Link>
         </View>
@@ -126,7 +141,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   button: {
-    height: 40,
+    height: 44,
     width: 200,
     backgroundColor: '#0056B3',
     borderRadius: 10,
@@ -158,18 +173,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
-
-
-  inputContainer: {
-    width: '100%',
-    maxWidth: 280,
-    marginBottom: 20,
-    paddingHorizontal: 20,
-    flexDirection: 'column',
-  },
-
-  ajudalink2:{
+  ajudalink2: {
     marginTop:60,
   }
 });

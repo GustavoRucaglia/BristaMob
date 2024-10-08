@@ -77,13 +77,13 @@ const styles = StyleSheet.create({
   },
   azul: {
     backgroundColor: '#0056B3',
-    height: 120,
+    height: 150,
     alignItems: 'center',
     justifyContent: 'center',
   },
   logo: {
-    width: 250,
-    height: 180,
+    width: 240,
+    height: 160,
     marginTop: 36,
     borderRadius: 50,
     justifyContent: 'flex-end',

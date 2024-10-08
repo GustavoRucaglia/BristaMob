@@ -78,14 +78,11 @@ const ItineraryScreen = () => {
   };
 
   // Função para renderizar cada item do roteiro
-  const renderItem = ({ item }) => (
+  const renderItem = () => (
     <View style={styles.itemContainer}>
-      <Image source={item.image} style={styles.itemImage} />
-      <Text style={styles.itemText}>{item.name}</Text>
-      {item.description && <Text style={styles.itemDescription}>{item.description}</Text>}
-      
-      {/* Exibe "Já visitado ✓" se o item tiver a propriedade visited como true */}
-      {item.visited && <Text style={styles.visitedText}>Já visitado ✓</Text>}
+      <Image source={{ uri: 'https://tourb.com.br/img/lugares/rio-de-janeiro/praia-vermelha.jpg' }} style={styles.itemImage} />
+      <Text style={styles.itemText}>Rio de janeiro</Text>
+      <Text style={styles.itemDescription}>Cidade linda</Text>
     </View>
   );
 

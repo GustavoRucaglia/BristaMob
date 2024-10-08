@@ -14,7 +14,12 @@ const LoginScreen = () => {
     const [passwordsMatch, setPasswordsMatch] = useState(true);
     const [role] = useState('USER');
    
-    
+    const [emailError, setEmailError] = useState('');
+
+const validateEmail = (email: string) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expressão regular para validar o formato do e-mail
+  return emailRegex.test(email);
+};
  
     const handleSubmit = async (e:  GestureResponderEvent) => {
       e.preventDefault();
@@ -53,21 +58,35 @@ const LoginScreen = () => {
           <View style={styles.passwordContainer}>
             <Text style={styles.label}>Email</Text>
             <TextInput
-              style={styles.input}
-              placeholder="exemplo@gmail.com"
-              keyboardType="email-address"
-              value={login}
-              onChangeText={setLogin}
-              autoCapitalize="none"
-              placeholderTextColor="#888"
-            />
+               style={styles.input}
+               placeholder="exemplo@gmail.com"
+               keyboardType="email-address" // Configura o teclado para e-mail
+               value={login}
+               onChangeText={(text) => {
+                 setLogin(text);
+                 if (!validateEmail(text)) {
+                   setEmailError('E-mail inválido'); // Mostra mensagem de erro se o e-mail não for válido
+                 } else {
+                   setEmailError('');
+                 }
+               }}
+               autoCapitalize="none"
+               placeholderTextColor="#888"
+             />
+             
+             {emailError ? <Text style={{ color: 'red', paddingLeft:22, }}>{emailError}</Text> : null}
+
           <View style={styles.passwordContainer}>
             <Text style={styles.label}>Telefone</Text>
             <TextInput
               style={styles.input}
               placeholder="+55 (00) 00000-0000"
               value={telefone}
-              onChangeText={setTelefone}
+              onChangeText={(text) => {
+                const numericText = text.replace(/[^0-9]/g, ''); // Remove todos os caracteres que não são números
+                setTelefone(numericText);
+              }}
+              keyboardType="numeric" // Apenas números serão exibidos no teclado
               autoCapitalize="none"
               placeholderTextColor="#888"
             />
@@ -177,7 +196,7 @@ const styles = StyleSheet.create({
     color: '#0056B3',
   },
   button: {
-    height: 40,
+    height: 44,
     width: 200,
     backgroundColor: '#0056B3',
     borderRadius: 10,
@@ -193,6 +212,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
     fontWeight: 'bold',
+    
   },
   imageSmall: {
     width: 240,
