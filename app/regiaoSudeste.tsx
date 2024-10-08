@@ -21,8 +21,7 @@ export default function regiaoSudeste() {
       <View style={styles.col}>
         {/* Imagem principal */}
         <View style={styles.lugar2}>
-          <ScrollView horizontal={true}  showsHorizontalScrollIndicator={true}>
-            
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={true}>
             <Image source={require('@/assets/images/cristo.jpg')} style={styles.image} />
             <Image source={require('@/assets/images/MASP.jpg')} style={styles.image} />
             <Image source={require('@/assets/images/minas.jpg')} style={styles.image} />
@@ -43,11 +42,13 @@ export default function regiaoSudeste() {
         <View style={styles.col}>
           <Text style={styles.title}>Turistando no <Text style={styles.c1}>Sudeste</Text></Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <View style={styles.imageContainer}>
             <Link href="/pontoTuristico">
               <ImageBackground source={require('@/assets/images/museudoamanhajpg.jpg')} style={styles.imageSmall1}>
                 <Text style={styles.text}>Museu do Amanhã</Text>
               </ImageBackground>
             </Link>
+            </View>
             <View style={styles.imageContainer}>
               <Link href="/pontoTuristico">
                 <ImageBackground source={require('@/assets/images/saopaulo.jpg')} style={styles.imageSmall1}>
@@ -75,7 +76,7 @@ export default function regiaoSudeste() {
         {/* Seção de restaurantes */}
         <View style={styles.col}>
           <Text style={styles.title}>Restaurantes no <Text style={styles.c1}>Sudeste</Text></Text>
-          <ScrollView horizontal={true}  showsHorizontalScrollIndicator={false}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <View style={styles.imageContainer}>
               <Link href="/pontoTuristico">
                 <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall1}>
@@ -110,36 +111,44 @@ export default function regiaoSudeste() {
         <View style={styles.blueLine} />
       </View>
 
-     
-        <Text style={styles.title}>Busque por outras Regiões</Text>
-    
-     
-        <View style={styles.card1}>
-          <Link href="/regiaoSul">
-            <Image source={require('@/assets/images/curitiba.jpg')} style={styles.image2} />
-            <Text style={styles.regiaoText}>Sul</Text>
-          </Link>
+      <View style={styles.section}>
+        <View style={styles.row}>
+          <Text style={styles.title1}>Busque por Região</Text>
         </View>
-        <View style={styles.card1}>
-          <Link href="/regiaoCentro">
-            <Image source={require('@/assets/images/df.jpg')} style={styles.image2} />
-            <Text style={styles.regiaoText}>Centro-Oeste</Text>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScroll}>
+          <Link href="/regiaoSudeste" style={styles.card2}>
+            <View style={styles.card1}>
+              <Image source={require('@/assets/images/lapa.jpg')} style={styles.image2} />
+              <Text style={styles.regiaoText}>Sudeste</Text>
+            </View>
           </Link>
-        </View>
-        <View style={styles.card1}>
-          <Link href="/regiaoNordeste">
-            <Image source={require('@/assets/images/sm.jpg')} style={styles.image2} />
-            <Text style={styles.regiaoText}>Nordeste</Text>
+          <Link href="/regiaoSul" style={styles.card2}>
+            <View style={styles.card1}>
+              <Image source={require('@/assets/images/curitiba.jpg')} style={styles.image2} />
+              <Text style={styles.regiaoText}>Sul</Text>
+            </View>
           </Link>
-        </View>
-        <View style={styles.card1}>
-          <Link href="/regiaoNorte">
-            <Image source={require('@/assets/images/amazonia.jpg')} style={styles.image2} />
-            <Text style={styles.regiaoText}>Norte</Text>
+          <Link href="/regiaoCentro" style={styles.card2}>
+            <View style={styles.card1}>
+              <Image source={require('@/assets/images/df.jpg')} style={styles.image2} />
+              <Text style={styles.regiaoText}>Centro-Oeste</Text>
+            </View>
           </Link>
-        </View>
-      </ScrollView>
-   
+          <Link href="/regiaoNordeste" style={styles.card2}>
+            <View style={styles.card1}>
+              <Image source={require('@/assets/images/sm.jpg')} style={styles.image2} />
+              <Text style={styles.regiaoText}>Nordeste</Text>
+            </View>
+          </Link>
+          <Link href="/regiaoNorte" style={styles.card2}>
+            <View style={styles.card1}>
+              <Image source={require('@/assets/images/amazonia.jpg')} style={styles.image2} />
+              <Text style={styles.regiaoText}>Norte</Text>
+            </View>
+          </Link>
+        </ScrollView>
+      </View>
+    </ScrollView>
   );
 }
 
@@ -252,29 +261,83 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   imageSmall1: {
-    width: 150,
-    height: 100,
+    width: 170,
+    height: 150,
     marginHorizontal: 5,
     justifyContent: 'flex-end',
     alignItems: 'center',
     borderRadius: 7,
-  },
-  imageContainer: {
-    marginRight: 10, // Ajuste o espaçamento entre as imagens
-  },
-  card1: {
-    width: 100,
-    height: 100,
-    marginHorizontal: 10,
-    alignItems: 'center',
-  },
-  image2: {
-    width: 100,
-    height: 100,
-    borderRadius: 7,
-  },
-  regiaoText: {
-    textAlign: 'center',
+    overflow: 'hidden',
     fontWeight: 'bold',
   },
+  imageContainer: {
+    marginRight: 15,
+    marginBottom: 20,
+  },
+  card1: {
+    width: 200,
+    height: 150,
+    marginHorizontal: 10,
+    alignItems: 'center',
+    marginLeft: 7,
+  },
+  image2: {
+    width: 170,
+    height: 160,
+    borderRadius: 10, // Arredondando as bordas
+    paddingLeft: 3,
+    paddingRight: 3,
+    marginHorizontal: 3,
+    marginBottom: 3,
+    marginTop:7,
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden', 
+  },
+  regiaoText: {
+  
+      position: 'absolute',
+      bottom: 0, // Alinha o texto na parte de baixo da imagem
+      marginBottom: 10, // Espaço entre o texto e a borda inferior da imagem
+      color: 'white',
+      fontSize: 20,
+      fontWeight: '800',
+      textAlign: 'center',
+      width: '100%', // Garantir que o texto fique centralizado na largura da imagem
+      padding: 5,
+      marginLeft:3,
+     marginTop:400,      
+
+  
+  
+  },
+  section: {
+    marginBottom: 20,
+    marginHorizontal: 10,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
+    marginLeft: 8,
+  },
+  title1: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop: 8,
+    marginBottom: 3,
+    padding: 13,
+    marginLeft: -9,
+  },
+  card2: {
+    width: 170,
+    marginLeft: 7,
+    marginRight: 9,
+    marginBottom: 30,
+    alignItems: 'center',
+  },
+  horizontalScroll: {
+    flexDirection: 'row',
+},
 });

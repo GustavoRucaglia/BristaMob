@@ -42,93 +42,116 @@ export default function regiaoNordeste() {
 
         {/* Seção de pontos turísticos */}
         <View style={styles.col}>
-          <Text style={styles.title}>Turistando no <Text style={styles.c1}>Nordeste</Text></Text>
-          <ScrollView horizontal={true} style={styles.row} showsHorizontalScrollIndicator={false}>
+          <Text style={styles.title}>Turistando no <Text style={styles.c1}>Nordeste</Text>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <View style={styles.imageContainer}>
             <Link href="/pontoTuristico">
-            <ImageBackground source={require('@/assets/images/pernambuco.jpg')} style={styles.imageSmall1}>
-              <Text style={styles.text}>Museu do Amanhã</Text>
-            </ImageBackground>
+              <ImageBackground source={require('@/assets/images/museudoamanhajpg.jpg')} style={styles.imageSmall1}>
+                <Text style={styles.text}>Museu do Amanhã</Text>
+              </ImageBackground>
             </Link>
-            <Link href="/pontoTuristico">
-            <ImageBackground source={require('@/assets/images/sm.jpg')} style={styles.imageSmall1}>
-              <Text style={styles.text}>São Paulo</Text>
-            </ImageBackground>
-            </Link>
-            <Link href="/pontoTuristico">
-            <ImageBackground source={require('@/assets/images/serracapivara.jpg')} style={styles.imageSmall1}>
-              <Text style={styles.text}>MASP</Text>
-            </ImageBackground>
-            </Link>
-            <Link href="/pontoTuristico">
-            <ImageBackground source={require('@/assets/images/maranhao.jpg')} style={styles.imageSmall1}>
-              <Text style={styles.text}>Lapa</Text>
-            </ImageBackground>
-            </Link>
+            </View>
+            <View style={styles.imageContainer}>
+              <Link href="/pontoTuristico">
+                <ImageBackground source={require('@/assets/images/saopaulo.jpg')} style={styles.imageSmall1}>
+                  <Text style={styles.text}>São Paulo</Text>
+                </ImageBackground>
+              </Link>
+            </View>
+            <View style={styles.imageContainer}>
+              <Link href="/pontoTuristico">
+                <ImageBackground source={require('@/assets/images/MASP.jpg')} style={styles.imageSmall1}>
+                  <Text style={styles.text}>MASP</Text>
+                </ImageBackground>
+              </Link>
+            </View>
+            <View style={styles.imageContainer}>
+              <Link href="/pontoTuristico">
+                <ImageBackground source={require('@/assets/images/lapa.jpg')} style={styles.imageSmall1}>
+                  <Text style={styles.text}>Lapa</Text>
+                </ImageBackground>
+              </Link>
+            </View>
           </ScrollView>
         </View>
 
         {/* Seção de restaurantes */}
         <View style={styles.col}>
           <Text style={styles.title}>Restaurantes no <Text style={styles.c1}>Nordeste</Text></Text>
-          <ScrollView horizontal={true} style={styles.row} showsHorizontalScrollIndicator={false}>
-            <Link href="/pontoTuristico">
-            <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall1}>
-              <Text style={styles.text1}>Tembui</Text>
-            </ImageBackground>
-            </Link>
-            <Link href="/pontoTuristico">
-            <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall1}>
-              <Text style={styles.text1}>Tembui</Text>
-            </ImageBackground>
-            </Link>
-            <Link href="/pontoTuristico">
-            <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall1}>
-              <Text style={styles.text1}>Tembui</Text>
-            </ImageBackground>
-            </Link>
-            <Link href="/pontoTuristico">
-            <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall1}>
-              <Text style={styles.text1}>Tembui</Text>
-            </ImageBackground>
-            </Link>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <View style={styles.imageContainer}>
+              <Link href="/pontoTuristico">
+                <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall1}>
+                  <Text style={styles.text1}>Tembui</Text>
+                </ImageBackground>
+              </Link>
+            </View>
+            <View style={styles.imageContainer}>
+              <Link href="/pontoTuristico">
+                <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall1}>
+                  <Text style={styles.text1}>Tembui</Text>
+                </ImageBackground>
+              </Link>
+            </View>
+            <View style={styles.imageContainer}>
+              <Link href="/pontoTuristico">
+                <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall1}>
+                  <Text style={styles.text1}>Tembui</Text>
+                </ImageBackground>
+              </Link>
+            </View>
+            <View style={styles.imageContainer}>
+              <Link href="/pontoTuristico">
+                <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall1}>
+                  <Text style={styles.text1}>Tembui</Text>
+                </ImageBackground>
+              </Link>
+            </View>
           </ScrollView>
         </View>
 
         <View style={styles.blueLine} />
       </View>
-      <View style={styles.section}/>
-                    <View style={styles.row}>
-                        <Text style={styles.title}>Busque por outras Regiões</Text>
-                      
-                    </View>
-                    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScroll}>
-                    <Link href="/regiaoSudeste">
-                        <View style={styles.card1}>
-                            <Image source={require('@/assets/images/lapa.jpg')} style={styles.image2} />
-                            <Text style={styles.regiaoText}>Sudeste</Text>  
-                        </View>
-                        </Link>
-                        <Link href="/regiaoSul">
-                        <View style={styles.card1}>
-                            <Image source={require('@/assets/images/curitiba.jpg')} style={styles.image2} />
-                            <Text style={styles.regiaoText}>Sul</Text>
-                              </View>
-                              </Link>
-                              <Link href="/regiaoCentro">
-                        <View style={styles.card1}>
-                            <Image source={require('@/assets/images/df.jpg')} style={styles.image2} />
-                            <Text style={styles.regiaoText}>Centro-Oeste</Text>
-                        </View>
-                        </Link>
-                        
-                        <Link href="/regiaoNorte">
-                        <View style={styles.card1}>
-                            <Image source={require('@/assets/images/amazonia.jpg')} style={styles.image2} />
-                            <Text style={styles.regiaoText}>Norte</Text> 
-                        </View>
-                        </Link>
-                   </ScrollView>    
+
+      <View style={styles.section}>
+        <View style={styles.row}>
+          <Text style={styles.title1}>Busque por Região</Text>
+        </View>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScroll}>
+          <Link href="/regiaoSudeste" style={styles.card2}>
+            <View style={styles.card1}>
+              <Image source={require('@/assets/images/lapa.jpg')} style={styles.image2} />
+              <Text style={styles.regiaoText}>Sudeste</Text>
+            </View>
+          </Link>
+          <Link href="/regiaoSul" style={styles.card2}>
+            <View style={styles.card1}>
+              <Image source={require('@/assets/images/curitiba.jpg')} style={styles.image2} />
+              <Text style={styles.regiaoText}>Sul</Text>
+            </View>
+          </Link>
+          <Link href="/regiaoCentro" style={styles.card2}>
+            <View style={styles.card1}>
+              <Image source={require('@/assets/images/df.jpg')} style={styles.image2} />
+              <Text style={styles.regiaoText}>Centro-Oeste</Text>
+            </View>
+          </Link>
+          <Link href="/regiaoNordeste" style={styles.card2}>
+            <View style={styles.card1}>
+              <Image source={require('@/assets/images/sm.jpg')} style={styles.image2} />
+              <Text style={styles.regiaoText}>Nordeste</Text>
+            </View>
+          </Link>
+          <Link href="/regiaoNorte" style={styles.card2}>
+            <View style={styles.card1}>
+              <Image source={require('@/assets/images/amazonia.jpg')} style={styles.image2} />
+              <Text style={styles.regiaoText}>Norte</Text>
+            </View>
+          </Link>
+        </ScrollView>
+      </View>
     </ScrollView>
+            
   );
 
 }
@@ -152,6 +175,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     
+  },
+  imageContainer: {
+    marginRight: 15,
+    marginBottom: 20,
   },
   header: {
     flexDirection: 'row',
@@ -250,6 +277,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 7,
     overflow: 'hidden',
+    fontWeight: 'bold',
   },
   row: {
     flexDirection: 'row',
@@ -261,6 +289,13 @@ const styles = StyleSheet.create({
   card1: {
     width: 170,
     marginLeft: 10,
+  },
+  card2: {
+    width: 170,
+    marginLeft: 7,
+    marginRight: 9,
+    marginBottom: 30,
+    alignItems: 'center',
   },
   image2: {
     width: 170,

@@ -98,8 +98,8 @@ const Buscar = () => {
                                 </ImageBackground>
                             </View>
                             <View style={styles.gridItem}>
-                                <ImageBackground source={require('@/assets/images/igreja.jpg')} style={styles.image1}>
-                                    <Text style={styles.gridText}>Igrejas</Text>
+                                <ImageBackground source={require('@/assets/images/cristo.jpg')} style={styles.image1}>
+                                    <Text style={styles.gridText}>Monumentos</Text>
                                 </ImageBackground>
                             </View>
                             <View style={styles.gridItem}>
@@ -123,31 +123,31 @@ const Buscar = () => {
                       
                     </View>
                     <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScroll}>
-                    <Link href="/regiaoSudeste">
+                    <Link href="/regiaoSudeste" style={styles.card2}>
                         <View style={styles.card1}>
                             <Image source={require('@/assets/images/lapa.jpg')} style={styles.image2} />
                             <Text style={styles.regiaoText}>Sudeste</Text>  
                         </View>
                         </Link>
-                        <Link href="/regiaoSul">
+                        <Link href="/regiaoSul" style={styles.card2}>
                         <View style={styles.card1}>
                             <Image source={require('@/assets/images/curitiba.jpg')} style={styles.image2} />
                             <Text style={styles.regiaoText}>Sul</Text>
                               </View>
                               </Link>
-                              <Link href="/regiaoCentro">
+                              <Link href="/regiaoCentro" style={styles.card2}>
                         <View style={styles.card1}>
                             <Image source={require('@/assets/images/df.jpg')} style={styles.image2} />
                             <Text style={styles.regiaoText}>Centro-Oeste</Text>
                         </View>
                         </Link>
-                        <Link href="/regiaoNordeste">
+                        <Link href="/regiaoNordeste" style={styles.card2}>
                         <View style={styles.card1}>
                             <Image source={require('@/assets/images/sm.jpg')} style={styles.image2} />
                             <Text style={styles.regiaoText}>Nordeste</Text>
                         </View>
                         </Link>
-                        <Link href="/regiaoNorte">
+                        <Link href="/regiaoNorte"  style={styles.card2}>
                         <View style={styles.card1}>
                             <Image source={require('@/assets/images/amazonia.jpg')} style={styles.image2} />
                             <Text style={styles.regiaoText}>Norte</Text> 
@@ -327,10 +327,12 @@ const styles = StyleSheet.create({
     },
     card1: {
     width: 170,
+    alignItems:'center',
+},
+card2: {
+    width: 170,
     marginLeft: 7,
-    marginRight: 15,
-    paddingLeft: 7,
-    paddingRight: 13,
+    marginRight: 9,
     marginBottom: 10, 
     alignItems:'center',
 },
@@ -338,15 +340,9 @@ image2: {
     width: 170,
     height: 170,
     borderRadius: 10,
-    marginBottom: 10, // Adiciona margem inferior para afastar as imagens verticalmente
-    marginHorizontal: 5, // Adiciona margem lateral para espaçar horizontalmente
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
-    marginLeft: 7,
-    marginRight: 15,
-    paddingLeft: 7,
-    paddingRight: 13,
     
 },
 

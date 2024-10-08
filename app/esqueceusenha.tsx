@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 import { Link } from 'expo-router';
 
-export default function EsqueceuSenha(){
+export default function EsqueceuSenha() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
@@ -21,23 +21,21 @@ export default function EsqueceuSenha(){
         <Image
           source={require('@/assets/images/brazurismotuc.png')}
           style={styles.logo}
-        
         />
       </View>
       <View style={styles.container}>
         <Text style={styles.title}>Recuperação de Senha</Text>
         <Text style={styles.message}>{message}</Text>
         <View style={styles.passwordContainer}>
-        
-        <Text style={styles.label}>Senha:</Text>
+          <Text style={styles.label}>Email:</Text>
           <TextInput
             style={styles.input}
             placeholder="exemplo@gmail.com"
             keyboardType="email-address"
             value={email}
             onChangeText={(text) => setEmail(text)}
-            accessibilityLabel="Campo de Email"
-            accessibilityHint="Insira seu endereço de email"
+            autoCapitalize="none"
+            placeholderTextColor="#888"
           />
         </View>
         <TouchableOpacity
@@ -74,13 +72,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
     color: '#0056A6',
-  },
-  instructions: {
-    fontSize: 20,
-    textAlign: 'center',
-    marginBottom: 40,
-    color: '#333',
-    fontWeight: 'bold',
   },
   input: {
     height: 38,
@@ -121,7 +112,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 240,
     height: 160,
-    marginTop:36,
+    marginTop: 36,
     borderRadius: 50,
     marginHorizontal: 6,
     justifyContent: 'flex-end',
