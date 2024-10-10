@@ -4,7 +4,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Link, useRouter } from 'expo-router';
 
 export default function PontoTuristico() {
-  const router = useRouter(); // UseRouter sendo chamado corretamente
+  const router = useRouter(); 
 
   return (
     <ScrollView contentContainerStyle={styles.container1}>

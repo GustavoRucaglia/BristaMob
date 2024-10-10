@@ -42,7 +42,7 @@ export default function regiaoNordeste() {
 
         {/* Seção de pontos turísticos */}
         <View style={styles.col}>
-          <Text style={styles.title}>Turistando no <Text style={styles.c1}>Nordeste</Text>
+          <Text style={styles.title}>Turistando no <Text style={styles.c1}>Nordeste</Text></Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <View style={styles.imageContainer}>
             <Link href="/pontoTuristico">
@@ -326,5 +326,13 @@ const styles = StyleSheet.create({
   }, 
   horizontalScroll: {
     flexDirection: 'row',
+},
+title1: {
+  fontSize: 22,
+  fontWeight: 'bold',
+  marginTop: 8,
+  marginBottom: 3,
+  padding: 13,
+  marginLeft: -9,
 },
 });

@@ -2,6 +2,16 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, TextInput 
 export default function ProfilePage() {
     return (
 <ScrollView>
+<View style={styles.container}>
+      
+        {/* Title and Logo Section */}
+        <View style={styles.header}>
+        <Image 
+          source={require('@/assets/images/brazurismotuc.png')} // Logo grande
+          style={styles.logoGrande} // Estilo ajustado para a logo grande
+        />
+        </View>
+        </View>
 <View style={styles.container2} >
 <Text style={styles.textAtual}>Atualizar Perfil</Text>
 
@@ -12,35 +22,34 @@ export default function ProfilePage() {
 style={styles.input1}
 placeholder="URL:"
 />
-
 </View>
+<View style={styles.blueLine}/> 
+ 
+
 
 
 <View style={styles.secaoatuali}>
+  
 <TextInput
 style={styles.input1}
 placeholder="Email"
-
 keyboardType="email-address"
 />
 
 <TextInput
 style={styles.input1}
 placeholder="Senha"
-
 secureTextEntry
 />
 
 <TextInput
 style={styles.input1}
 placeholder="Username"
-
 />
 
 <TextInput
 style={styles.input1}
 placeholder="Telefone"
-
 keyboardType="phone-pad"
 />
 
@@ -50,6 +59,7 @@ keyboardType="phone-pad"
 >
   <Text style={styles.buttonText}>Atualizar</Text>
 </TouchableOpacity>
+
 </View>
 </View>
 </ScrollView>
@@ -75,13 +85,13 @@ keyboardType="phone-pad"
         },
         profileSection: {
           flexDirection: 'row',
-          padding: 20,
+          padding: 12,
           alignItems: 'center',
         },
         
         profileImage: {
-          width: 90,
-          height: 90,
+          width: 100,
+          height: 100,
           borderRadius: 25,
         },
         profileInfo: {
@@ -156,12 +166,14 @@ keyboardType="phone-pad"
           flex: 1,
           padding: 20,
           justifyContent: 'center',
+         
         },
         textAtual: {
           fontSize: 28,
           marginBottom: 20,
           textAlign: 'center',
           fontWeight: 'bold',
+          marginTop: 30,
         },
         input: {
           height: 40,
@@ -177,8 +189,8 @@ keyboardType="phone-pad"
           backgroundColor:  '#0056B3',
           marginVertical: 10,
           alignSelf: 'center',
-          marginTop: 40,
-          marginBottom: 10,
+          marginTop: 10,
+          marginBottom: 50,
         },
         input1: {
           height: 36,

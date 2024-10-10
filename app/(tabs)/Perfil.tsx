@@ -67,8 +67,11 @@ export default function ProfilePage() {
           <Link href="/novoRoteiro" style={styles.bottomLink}>
             <Text style={styles.bottomLinkText}>Acesse seus roteiros</Text>
           </Link>
-        </View>
- 
+        
+        <Link href="/atualizarPerfil" style={styles.bottomLink}>
+          <Text style={styles.bottomLinkText}>Atualizar Perfil</Text>
+        </Link>
+      </View>
         
 <View style={styles.blueLine}/> 
  
