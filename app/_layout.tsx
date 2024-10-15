@@ -50,7 +50,6 @@ export default function RootLayout() {
         <Stack.Screen name="resultadoBusca" options={{ headerShown: false }} />
         <Stack.Screen name="redefinirSenhad" options={{ headerShown: false }} />
         <Stack.Screen name="atualizarPerfil" options={{ headerShown: false }} />
-        
        
         <Stack.Screen name="+not-found" />
       </Stack>

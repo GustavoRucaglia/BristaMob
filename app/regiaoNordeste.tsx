@@ -292,4 +292,12 @@ const styles = StyleSheet.create({
   horizontalScroll: {
     flexDirection: 'row',
 },
+title1: {
+  fontSize: 22,
+  fontWeight: 'bold',
+  marginTop: 8,
+  marginBottom: 3,
+  padding: 13,
+  marginLeft: -9,
+},
 });
