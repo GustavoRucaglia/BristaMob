@@ -13,6 +13,7 @@ export const HomePage = () => {
     <>
  <ScrollView>
       {/* Título principal e ícone */}
+      <Link href={'/quemSomos'}>
       <View style={styles.azul}>
         {/* Exibindo a logo grande */}
         <Image 
@@ -20,6 +21,7 @@ export const HomePage = () => {
           style={styles.logoGrande} // Estilo ajustado para a logo grande
         />
       </View>
+      </Link>
    
       <StatusBar hidden={false} />
       <ScrollView style={styles.container}>
@@ -42,20 +44,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f5f5f5',
   },
+  azul: {
+    backgroundColor: '#0056B3',
+    height: 120,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%', // Mudança aqui
+  },
   logoGrande: {
     width: 250,
     height: 180,
-    marginTop: 46,
+    marginTop: 36,
     borderRadius: 50,
-    marginHorizontal: 6,
-    justifyContent: 'flex-end',
+    justifyContent: 'center', // Alterado de 'flex-end' para 'center'
     alignItems: 'center',
-  },
-  azul: {
-    backgroundColor: '#0056B3',
-    height: 130,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   inicio: {
     color: '#E6E6E6',

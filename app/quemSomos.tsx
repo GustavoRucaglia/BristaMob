@@ -1,46 +1,111 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, ImageBackground } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons'; // Importa ícones se necessário
+import AntDesign from '@expo/vector-icons/AntDesign';
+import { Link } from 'expo-router';
 
 export default function TabTwoScreen() {
   return (
     <ScrollView style={{ backgroundColor: '#fff' }}>
-       <View style={styles.azul}>
+      {/* Banner superior */}
+      <View style={styles.banner}>
         <ImageBackground source={require('@/assets/images/brazurismotuc.png')} style={styles.imageSmall} />
       </View>
+
       {/* Seção "Quem Somos" */}
       <View style={styles.container}>
+        
+        <View style={styles.lineContainer}>
+          <AntDesign style={styles.arrowleft} name="arrowleft" size={24} color="black"  />
+       
+      </View>
+     
         <Text style={styles.title}>QUEM SOMOS?</Text>
         <Text style={styles.instructions}>
-          Brazurista é um site web e aplicativo para dispositivo móvel que facilita a criação de roteiros, tem funções, como avaliar e comentar em pontos turísticos e restaurantes.
+          Brazurista é um site web e aplicativo para dispositivo móvel que facilita a criação de roteiros. Possui funcionalidades como avaliar e comentar em pontos turísticos e restaurantes por todo o Brasil.
         </Text>
+        <ImageBackground source={require('@/assets/images/Design sem nome.png')} style={styles.imageSmall1} />
         <Text style={styles.instructions}>
-          No Brazurista, entendemos que não há uma única maneira "certa" de viajar. É por isso que oferecemos a liberdade e flexibilidade para que você crie o seu próprio roteiro de viagem, sob medida para os seus interesses, estilo e orçamento. Quer você seja um aventureiro intrépido em busca de emoções, um explorador cultural ansioso por descobrir novas tradições ou um amante da natureza em busca de paisagens deslumbrantes, estamos aqui para transformar seus sonhos de viagem em realidade.
+          No Brazurista, entendemos que não há uma única maneira "certa" de viajar. Por isso, oferecemos a liberdade para que você crie seu próprio roteiro de viagem, personalizado de acordo com seus interesses, estilo e orçamento.
         </Text>
+      </View>
 
-        {/* Seção "Nosso Objetivo" */}
+      {/* Divisória com ícone */}
+      <View style={styles.lineContainer}>
+        <FontAwesome name="globe" size={24} color="#0056b3" />
+        <View style={styles.line}></View>
+      </View>
+
+      {/* Seção "Nosso Objetivo" */}
+      <View style={styles.container}>
         <Text style={styles.title}>NOSSO OBJETIVO?</Text>
         <Text style={styles.instructions}>
-          Nosso objetivo no Brazurista vai além de simplesmente organizar viagens. Queremos inspirar e empoderar nossos clientes a explorar o mundo de maneira autêntica e significativa. Acreditamos que as melhores viagens são aquelas que não apenas enriquecem a vida do viajante, mas também deixam um impacto positivo nas comunidades locais e no meio ambiente.
+          Queremos inspirar e empoderar nossos clientes a explorar o mundo de maneira autêntica e significativa. Acreditamos que as melhores viagens não só enriquecem a vida do viajante, mas também têm um impacto positivo nas comunidades locais.
         </Text>
         <Text style={styles.instructions}>
           Junte-se a nós e comece a planejar a viagem dos seus sonhos com o Brazurista. Seu próximo destino espera por você!
         </Text>
       </View>
-      <View style={styles.line}></View>
 
-     
+      {/* Nova linha divisória */}
+      <View style={styles.lineContainer}>
+        <FontAwesome name="plane" size={24} color="#0056B3" />
+        <View style={styles.line}></View>
+      </View>
+
       {/* Seção "Nossa Equipe" */}
       <View style={styles.container}>
         <Text style={styles.title}>NOSSA EQUIPE</Text>
-        <Text style={styles.team}>
-          Gustavo Rucaglia Bozetti Santiago Nº14 {'\n'}
-          Italo Renan Monteiro da Silva Nº15{'\n'}
-          Jonatas Nascimento Nº16{'\n'}
-          Karen Cristiny Nº23 {'\n'}
-          Nicolly Clara Damasceno da Silva Nº27{'\n'}
-          Raquel Marques Nº29 {'\n'}
-          Rayane Vieira Dos Santos Nº31{'\n'}
-        </Text>
+        
+        {/* Membro 1 */}
+        <View style={styles.imageContainer}>
+          <ImageBackground source={require('@/assets/images/shared image (3).jpg')} style={styles.imageLarge} />
+          <Text style={styles.memberTitle}>Gustavo Rucaglia Bozetti Santiago Nº14</Text>
+          <Text style={styles.instructions}>Programador, Back-end</Text>
+        </View>
+
+        {/* Membro 2 */}
+        <View style={styles.imageContainer}>
+          <ImageBackground source={require('@/assets/images/shared image (2).jpg')} style={styles.imageLarge} />
+          <Text style={styles.memberTitle}>Italo Renan Monteiro da Silva Nº15</Text>
+          <Text style={styles.instructions}>Banco de dados, Programador e Ajudante da Documentação</Text>
+        </View>
+
+        {/* Membro 3 */}
+        <View style={styles.imageContainer}>
+          <ImageBackground source={require('@/assets/images/shared image.jpg')} style={styles.imageLarge} />
+          <Text style={styles.memberTitle}>Jonatas Nascimento Martins Nº16</Text>
+          <Text style={styles.instructions}>Programador e Design</Text>
+        </View>
+
+        {/* Membro 4 */}
+        <View style={styles.imageContainer}>
+          <ImageBackground source={require('@/assets/images/shared image (5).jpg')} style={styles.imageLarge} />
+          <Text style={styles.memberTitle}>Karen Cristiny Oliveira Araujo Nº23</Text>
+          <Text style={styles.instructions}>Programadora do Mobile</Text>
+        </View>
+
+        {/* Membro 5 */}
+        <View style={styles.imageContainer}>
+          <ImageBackground source={require('@/assets/images/shared image (1).jpg')} style={styles.imageLarge} />
+          <Text style={styles.memberTitle}>Nicolly Clara Damasceno da Silva Nº27</Text>
+          <Text style={styles.instructions}>Programadora do Mobile</Text>
+        </View>
+
+        {/* Membro 6 */}
+        <View style={styles.imageContainer}>
+          <ImageBackground source={require('@/assets/images/brazurismotuc.png')} style={styles.imageLarge} />
+          <Text style={styles.memberTitle}>Raquel Marques Santana Nº29</Text>
+          <Text style={styles.instructions}>Programadora do Mobile</Text>
+        </View>
+
+        {/* Membro 7 */}
+        <View style={styles.imageContainer}>
+          <ImageBackground source={require('@/assets/images/shared image (4).jpg')} style={styles.imageLarge} />
+          <Text style={styles.memberTitle}>Rayane Vieira Dos Santos Nº31</Text>
+          <Text style={styles.instructions}>Designer, Responsável pela Documentação e Back-end</Text>
+        </View>
+
       </View>
     </ScrollView>
   );
@@ -50,48 +115,95 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#fff',
+    alignItems: 'center',
   },
   title: {
-    fontSize: 30,
+    fontSize: 28,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 15,
     color: '#0056A6',
-    marginTop:10,
+    textAlign: 'center',
+    marginTop:'-13%'
+  },
+  arrowleft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+  
+    borderRadius: 25, // Para tornar o botão com bordas arredondadas
+    shadowColor: '#000',
+    
+    width:200,
+    height:60,
+    marginLeft:'-71%',
+    marginBottom:'-10%',
+    marginTop:'-5%'
   },
   instructions: {
-    fontSize: 20, 
-    textAlign: 'left',
-    marginTop:6,
+    fontSize: 18, 
+    textAlign: 'center',
     marginBottom: 20,
     color: '#333',
-    fontWeight: 'normal',
+    lineHeight: 26,
+  },
+  memberTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#0056A6',
+    marginTop: 10,
+    textAlign: 'center',
+  },
+  lineContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 20,
   },
   line: {
-    height: 2.5, // Define a altura da linha
-    width:360,
-    backgroundColor: '#0056B3', // Cor da linha
-    marginVertical: 10,
-    alignSelf: 'center',
-  },
-  team: {
-    fontSize: 20,
-    textAlign: 'left',
-    marginBottom: 20,
-    color: '#333',
-    fontWeight: 'normal',
-  },
-  azul: {
+    height: 2,
+    width: '70%',
     backgroundColor: '#0056B3',
-    height: 150,
+    marginLeft: 10,
+  },
+  banner: {
+    backgroundColor: '#0056B3',
+    height: 120,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  imageContainer: {
+    backgroundColor: '#fff',
+    borderRadius: 15,
+    padding: 10,
+    marginVertical: 10,
+    alignItems: 'center',
+    width: '90%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  imageLarge: {
+    width: 200,
+    height: 200,
+    borderRadius: 1000, // Torna a imagem arredondada
+    marginTop: 10,
+  },
+  imageSmall1: {
+    width: 1300,
+    height: 300,
+    marginTop: 36,
+    borderRadius: 50,
+    marginHorizontal: 6,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
   imageSmall: {
-    width: 240,
-    height: 160,
+    width: 250,
+    height: 180,
     marginTop: 36,
     borderRadius: 50,
     marginHorizontal: 6,
