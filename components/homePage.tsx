@@ -13,7 +13,7 @@ export const HomePage = () => {
     <>
  <ScrollView>
       {/* Título principal e ícone */}
-      <Link href={'/quemSomos'}>
+      <Link href='/quemSomos'>
       <View style={styles.azul}>
         {/* Exibindo a logo grande */}
         <Image 
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     height: 120,
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%', // Mudança aqui
+    width: '10%', // Mudança aqui
   },
   logoGrande: {
     width: 250,

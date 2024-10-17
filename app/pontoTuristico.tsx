@@ -11,16 +11,16 @@ export default function PontoTuristico() {
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
+
   const [secondModalVisible, setSecondModalVisible] = useState(false);
 
-const toggleSecondModal = () => {
-  setSecondModalVisible(!secondModalVisible);
-};
-
+  const toggleSecondModal = () => {
+    setSecondModalVisible(!secondModalVisible);
+  };
 
   const handleCreateRoteiro = () => {
     console.log("Roteiro criado com título:", titulo);
-    toggleModal(); // Fechar modal após criar o roteiro
+    toggleModal(); // Fecha o primeiro modal após criar o roteiro
   };
 
   return (
@@ -31,7 +31,7 @@ const toggleSecondModal = () => {
           style={styles.logoGrande}
         />
       </View>
-      
+
       <View style={styles.header}>
         <Text style={styles.a}>Museu Da Arte Moderna</Text>
         <TouchableOpacity onPress={toggleModal}>
@@ -43,89 +43,84 @@ const toggleSecondModal = () => {
 
       {/* Modal para adicionar roteiro */}
       <Modal
-  visible={modalVisible}
-  animationType="slide"
-  transparent={true}
-  onRequestClose={toggleModal}
->
-  <View style={styles.modalOverlay}>
-    <View style={styles.modalContent}>
-      {/* Cabeçalho do Modal */}
-      <View style={styles.modalHeader}>
-        <TouchableOpacity onPress={toggleModal}>
-          <Entypo name="cross" size={24} color="black" />
-        </TouchableOpacity>
-      </View>
+        visible={modalVisible}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={toggleModal}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            {/* Cabeçalho do Modal */}
+            <View style={styles.modalHeader}>
+              {/* Botão de "X" para fechar o primeiro modal */}
+              <TouchableOpacity onPress={toggleModal}>
+                <Entypo name="cross" size={24} color="black" />
+              </TouchableOpacity>
+            </View>
 
-      <Image 
-        source={require('@/assets/images/B (3).png')} 
-        style={styles.modalLogo} 
-      />
-      
-      <Modal
-  visible={secondModalVisible}
-  animationType="slide"
-  transparent={true}
-  onRequestClose={toggleSecondModal}
->
-  <View style={styles.modalOverlay1}>
-    <View style={styles.modalContent1}>
-      <View style={styles.modalHeader1}>
-        <TouchableOpacity onPress={toggleSecondModal}>
-          <Entypo name="cross" size={24} color="black" />
-        </TouchableOpacity>
-      </View>
+            <Image 
+              source={require('@/assets/images/B (3).png')} 
+              style={styles.modalLogo} 
+            />
 
-      {/* Conteúdo do novo modal aqui */}
-      <ImageBackground source={require('@/assets/images/B (3).png')} style={styles.modalLogo} />
-      <Text style={styles.modalTitle}>Crie aqui um novo Roteiro!</Text>
-      <Text style={styles.label}>Título do Roteiro</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Adicione um título para o seu roteiro"
-        value={titulo}
-        onChangeText={setTitulo}
-      />
-    
-      <TouchableOpacity style={styles.createButton}>
-        <Text style={styles.createButtonText}>Criar roteiro</Text>
-      </TouchableOpacity>
-      
-    </View>
-  </View>
-</Modal>
+            {/* Segundo modal (novo modal) */}
+            <Modal
+              visible={secondModalVisible}
+              animationType="slide"
+              transparent={true}
+              onRequestClose={toggleSecondModal}
+            >
+              <View style={styles.modalOverlay1}>
+                <View style={styles.modalContent1}>
+                  <View style={styles.modalHeader1}>
+                    {/* Botão de "X" para fechar o segundo modal */}
+                    <TouchableOpacity onPress={toggleSecondModal}>
+                      <Entypo name="cross" size={24} color="black" />
+                    </TouchableOpacity>
+                  </View>
 
-     
+                  <ImageBackground source={require('@/assets/images/B (3).png')} style={styles.modalLogo} />
+                  <Text style={styles.modalTitle2}>Crie aqui um novo Roteiro!</Text>
+                  <Text style={styles.label}>Título do Roteiro</Text>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Adicione um título para o seu roteiro"
+                    value={titulo}
+                    onChangeText={setTitulo}
+                  />
+                  
+                  <TouchableOpacity style={styles.createButton} onPress={handleCreateRoteiro}>
+                    <Text style={styles.createButtonText}>Criar roteiro</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </Modal>
+            
 
-      {/* Adicione dentro de Roteiro já criados por você! */}
-      <Text style={styles.modalTitle1}>Adicione dentro de roteiros já criados por você!</Text>
-      <Link href="/dentroRoteiro" onPress={toggleModal}>
-  
-      <View style={styles.itemContainer}>
-        <Image 
-          source={{ uri: 'https://tourb.com.br/img/lugares/rio-de-janeiro/praia-vermelha.jpg' }} 
-          style={styles.itemImage} 
-        />
-        <Text style={styles.roteiro}>Roteiro para o Rio de Janeiro</Text>
-      </View>
-      </Link>
-     
-      <Text style={styles.modalTitle}>Adicione a um novo Roteiro!</Text>
+            <Text style={styles.modalTitle1}>Adicione isso dentro de roteiros já criados por você!</Text>
+            <Link href="/dentroRoteiro" onPress={toggleModal}>
+              <View style={styles.itemContainer}>
+                <Image 
+                  source={{ uri: 'https://tourb.com.br/img/lugares/rio-de-janeiro/praia-vermelha.jpg' }} 
+                  style={styles.itemImage} 
+                />
+                <Text style={styles.roteiro}>Roteiro para o Rio de Janeiro</Text>
+              </View>
+            </Link>
 
-      
-      <TouchableOpacity onPress={toggleSecondModal}>
-  <View style={styles.itemContainer1}>
-    <View style={styles.iconCircle3}>
-      <Entypo name="plus" size={24} color="black" />
-    </View>
-  </View>
-</TouchableOpacity>
-<Text style={styles.roteiro1}>Novo Roteiro</Text>
+            <Text style={styles.modalTitle}>Adicione a um novo Roteiro!</Text>
 
-        
-    </View>
-  </View>
-</Modal>
+            <TouchableOpacity onPress={toggleSecondModal}>
+              <View style={styles.itemContainer1}>
+                <View style={styles.iconCircle3}>
+                  <Entypo name="plus" size={24} color="black" />
+                </View>
+              </View>
+            </TouchableOpacity>
+            <Text style={styles.roteiro1}>Novo Roteiro</Text>
+          </View>
+        </View>
+      </Modal>
 
       <View style={styles.lugar2}>
         <Image source={require('@/assets/images/MASP.jpg')} style={styles.image} />
@@ -180,18 +175,12 @@ const toggleSecondModal = () => {
               <Text style={styles.text1}>Tembui</Text>
             </ImageBackground>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => router.push('/pontoTuristico')}>
-            <ImageBackground source={require('@/assets/images/tembui.jpg')} style={styles.imageSmall}>
-              <Text style={styles.text1}>Tembui</Text>
-            </ImageBackground>
-          </TouchableOpacity>
         </ScrollView>
         <View style={styles.blueLine} />
       </View>
     </ScrollView>
   );
 }
-
 const styles = StyleSheet.create({
   container1: {
     padding: 0,
@@ -221,7 +210,7 @@ const styles = StyleSheet.create({
     fontSize: 15, // Tamanho reduzido do texto
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: '-56%',
+    marginTop: '-66%',
     color: '#333',
     marginLeft: '-18%'
     
@@ -341,6 +330,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     elevation: 5,
     marginRight: 15,
+    marginTop:"2%"
   },
   modalOverlay: {
     flex: 1,
@@ -405,8 +395,18 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center', // Centraliza o texto
     marginVertical: 10, // Espaçamento vertical
-    marginTop: '7%',
+    marginTop: '10%',
     color:'black',
+    marginBottom:'10%'
+  },
+  modalTitle2: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center', // Centraliza o texto
+    marginVertical: 10, // Espaçamento vertical
+    marginTop: '3%',
+    color:'black',
+   
   },
   label: {
     fontSize: 16,
@@ -463,7 +463,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     elevation: 5, // Sombra para dar um destaque ao card
     padding: 10, // Espaçamento interno do card
-    height: '35%',
+    height: '33%',
     marginLeft:10,
   },
 

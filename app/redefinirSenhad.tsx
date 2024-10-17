@@ -103,11 +103,11 @@ const TokenVerificationScreen = () => {
             placeholderTextColor="#888"
           />
         </View>
-       
+       <Link href="/atualizarPerfil">
         <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           <Text style={styles.buttonText}>Verificar o código</Text>
         </TouchableOpacity>
-       
+        </Link>
       </View>
 
       {/* Usando o Link para navegação */}

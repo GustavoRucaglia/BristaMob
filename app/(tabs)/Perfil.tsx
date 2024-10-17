@@ -1,31 +1,57 @@
+import { View, Text, Image, StyleSheet, ScrollView, Alert, TouchableOpacity } from 'react-native';
+import { Link, useRouter } from 'expo-router';
+import Entypo from '@expo/vector-icons/Entypo'; // Biblioteca de ícones
 
-import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, TextInput } from 'react-native';
-import Entypo from '@expo/vector-icons/Entypo';
-import { Link } from 'expo-router';
- 
 export default function ProfilePage() {
+  const router = useRouter(); // Hook para navegação
+
+  // Função para exibir a mensagem de confirmação
+  const handleLogout = () => {
+    Alert.alert(
+      "Deseja sair deste perfil?",
+      "Você perderá suas informações de sessão.",
+      [
+        {
+          text: "Cancelar",
+          onPress: () => console.log("Logout cancelado"),
+          style: "cancel"
+        },
+        { 
+          text: "Sim", 
+          onPress: () => router.replace('/login') // Redireciona para a página de login
+        }
+        
+      ]
+    );
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView>
         {/* Title and Logo Section */}
         <View style={styles.header}>
-        <Image 
-          source={require('@/assets/images/brazurismotuc.png')} // Logo grande
-          style={styles.logoGrande} // Estilo ajustado para a logo grande
-        />
+          <Image 
+            source={require('@/assets/images/brazurismotuc.png')} // Logo grande
+            style={styles.logoGrande} // Estilo ajustado para a logo grande
+          />
         </View>
- 
+
         {/* Profile Section */}
         <View style={styles.profileSection}>
           <Image source={require('@/assets/images/brazurista2.png')} style={styles.profileImage} />
           <View style={styles.profileInfo}>
             <Text style={styles.profileName}>Yasmin Silva</Text>
             <Text style={styles.profileHandle}>@yass.silva</Text>
-           
           </View>
-       
+           {/* Ícone de Sair na parte inferior */}
+           <Link href='/login'>
+        <TouchableOpacity style={styles.logoutContainer} onPress={handleLogout}>
+          <Entypo name="log-out" size={24} color="#0056B3" />
+          <Text style={styles.logoutText}>Sair da Conta</Text>
+        </TouchableOpacity>
+        </Link>
         </View>
- 
+
         {/* Reviews Section */}
         <Text style={styles.sectionTitle}>Alguns de seus favoritos</Text>
         <ScrollView horizontal={true} style={styles.reviewsSection}>
@@ -60,28 +86,26 @@ export default function ProfilePage() {
             </View>
           ))}
         </ScrollView>
- 
+
         {/* Bottom Section */}
         <View style={styles.bottomSection}>
-        
           <Link href="/roteiro" style={styles.bottomLink}>
             <Text style={styles.bottomLinkText}>Acesse seus roteiros</Text>
           </Link>
-        
-        <Link href="/atualizarPerfil" style={styles.bottomLink}>
-          <Text style={styles.bottomLinkText}>Atualizar Perfil</Text>
-        </Link>
-      </View>
-        
-<View style={styles.blueLine}/> 
- 
- 
-        
+
+          <Link href="/atualizarPerfil" style={styles.bottomLink}>
+            <Text style={styles.bottomLinkText}>Atualizar Perfil</Text>
+          </Link>
+        </View>
+
+       
+
+        <View style={styles.blueLine}/>
       </ScrollView>
     </View>
   );
 }
- 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -99,12 +123,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  logoGrande: {
+    width: 250,
+    height: 180,
+    borderRadius: 50,
+  },
   profileSection: {
     flexDirection: 'row',
     padding: 20,
     alignItems: 'center',
   },
-  
   profileImage: {
     width: 90,
     height: 90,
@@ -122,10 +150,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'gray',
   },
-  
   reviewsSection: {
     padding: 20,
-  
   },
   sectionTitle: {
     fontSize: 22,
@@ -177,78 +203,25 @@ const styles = StyleSheet.create({
     color: '#3366CC',
     textDecorationLine: 'underline',
   },
-  
-  container2: {
-    flex: 1,
-    padding: 20,
+  logoutContainer: {
+    flexDirection: 'row',
     justifyContent: 'center',
-  },
-  textAtual: {
-    fontSize: 28,
+    alignItems: 'center',
+    marginTop: 30,
     marginBottom: 20,
-    textAlign: 'center',
-    fontWeight: 'bold',
   },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 12,
-    paddingHorizontal: 8,
-    borderRadius: 4,
+  logoutText: {
+    marginLeft: 10,
+    fontSize: 18,
+    color: '#0056B3',
   },
   blueLine: {
     height: 2.5,
     width: 300,
-    backgroundColor:  '#0056B3',
+    backgroundColor: '#0056B3',
     marginVertical: 10,
     alignSelf: 'center',
     marginTop: 40,
     marginBottom: 10,
   },
-  input1: {
-    height: 36,
-    width: 240,
-    borderColor: '#0056B3',
-    borderWidth: 1,
-    paddingLeft: 12,
-    borderRadius: 10,
-    marginTop: 10,
-    marginBottom: 10,
-    marginHorizontal: 20,
-    marginVertical: 10,
-  },
-  logoGrande: {
-    width: 250,
-    height: 180,
-    marginTop: 46,
-    borderRadius: 50,
-    marginHorizontal: 6,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  button: {
-    height: 40,
-    width: '80%',
-    backgroundColor: '#0056B3',
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 20,
-    marginTop: 30,
-    paddingVertical: 10,
-    paddingHorizontal: 40,
-  },
-  buttonText: {
-    fontSize: 20,
-    color: '#fff',
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-  secaoatuali:{
-    alignItems: 'center',
-    justifyContent: 'center',
-   
-    marginBottom: 20,
-  }
 });

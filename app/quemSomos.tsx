@@ -22,7 +22,7 @@ export default function TabTwoScreen() {
      
         <Text style={styles.title}>QUEM SOMOS?</Text>
         <Text style={styles.instructions}>
-          Brazurista é um site web e aplicativo para dispositivo móvel que facilita a criação de roteiros. Possui funcionalidades como avaliar e comentar em pontos turísticos e restaurantes por todo o Brasil.
+          Brazurista é o conjunto de um sistema web e um aplicativo para dispositivo móvel que facilita a criação de roteiros. Possui a funcionalidade de acessar pontos turísticos e restaurantes por todo o Brasil.Onde o usuário pode adicionar os locais de sua preferencia a um roteiro gratuito,feito por ele mesmo!
         </Text>
         <ImageBackground source={require('@/assets/images/Design sem nome.png')} style={styles.imageSmall1} />
         <Text style={styles.instructions}>
