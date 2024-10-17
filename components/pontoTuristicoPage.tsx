@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Image, ImageBackground, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, ImageBackground, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useQuery } from '@tanstack/react-query';
 import { getPontoInterreseById, PontoInterrese } from '@/app/utils/api-request';
 import { useRoute } from '@react-navigation/native';
 import { Carrossel } from './carrossel';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
+import { Entypo } from '@expo/vector-icons';
 
 interface RouteParams {
   id: string;
@@ -76,9 +77,9 @@ const toggleSecondModal = () => {
     <View style={styles.modalContent}>
       {/* Cabeçalho do Modal */}
       <View style={styles.modalHeader}>
-        <TouchableOpacity onPress={toggleModal}>
+      <Pressable onPress={toggleModal}>
           <Entypo name="cross" size={24} color="black" />
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       <Image 

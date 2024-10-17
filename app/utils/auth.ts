@@ -34,13 +34,17 @@ interface Recover{
 }
 
 
-const API = 'https://d201-2804-14d-32a0-4fdc-1c18-a789-f220-289a.ngrok-free.app';
+const API = 'https://9212-200-148-158-242.ngrok-free.app';
 
 const defaultHeaders = {
   "ngrok-skip-browser-warning": "69420",
   "Content-Type": "application/json", 
 };
 
+const Textheaders = {
+  "ngrok-skip-browser-warning": "69420",
+  "Content-Type": "application/json", 
+};
 
  
  const [token, setToken] = useState<string | null>('');
@@ -50,6 +54,12 @@ const defaultHeaders = {
   'Content-Type': 'application/json',
   Authorization: `Bearer ${token}`,
   });
+
+  const HeaderAuth1 = (token: string | null) => ({
+    'ngrok-skip-browser-warning': '69420',
+    'Content-Type': 'text/plain',
+    Authorization: `Bearer ${token}`,
+    });
 export const loginRequest = async (credentials: Credentials) => {
     const response = await fetch(`${API}/auth/login`, {
       method: 'POST',
@@ -93,6 +103,24 @@ export const loginRequest = async (credentials: Credentials) => {
     if (!response.ok) {
       throw new Error('Password recovery failed');
     }
+ 
+    return response.json();
+  };
+
+  export const PostRoteiro = async (text: string, token: string) => {
+    const response = await fetch(`${API}/brazu/pontos/roteiro-new`, {
+      method: 'POST',
+      headers: HeaderAuth1(token),
+      body:  text
+    });
+ 
+    if (!response.ok) {
+      throw new Error('Password recovery failed');
+    }
+    if(token.length > 4) {
+      console.log('Roteiro criado com sucesso!' + token);
+    }
+  
  
     return response.json();
   };

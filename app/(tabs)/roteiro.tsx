@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Modal, StyleSheet, ImageBackground, FlatList, Image, Dimensions, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Modal, StyleSheet, ImageBackground, FlatList, Image, Dimensions, ScrollView, Pressable, GestureResponderEvent } from 'react-native';
 import { Entypo } from '@expo/vector-icons'; // Ícone de "X" para fechar o modal
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
+import { PostRoteiro } from '../utils/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const itineraryItems = [
   {
@@ -55,21 +57,56 @@ const itineraryItems = [
   },
 ];
 
-// Obtém as dimensões da tela para calcular o tamanho das colunas
 const numColumns = 2;
 const screenWidth = Dimensions.get('window').width;
 const itemWidth = screenWidth / numColumns - 20;
 
-const BottomModalExample = () => {
+const Roteiro = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [titulo, setTitulo] = useState('');
   const [sortBy, setSortBy] = useState('recent');
+  const [token, setToken] = useState('');
+  const router = useRouter();
+
+  const getToken = async () => {
+    const token1 = await AsyncStorage.getItem('@user_token');
+    if(token1){
+      setToken(token1);
+      console.log(token1);
+    }
+    else{
+      console.log('Token não encontrado');
+    }
+    console.log(token);
+  }
+
+  getToken();
+
+
+  const handleSubmit = async (e: GestureResponderEvent) => {
+    e.preventDefault();
+    console.log('Botão flutuante pressionado!');
+    try {
+
+      console.log(token);
+      if(token){
+        console.log('Roteiro criado com sucesso!' + token);
+        await PostRoteiro(titulo, token);
+      }
+      setModalVisible(false);
+      router.push('/');
+
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
+    }
+  }; 
+ 
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
 
-  // Função para renderizar cada item do roteiro
+  
   const renderItem = () => (
     <View style={styles.itemContainer}>
       <Image source={{ uri: 'https://tourb.com.br/img/lugares/rio-de-janeiro/praia-vermelha.jpg' }} style={styles.itemImage} />
@@ -84,34 +121,31 @@ const BottomModalExample = () => {
   };
 
   const handlePress = () => {
-    // Ação que será executada quando o botão for pressionado
+  
     console.log('Botão flutuante pressionado!');
   };
 
   const sortedItems = [...itineraryItems].sort((a, b) => {
     if (sortBy === 'recent') {
-      return b.id.localeCompare(a.id); // Ordena por mais recente
+      return b.id.localeCompare(a.id); 
     }
-    return a.id.localeCompare(b.id); // Ordena por menos recente
+    return a.id.localeCompare(b.id);
   });
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <Link href='/'></Link>
       <View style={styles.azul}>
         <ImageBackground source={require('@/assets/images/brazurismotuc.png')} style={styles.imageSmall} />
         </View>
         <View style={styles.filterContainer}>
           <Text style={styles.title}>Seus Roteiros criados</Text>
-          {/* Botão para abrir o modal */}
           <TouchableOpacity onPress={toggleModal}>
             <View style={styles.iconCircle}>
               <Entypo name="plus" size={24} color="black" />
             </View>
           </TouchableOpacity>
         </View>
-
-        {/* Botão para alternar entre "Mais recentes" e "Menos recentes" */}
         <TouchableOpacity style={styles.iconCircle1} onPress={toggleSortOrder}>
           <Entypo name={sortBy === 'recent' ? 'arrow-down' : 'arrow-up'} size={24} color="black" />
           <Text style={styles.filterText}>
@@ -120,53 +154,42 @@ const BottomModalExample = () => {
         </TouchableOpacity>
 
         <FlatList
-          data={sortedItems} // Usar a lista ordenada
+          data={sortedItems}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
-          numColumns={1} // Definindo para 1 coluna para empilhar os itens
+          numColumns={1} 
           contentContainerStyle={styles.grid}
         />
-
-        
-      
-
-      {/* Modal que aparece da parte inferior */}
       <Modal
   visible={modalVisible}
   animationType="slide"
   transparent={true}
-  onRequestClose={toggleModal} // Fecha o modal ao pressionar 'voltar' no Android
+  onRequestClose={() => setModalVisible(!modalVisible)}
 >
   <View style={styles.modalOverlay}>
     <View style={styles.modalContent}>
-      {/* Cabeçalho com o botão de fechar */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={toggleModal}>
+      <Pressable  onPress={() => setModalVisible(false)} style={{zIndex: 10}}>
           <Entypo name="cross" size={30} color="black" />
-        </TouchableOpacity>
-      </View>
-
-      {/* O conteúdo do modal vai aqui */}
+        </Pressable>
       <ImageBackground source={require('@/assets/images/B (3).png')} style={styles.imageSmall1} />
       <Text style={styles.modalTitle}>Crie aqui o seu próprio Roteiro!</Text>
       <Text style={styles.label}>Título do Roteiro</Text>
       <TextInput
         style={styles.input}
         placeholder="Adicione um título para o seu roteiro"
-        value={titulo}
         onChangeText={setTitulo}
       />
       <Link href="/resultadoBusca" style={styles.bottomLink} onPress={toggleModal}>
   <Text style={styles.bottomLinkText}>Veja aqui lugares para adicionar ao seu novo roteiro</Text>
 </Link>
-      <TouchableOpacity style={styles.createButton}>
+      <TouchableOpacity style={styles.createButton} onPress={handleSubmit}>
         <Text style={styles.createButtonText}>Criar roteiro</Text>
       </TouchableOpacity>
       
     </View>
   </View>
 </Modal>
-    </ScrollView>
+    </View>
   );
 };
 
@@ -374,4 +397,4 @@ imageSmall: {
 
 });
 
-export default BottomModalExample;
+export default Roteiro;

@@ -13,12 +13,6 @@ export default function ProfilePage() {
   const getUserData = async () => {
     const token = await AsyncStorage.getItem('@user_token');
     setToken(token);
-    
-    if (token) {
-      console.log('Token:', token);
-    } else {
-      console.log('Nenhum dado de usuário encontrado.');
-    }
   };
 
   getUserData();

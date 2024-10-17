@@ -14,12 +14,14 @@ export type PontoInterrese = {
   regiao: string;
 };
 
-const API = 'https://d201-2804-14d-32a0-4fdc-1c18-a789-f220-289a.ngrok-free.app';
+const API = 'https://9212-200-148-158-242.ngrok-free.app';
 
 const defaultHeaders = {
   "ngrok-skip-browser-warning": "69420",
   "Content-Type": "application/json", 
 };
+
+
 
 export async function getPontoInterrese(sortBy: string): Promise<PontoInterrese[]> {
   const res = await fetch(`${API}/brazu/pontos?sort=${sortBy}`, {

@@ -20,6 +20,7 @@ export function LoginPage() {
     try {
       const data = await loginRequest({ login, password });
       await AsyncStorage.setItem('@user_token', data.token);
+      console.log('Login realizado com sucesso!');
       router.push('/');
       
  

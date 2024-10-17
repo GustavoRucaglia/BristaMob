@@ -13,12 +13,11 @@ export default function TabLayout() {
     const token = await AsyncStorage.getItem('@user_token');
      if(token){
        setLogin(true);
+       console.log('Dado de usuário encontrado:', token);
      }
-    
-    if (token) {
-      console.log('Token:', token);
-    } else {
+   else {
       console.log('Nenhum dado de usuário encontrado.');
+      setLogin(false);
     }
   };
 
