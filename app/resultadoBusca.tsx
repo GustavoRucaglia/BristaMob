@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { View, Image, Text, StyleSheet, TextInput, ImageBackground, FlatList } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
@@ -75,15 +76,17 @@ const searchResults = [
 const SearchResults = () => {
   // Função para renderizar cada item da lista
   const renderItem = () => (
-    <Link href='/'>
-      <View style={styles.resultContainer}>
-        <Image source={require('@/assets/images/recife.jpg')} style={styles.image} />
-        <View style={styles.infoContainer}>
-          <Text style={styles.title}>Recife</Text>
-          <Text style={styles.address}>Em recife</Text>
+  
+      <View style={styles.cardContainer}> {/* Novo contêiner para o retângulo */}
+        <View style={styles.resultContainer}>
+          <Image source={require('@/assets/images/MASP.jpg')} style={styles.image} />
+          <View style={styles.infoContainer}>
+            <Text style={styles.title}>Museu Da Arte Moderna</Text>
+            <Text style={styles.address}>Avenida Paulista,SP</Text>
+          </View>
         </View>
       </View>
-    </Link>
+
   );
 
   return (
@@ -137,7 +140,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#555',
     paddingLeft: 20,
-    alignItems:'center',
+    alignItems: 'center',
   },
   title: {
     fontSize: 16,
@@ -154,6 +157,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+    width: '100%', // A largura agora ocupa 100% da tela
   },
   image: {
     width: 150,
@@ -199,6 +203,14 @@ const styles = StyleSheet.create({
   },
   listContent: {
     paddingBottom: 20,
+  },
+  cardContainer: { // Novo estilo para o retângulo
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 10,
+    marginBottom: -1,
+    overflow: 'hidden', // Garante que as bordas arredondadas sejam aplicadas corretamente
   },
 });
 

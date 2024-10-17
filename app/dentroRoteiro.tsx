@@ -1,72 +1,94 @@
-import React from 'react';
-import { ScrollView, View, Text, Image, StyleSheet,ImageBackground, TouchableOpacity } from 'react-native';
-import Header from '@/components/Header';
- 
+import React, { useState } from 'react';  // Importando o hook useState
+import { ScrollView, View, Text, Image, StyleSheet, ImageBackground, TouchableOpacity, Dimensions } from 'react-native';
+import { Entypo } from '@expo/vector-icons';
+
 const App = () => {
+  const [sortBy, setSortBy] = useState('recent'); // Estado para controlar o filtro
+
+  const numColumns = 2;
+  const screenWidth = Dimensions.get('window').width;
+  const itemWidth = screenWidth / numColumns - 20;
+
+  // Função para alternar entre mais recentes e menos recentes
+  const toggleSortOrder = () => {
+    setSortBy(sortBy === 'recent' ? 'oldest' : 'recent');
+  };
+
+  // Exemplo de dados para roteiros, você pode adicionar mais conforme necessário
+  const itineraryItems = [
+    {
+      id: '1',
+      name: 'Copacabana',
+      description: 'Copacabana é um bairro do Rio de Janeiro...',
+      image: require('@/assets/images/copacabana.jpg'),
+    },
+    {
+      id: '2',
+      name: 'Copacabana',
+      description: 'Copacabana é um bairro do Rio de Janeiro...',
+      image: require('@/assets/images/copacabana.jpg'),
+    },
+    {
+      id: '3',
+      name: 'Copacabana',
+      description: 'Copacabana é um bairro do Rio de Janeiro...',
+      image: require('@/assets/images/copacabana.jpg'),
+    },
+    {
+      id: '4',
+      name: 'Copacabana',
+      description: 'Copacabana é um bairro do Rio de Janeiro...',
+      image: require('@/assets/images/copacabana.jpg'),
+    },
+    {
+      id: '5',
+      name: 'Cristo Redentor',
+      description: 'O Cristo Redentor é uma estátua icônica...',
+      image: require('@/assets/images/cristo.jpg'),
+    },
+  ];
+
+  const sortedItems = [...itineraryItems].sort((a, b) => {
+    return sortBy === 'recent' ? b.id.localeCompare(a.id) : a.id.localeCompare(b.id);
+  });
+
   return (
-<>
-<ScrollView style={{backgroundColor: "#fff"}}>
-<View style={styles.azul}>
+    <ScrollView style={{ backgroundColor: "#fff" }}>
+      <View style={styles.azul}>
         <ImageBackground source={require('@/assets/images/brazurismotuc.png')} style={styles.imageSmall} />
       </View>
+
       <View style={styles.container}>
-     
-   
-      <Text style={styles.title}>Roteiro para Rio de Janeiro</Text>
-      <View style={styles.filterContainer}>
-        
-      </View>
- 
-      <View style={styles.roteiroContainer}>
-        <View style={styles.roteiro}>
-        <ImageBackground source={require('@/assets/images/copacabana.jpg')} style={styles.image}>
-          </ImageBackground>
-          <Text style={styles.roteiroTitle}>Copacabana</Text>
-          
-          <Text style={styles.roteiroDescription}>Copacabana é um bairro do Rio de Janeiro, famoso por sua praia em meia-lua, o calçadão com ondas de pedras portuguesas e sua vibrante vida cultural e turística.
+        <Text style={styles.title}>Roteiro para Rio de Janeiro</Text>
 
+        <View style={styles.filterContainer}>
+          <View style={styles.iconCircle}>
+            <Entypo name="plus" size={24} color="black" />
+          </View>
+        </View>
 
-</Text>
-        </View>
-        <View style={styles.roteiro}>
-        <ImageBackground source={require('@/assets/images/cristo.jpg')} style={styles.image} />
-          <Text style={styles.roteiroTitle}>Cristo Redentor</Text>
-          
-          <Text style={styles.roteiroDescription}>
-          O Cristo Redentor é uma estátua de 38 metros de altura, situada no Morro do Corcovado, no Rio de Janeiro. Inaugurada em 1931, é um ícone do Brasil e uma das Sete Maravilhas do Mundo Moderno.
+        <TouchableOpacity style={styles.iconCircle1} onPress={toggleSortOrder}>
+          <Entypo name={sortBy === 'recent' ? 'arrow-down' : 'arrow-up'} size={24} color="black" />
+          <Text style={styles.filterText}>{sortBy === 'recent' ? 'Mais recentes' : 'Menos recentes'}</Text>
+        </TouchableOpacity>
 
-</Text>
-        </View>
+        {sortedItems.map((item) => (
+          <View style={styles.roteiroContainer} key={item.id}>
+            <View style={styles.roteiro}>
+              <ImageBackground source={item.image} style={styles.image} />
+              <Text style={styles.roteiroTitle}>{item.name}</Text>
+              <Text style={styles.roteiroDescription}>{item.description}</Text>
+            </View>
+          </View>
+        ))}
       </View>
-      <View style={styles.roteiroContainer}>
-        <View style={styles.roteiro}>
-        <ImageBackground source={require('@/assets/images/museudoamanhajpg.jpg')} style={styles.image}>
-          </ImageBackground>
-          <Text style={styles.roteiroTitle}>Museu do Amanhã </Text>
-         
-          <Text style={styles.roteiroDescription}>O Museu do Amanhã, no Rio de Janeiro, é um museu de ciência inaugurado em 2015, projetado por Santiago Calatrava. Focado em sustentabilidade e inovação, apresenta exposições interativas sobre desafios globais. Sua arquitetura futurista é um importante ponto turístico.
-</Text>
-        </View>
-        <View style={styles.roteiro}>
-        <ImageBackground source={require('@/assets/images/ipanemarj.jpg')} style={styles.image} />
-          <Text style={styles.roteiroTitle}>Praia de Ipanema</Text>
-        
-          <Text style={styles.roteiroDescription}>Ipanema é cenário de um belíssimo nascer e pôr-do-sol, diariamente apreciados por moradores e turistas, que costumam aplaudir o pôr- do-sol nos dias mais limpos. </Text>
-        </View>
-      </View>
-      </View>
-
- 
-      
-    
-      </ScrollView>
-      </>
+    </ScrollView>
   );
 };
- 
+
+// Estilos
 const styles = StyleSheet.create({
   container: {
-
     padding: 16,
     backgroundColor: '#f5f5f5',
   },
@@ -74,6 +96,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 16,
+    marginTop:15,
+    marginLeft:10,
   },
   filterContainer: {
     flexDirection: 'row',
@@ -82,10 +106,6 @@ const styles = StyleSheet.create({
   },
   filterText: {
     fontSize: 16,
-  },
-  filterValue: {
-    fontSize: 16,
-    fontWeight: 'bold',
   },
   roteiroContainer: {
     marginBottom: 32,
@@ -116,21 +136,44 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#777',
   },
-  subtitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 16,
+  iconCircle1: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    backgroundColor: 'lightgray',
+    borderRadius: 25,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 5,
+    width: 180,
+    height: 40,
+    marginLeft: 10,
+    marginTop:-60,
+    marginBottom:30,
   },
-  visitedText:{
-    fontSize:14,
-    color:'#00b300',
-    marginBottom:16,
+  iconCircle: {
+    width: 50,
+    height: 50,
+    backgroundColor: 'lightgray',
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 5,
+    marginLeft: 300,
+    marginTop:20,
+
   },
-  
   imageSmall: {
     width: 240,
     height: 160,
-    marginTop:36,
+    marginTop: 36,
     borderRadius: 50,
     marginHorizontal: 6,
     justifyContent: 'flex-end',
@@ -138,10 +181,10 @@ const styles = StyleSheet.create({
   },
   azul: {
     backgroundColor: '#0056B3',
-    height:120, 
+    height: 120,
     alignItems: 'center',
     justifyContent: 'center',
   },
 });
- 
+
 export default App;

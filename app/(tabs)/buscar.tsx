@@ -11,10 +11,11 @@ const Buscar = () => {
             <StatusBar hidden={true} />
             <ScrollView style={styles.container}>
                 {/* Imagem de Cabeçalho */}
+                <Link href='/login'>
                 <View style={styles.azul}>
                     <ImageBackground source={require('@/assets/images/brazurismotuc.png')} style={styles.imageSmall} />
                 </View>
-
+                </Link>
                 {/* Barra de Pesquisa */}
                
                 <View style={styles.searchContainer}>
@@ -214,7 +215,7 @@ const Buscar = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#f5f5f5',
     },
     imageSmall: {
         width: 250,

@@ -56,14 +56,14 @@ export default function TabLayout() {
         name="roteiro"
         options={{
           title: 'Roteiro',
-          href: '/roteiro',
+          href: login ?  '/roteiro' : null, 
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon  name={focused ? 'heart' : 'heart-outline'}  color={'#0056B3'} />
           ),
         }}
       />
         <Tabs.Screen
-          name="login" // Nome diferente para evitar conflito
+          name="login" 
           options={{
             title: 'Login',
             href: login ?  null : '/login', 
@@ -86,6 +86,7 @@ export default function TabLayout() {
           name="criarRoteirou"
           options={{
             title: 'Criar Roteiro',
+            href: login ?  '/criarRoteirou': null, 
             tabBarIcon: ({ color, focused }) => (
               <TabBarIcon name={focused ? 'person' : 'person-outline'} color={ '#0056B3'} />
             ),

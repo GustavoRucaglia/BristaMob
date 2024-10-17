@@ -98,7 +98,7 @@ export default function ProfilePage() {
         {/* Bottom Section */}
         <View style={styles.bottomSection}>
         
-          <Link href="/novoRoteiro" style={styles.bottomLink}>
+          <Link href="/roteiro" style={styles.bottomLink}>
             <Text style={styles.bottomLinkText}>Acesse seus roteiros</Text>
           </Link>
         

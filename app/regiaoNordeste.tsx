@@ -113,44 +113,9 @@ export default function regiaoNordeste() {
         <View style={styles.blueLine} />
       </View>
 
-      <View style={styles.section}>
-        <View style={styles.row}>
-          <Text style={styles.title1}>Busque por Região</Text>
-        </View>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScroll}>
-          <Link href="/regiaoSudeste" style={styles.card2}>
-            <View style={styles.card1}>
-              <Image source={require('@/assets/images/lapa.jpg')} style={styles.image2} />
-              <Text style={styles.regiaoText}>Sudeste</Text>
-            </View>
-          </Link>
-          <Link href="/regiaoSul" style={styles.card2}>
-            <View style={styles.card1}>
-              <Image source={require('@/assets/images/curitiba.jpg')} style={styles.image2} />
-              <Text style={styles.regiaoText}>Sul</Text>
-            </View>
-          </Link>
-          <Link href="/regiaoCentro" style={styles.card2}>
-            <View style={styles.card1}>
-              <Image source={require('@/assets/images/df.jpg')} style={styles.image2} />
-              <Text style={styles.regiaoText}>Centro-Oeste</Text>
-            </View>
-          </Link>
-          <Link href="/regiaoNordeste" style={styles.card2}>
-            <View style={styles.card1}>
-              <Image source={require('@/assets/images/sm.jpg')} style={styles.image2} />
-              <Text style={styles.regiaoText}>Nordeste</Text>
-            </View>
-          </Link>
-          <Link href="/regiaoNorte" style={styles.card2}>
-            <View style={styles.card1}>
-              <Image source={require('@/assets/images/amazonia.jpg')} style={styles.image2} />
-              <Text style={styles.regiaoText}>Norte</Text>
-            </View>
-          </Link>
+      
         </ScrollView>
-      </View>
-    </ScrollView>
+      
             
   );
 

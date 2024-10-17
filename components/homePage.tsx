@@ -12,7 +12,7 @@ const { width } = Dimensions.get('window');
 export const HomePage = () => {
   const [token, setToken] = useState<string | null>(null);
 
-  const getUserData = async () => {
+  /* const getUserData = async () => {
     const token = await AsyncStorage.getItem('@user_token');
     setToken(token);
     
@@ -22,20 +22,22 @@ export const HomePage = () => {
       console.log('Nenhum dado de usuário encontrado.');
     }
   };
+  */
 
-  getUserData();
+
 
   
   return (
     <>
  <ScrollView>
+      <Link href={'/quemSomos'}>
       <View style={styles.azul}>
-        {/* Exibindo a logo grande */}
         <Image 
-          source={require('@/assets/images/brazurismotuc.png')} // Logo grande
-          style={styles.logoGrande} // Estilo ajustado para a logo grande
+          source={require('@/assets/images/brazurismotuc.png')}
+          style={styles.logoGrande}
         />
       </View>
+      </Link>
    
       <StatusBar hidden={false} />
       <ScrollView style={styles.container}>
@@ -58,20 +60,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f5f5f5',
   },
+  azul: {
+    backgroundColor: '#0056B3',
+    height: 120,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%', // Mudança aqui
+  },
   logoGrande: {
     width: 250,
     height: 180,
-    marginTop: 46,
+    marginTop: 36,
     borderRadius: 50,
-    marginHorizontal: 6,
-    justifyContent: 'flex-end',
+    justifyContent: 'center', // Alterado de 'flex-end' para 'center'
     alignItems: 'center',
-  },
-  azul: {
-    backgroundColor: '#0056B3',
-    height: 130,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   inicio: {
     color: '#E6E6E6',

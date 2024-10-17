@@ -1,5 +1,17 @@
+import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+
 export default function ProfilePage() {
+    const [url, setUrl] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('');
+    const [phone, setPhone] = useState('');
+
+    const handleUpdate = () => {
+        // Handle profile update logic here
+    };
+
     return (
 <ScrollView>
 <View style={styles.container}>
@@ -15,7 +27,9 @@ export default function ProfilePage() {
 <View style={styles.container2} >
 <Text style={styles.textAtual}>Atualizar Perfil</Text>
 
-
+            <View style={styles.container2}>
+                <Text style={styles.textAtual}>Atualizar Perfil</Text>
+</View>
 <View style={styles.profileSection}>     
 <Image source={require('@/assets/images/brazurista2.png')} style={styles.profileImage} />
 <TextInput
@@ -27,6 +41,14 @@ placeholder="URL:"
  
 
 
+                <Text>Email:</Text>
+                <TextInput
+                    style={styles.input1}
+                    placeholder="Email"
+                    keyboardType="email-address"
+                    value={email}
+                    onChangeText={setEmail}
+                />
 
 <View style={styles.secaoatuali}>
   
