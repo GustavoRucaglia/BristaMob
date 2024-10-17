@@ -1,31 +1,34 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground, ScrollView, GestureResponderEvent } from 'react-native';
-import { Link, router } from 'expo-router';
+import { Link, router, useRouter } from 'expo-router';
 import Checkbox from 'expo-checkbox';
 import { loginRequest, RegisterRequest } from './utils/auth';
 
 
 const LoginScreen = () => {
+  const router = useRouter();
   const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
-    const [nome, setNome] = useState('');
+    const [name, setName] = useState('');
     const [telefone, setTelefone] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordsMatch, setPasswordsMatch] = useState(true);
     const [role] = useState('USER');
+ 
    
     const [emailError, setEmailError] = useState('');
 
 const validateEmail = (email: string) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expressão regular para validar o formato do e-mail
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 };
  
     const handleSubmit = async (e:  GestureResponderEvent) => {
       e.preventDefault();
       try {
-        await RegisterRequest({ login, password, role });
+        await RegisterRequest({ login, password, role, name, telefone });
         await loginRequest({ login, password });
+        router.push('/');
         
       } catch (error) {
         console.error('Falha no registro:', error);
@@ -49,8 +52,8 @@ const validateEmail = (email: string) => {
             <TextInput
               style={styles.input}
               placeholder="Nome de Usuário"
-              value={nome}
-              onChangeText={setNome}
+              value={name}
+              onChangeText={setName}
               autoCapitalize="none"
               placeholderTextColor="#888"
             />

@@ -2,15 +2,49 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import Entypo from '@expo/vector-icons/Entypo';
 import { Link } from 'expo-router';
+import { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useQuery } from '@tanstack/react-query';
+import { fetchUserDetails, User } from '../utils/auth';
  
 export default function ProfilePage() {
+  const [token, setToken] = useState<string | null>(null);
+
+  const getUserData = async () => {
+    const token = await AsyncStorage.getItem('@user_token');
+    setToken(token);
+    
+    if (token) {
+      console.log('Token:', token);
+    } else {
+      console.log('Nenhum dado de usuário encontrado.');
+    }
+  };
+
+  getUserData();
+
+    
+    if(!token){
+      return (
+        <div>
+          <p>Carregando...</p>
+        </div>
+      );
+    }
+    const { isLoading, isError, data, error } = useQuery<User>({
+        queryKey: ['userData'],
+        queryFn: () => fetchUserDetails(token),
+        enabled: !!token, 
+    });
+
+
   return (
     <View style={styles.container}>
       <ScrollView>
         {/* Title and Logo Section */}
         <View style={styles.header}>
         <Image 
-          source={require('@/assets/images/brazurismotuc.png')} // Logo grande
+          source={require('@/assets/images/brazurismotuc.png')} // Logo gran
           style={styles.logoGrande} // Estilo ajustado para a logo grande
         />
         </View>

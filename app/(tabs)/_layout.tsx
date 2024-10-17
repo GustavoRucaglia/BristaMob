@@ -4,10 +4,26 @@ import React, { useState } from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const [ login, setLogin ] = useState(true);
+  const [ login, setLogin ] = useState(false);
+  const getUserData = async () => {
+    const token = await AsyncStorage.getItem('@user_token');
+     if(token){
+       setLogin(true);
+     }
+    
+    if (token) {
+      console.log('Token:', token);
+    } else {
+      console.log('Nenhum dado de usuário encontrado.');
+    }
+  };
+
+  getUserData();
+
 
   return (
     <Tabs
@@ -61,6 +77,15 @@ export default function TabLayout() {
           options={{
             title: 'Perfil',
             href: login ? '/Perfil' : null, 
+            tabBarIcon: ({ color, focused }) => (
+              <TabBarIcon name={focused ? 'person' : 'person-outline'} color={ '#0056B3'} />
+            ),
+          }}
+        />
+          <Tabs.Screen
+          name="criarRoteirou"
+          options={{
+            title: 'Criar Roteiro',
             tabBarIcon: ({ color, focused }) => (
               <TabBarIcon name={focused ? 'person' : 'person-outline'} color={ '#0056B3'} />
             ),

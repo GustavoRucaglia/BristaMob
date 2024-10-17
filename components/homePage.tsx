@@ -1,18 +1,34 @@
 import Header from '@/components/Header';
 import { Link } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import { ScrollView, View, Image, Text, StyleSheet, ImageBackground } from 'react-native';
 import { Dimensions } from 'react-native';
 import { Carrossel } from './carrossel';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const { width } = Dimensions.get('window');
 export const HomePage = () => {
+  const [token, setToken] = useState<string | null>(null);
+
+  const getUserData = async () => {
+    const token = await AsyncStorage.getItem('@user_token');
+    setToken(token);
+    
+    if (token) {
+      console.log('Token:', token);
+    } else {
+      console.log('Nenhum dado de usuário encontrado.');
+    }
+  };
+
+  getUserData();
+
+  
   return (
     <>
  <ScrollView>
-      {/* Título principal e ícone */}
       <View style={styles.azul}>
         {/* Exibindo a logo grande */}
         <Image 

@@ -1,4 +1,4 @@
-import { getPontoInterreseFilter, PontoInterrese } from '@/app/utils/api-request';
+import { getPontoInterreseFilter, getPontoInterreseFilterRegiao, PontoInterrese } from '@/app/utils/api-request';
 import Header from '@/components/Header';
 import { useQuery } from '@tanstack/react-query';
 import { Link, useNavigation, useRouter } from 'expo-router';
@@ -17,12 +17,24 @@ const { width } = Dimensions.get('window');
 export const Carrossel = ({title, category}: propsCarrossel) => {
 
   const navigation = useNavigation(); 
-    const { data, error, isLoading, refetch } = useQuery({
-        queryKey: ["pontos", category],
-        queryFn: () => getPontoInterreseFilter(category),
-        staleTime: 5 * 60 * 1000,     
-      });
+    
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["pontos", category],
+    queryFn: category === 'sul' || category === 'norte' || category === 'nordeste' || category === 'sudeste' || category === 'centro-oeste'
+      ? () => getPontoInterreseFilterRegiao(category)
+      : () => getPontoInterreseFilter(category),
+    staleTime: 5 * 60 * 1000,
+  });
+      
+  if(isLoading){
+    return <Text>Carregando...</Text>
+  }
 
+  if(error){
+    console.log(error?.message);
+    return <Text>Erro ao carregar os pontos turísticos.</Text>
+   
+  }
   return (
    
           <View style={styles.col}>
