@@ -1,60 +1,90 @@
+
 export type PontoInterrese = {
-    id: number;
-    fotos: string;
-    descricao: string;
-    nome: string;
-    nota: number;
-    latitude: string,
-    longitude: string,
-    categoria: string,
-    dataDeCriacao: string,
-    telefone: string
-    state: boolean
-  };
- 
- 
-  export async function getPontoInterrese(sortBy: string) {
-    const headers = new Headers();
-    const res = await fetch(`http://localhost:8080/brazu/pontos?sort=${sortBy}`, {
+  id: number;
+  fotos: string;
+  descricao: string;
+  nome: string;
+  nota: number;
+  latitude: string;
+  longitude: string;
+  categoria: string;
+  dataDeCriacao: string;
+  telefone: string;
+  state: boolean;
+  regiao: string;
+};
+
+const API = 'https://9212-200-148-158-242.ngrok-free.app';
+
+const defaultHeaders = {
+  "ngrok-skip-browser-warning": "69420",
+  "Content-Type": "application/json", 
+};
+
+
+
+export async function getPontoInterrese(sortBy: string): Promise<PontoInterrese[]> {
+  const res = await fetch(`${API}/brazu/pontos?sort=${sortBy}`, {
       method: 'GET',
-      headers: headers
-    });
-    const pontoInterrese = await res.json();
-    return pontoInterrese;
+      headers: defaultHeaders,
+  });
+
+  if (!res.ok) {
+      throw new Error(`Erro ao buscar pontos de interesse: ${res.statusText}`);
   }
-  export async function getPontoInterreseFilter(category: string) {
-    const headers = new Headers();
-    const res = await fetch(`http://localhost:8080/brazu/pontos?categoria=${category}`, {
+
+  return await res.json();
+}
+
+export async function getPontoInterreseFilter(category: string): Promise<PontoInterrese[]> {
+  const res = await fetch(`${API}/brazu/pontos?categoria=${category}`, {
       method: 'GET',
-      headers: headers
-    });
-    const pontoInterrese = await res.json();
-    return pontoInterrese;
+      headers: defaultHeaders,
+  });
+
+  if (!res.ok) {
+      throw new Error(`Erro ao buscar pontos de interesse por categoria: ${res.statusText}`);
   }
- 
-  export async function getPontoInterreseSearch(search: string) {
-    const headers = new Headers();
-    const res = await fetch(`http://localhost:8080/brazu/pontos?search=${search}`, {
+
+  const pontoInterrese = await res.json();
+  return pontoInterrese;
+}
+
+export async function getPontoInterreseFilterRegiao(regiao: string): Promise<PontoInterrese[]> {
+  const res = await fetch(`${API}/brazu/pontos?regiao=${regiao}`, {
       method: 'GET',
-      headers: headers
-    });
-    const pontoInterrese = await res.json();
-    return pontoInterrese;
+      headers: defaultHeaders,
+  });
+
+  if (!res.ok) {
+      throw new Error(`Erro ao buscar pontos de interesse por região: ${res.statusText}`);
   }
- 
- 
-  export async function getPontoInterreseById(id: number) {
-    const headers = new Headers();
-    const res = await fetch(`http://localhost:8080/brazu/pontos/${id}`,
-      {
-        method: 'GET',
-        headers: headers
-      }
-    );
-    const pontoInterrese = await res.json();
-    return pontoInterrese;
- 
+
+  return await res.json();
+}
+
+export async function getPontoInterreseSearch(search: string): Promise<PontoInterrese[]> {
+  const res = await fetch(`${API}/brazu/pontos?search=${search}`, {
+      method: 'GET',
+      headers: defaultHeaders,
+  });
+
+  if (!res.ok) {
+      throw new Error(`Erro ao buscar pontos de interesse por busca: ${res.statusText}`);
   }
- 
- 
- 
+
+  return await res.json();
+}
+
+export async function getPontoInterreseById(id: number): Promise<PontoInterrese> {
+  const res = await fetch(`${API}/brazu/pontos/${id}`, {
+      method: 'GET',
+      headers: defaultHeaders,
+  });
+
+  if (!res.ok) {
+      throw new Error(`Erro ao buscar ponto de interesse com ID ${id}: ${res.statusText}`);
+  }
+
+  return await res.json();
+}

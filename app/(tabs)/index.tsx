@@ -9,11 +9,11 @@ export default function Home({ sortBy = "", id = 0, category = "" }: { sortBy?: 
 
   useEffect(() => {
     async function prefetchQueries() {
-      // Invalidate previous queries with the same key but different sort order
+      
       await queryClient.invalidateQueries({
         queryKey: ["pontos", sortBy],
       });
-      // Prefetch queries with the latest data
+      
       await queryClient.prefetchQuery({
         queryKey: ["pontos", category],
         queryFn: () => getPontoInterreseFilter(category),

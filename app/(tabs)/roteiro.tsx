@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Modal, StyleSheet, ImageBackground, FlatList, Image, Dimensions, ScrollView, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Modal, StyleSheet, ImageBackground, FlatList, Image, Dimensions, ScrollView, Pressable, GestureResponderEvent } from 'react-native';
 import { Entypo } from '@expo/vector-icons'; // Ícone de "X" para fechar o modal
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
+import { PostRoteiro } from '../utils/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const initialItineraryItems = [
   {
@@ -55,147 +57,128 @@ const initialItineraryItems = [
   },
 ];
 
-// Obtém as dimensões da tela para calcular o tamanho das colunas
-
-// Obtém as dimensões da tela para calcular o tamanho das colunas
 const numColumns = 2;
 const screenWidth = Dimensions.get('window').width;
 const itemWidth = screenWidth / numColumns - 20;
 
-const BottomModalExample = () => {
+const Roteiro = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [titulo, setTitulo] = useState('');
   const [sortBy, setSortBy] = useState('recent');
-  const [itineraryItems, setItineraryItems] = useState(initialItineraryItems); // Definindo o estado para os itens
-  const [successMessageVisible, setSuccessMessageVisible] = useState(false); // Estado para a mensagem de sucesso
+  const [token, setToken] = useState('');
+  const router = useRouter();
+
+  const getToken = async () => {
+    const token1 = await AsyncStorage.getItem('@user_token');
+    if(token1){
+      setToken(token1);
+      console.log(token1);
+    }
+    else{
+      console.log('Token não encontrado');
+    }
+    console.log(token);
+  }
+
+  getToken();
+
+
+  const handleSubmit = async (e: GestureResponderEvent) => {
+    e.preventDefault();
+    console.log('Botão flutuante pressionado!');
+    try {
+
+      console.log(token);
+      if(token){
+        console.log('Roteiro criado com sucesso!' + token);
+        await PostRoteiro(titulo, token);
+      }
+      setModalVisible(false);
+      router.push('/');
+
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
+    }
+  }; 
+ 
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
 
-  const removeAllRoteiros = () => {
-    Alert.alert(
-      "Confirmação",
-      "Tem certeza de que deseja remover todos os roteiros?",
-      [
-        {
-          text: "Cancelar",
-          style: "cancel"
-        },
-        {
-          text: "Remover",
-          onPress: () => setItineraryItems([]), // Agora funcionando corretamente
-        }
-      ]
-    );
-  };
+  
+  const renderItem = () => (
+    <View style={styles.itemContainer}>
+      <Image source={{ uri: 'https://tourb.com.br/img/lugares/rio-de-janeiro/praia-vermelha.jpg' }} style={styles.itemImage} />
+      <Text style={styles.itemText}> Roteiro para Rio de janeiro</Text>
+      <Text style={styles.itemDescription}>Explore o Rio de Janeiro: visite o Cristo Redentor, relaxe nas praias de Copacabana e Ipanema, e descubra a vibrante cultura da Lapa com sua vida noturna animada.</Text>
+    </View>
+
+  );
 
   const toggleSortOrder = () => {
     setSortBy(sortBy === 'recent' ? 'oldest' : 'recent');
   };
 
   const handlePress = () => {
+  
     console.log('Botão flutuante pressionado!');
   };
 
-  const handleCreateRoteiro = () => {
-    // Lógica para criar o roteiro aqui
-    setModalVisible(false); // Fecha o modal
-    setSuccessMessageVisible(true); // Exibe a mensagem de sucesso
-    setTimeout(() => setSuccessMessageVisible(false), 3000); // Esconde a mensagem após 3 segundos
-  };
-
-  const sortedItems = [...itineraryItems].sort((a, b) => {
-    if (sortBy === 'recent') {
-      return b.id.localeCompare(a.id); // Ordena por mais recente
-    }
-    return a.id.localeCompare(b.id); // Ordena por menos recente
-  });
-
-  const renderItem = () => (
-    <View style={styles.itemContainer}>
-      <Image source={{ uri: 'https://tourb.com.br/img/lugares/rio-de-janeiro/praia-vermelha.jpg' }} style={styles.itemImage} />
-      <Text style={styles.itemText}>Roteiro para Rio de Janeiro</Text>
-      <Text style={styles.itemDescription}>Explore o Rio de Janeiro: visite o Cristo Redentor, relaxe nas praias de Copacabana e Ipanema, e descubra a vibrante cultura da Lapa com sua vida noturna animada.</Text>
-    </View>
-  );
+ 
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <Link href='/'></Link>
       <View style={styles.azul}>
         <ImageBackground source={require('@/assets/images/brazurismotuc.png')} style={styles.imageSmall} />
-      </View>
-      <View style={styles.filterContainer}>
-        <Text style={styles.title}>Seus Roteiros criados</Text>
-        <TouchableOpacity onPress={toggleModal}>
-          <View style={styles.iconCircle}>
-            <Entypo name="plus" size={24} color="black" />
-          </View>
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity onPress={removeAllRoteiros}>
-        <View style={{ paddingLeft:'82%', paddingTop:'4%', paddingBottom:'-50%' }}>
-          <Entypo name="trash" size={24} color="black" />
         </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.iconCircle1} onPress={toggleSortOrder}>
-        <Entypo name={sortBy === 'recent' ? 'arrow-down' : 'arrow-up'} size={24} color="black" />
-        <Text style={styles.filterText}>
-          {sortBy === 'recent' ? 'Mais recentes' : 'Menos recentes'}
-        </Text>
-      </TouchableOpacity>
-
-      <FlatList
-        data={sortedItems}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        numColumns={1}
-        contentContainerStyle={styles.grid}
-      />
-
-      {/* Modal para criar roteiro */}
-      <Modal
-        visible={modalVisible}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={toggleModal}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <View style={styles.header}>
-              <TouchableOpacity onPress={toggleModal}>
-                <Entypo name="cross" size={30} color="black" />
-              </TouchableOpacity>
+        <View style={styles.filterContainer}>
+          <Text style={styles.title}>Seus Roteiros criados</Text>
+          <TouchableOpacity onPress={toggleModal}>
+            <View style={styles.iconCircle}>
+              <Entypo name="plus" size={24} color="black" />
             </View>
-            <ImageBackground source={require('@/assets/images/B (3).png')} style={styles.imageSmall1} />
-            <Text style={styles.modalTitle}>Crie aqui o seu próprio Roteiro!</Text>
-            <Text style={styles.label}>Título do Roteiro</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Adicione um título para o seu roteiro"
-              value={titulo}
-              onChangeText={setTitulo}
-            />
-            <Link href="/resultadoBusca" style={styles.bottomLink} onPress={toggleModal}>
-              <Text style={styles.bottomLinkText}>Veja aqui lugares para adicionar ao seu novo roteiro</Text>
-            </Link>
-            <TouchableOpacity style={styles.createButton} onPress={handleCreateRoteiro}>
-              <Text style={styles.createButtonText}>Criar roteiro</Text>
-            </TouchableOpacity>
-          </View>
+          </TouchableOpacity>
         </View>
-      </Modal>
+        <TouchableOpacity style={styles.iconCircle1} onPress={toggleSortOrder}>
+          <Entypo name={sortBy === 'recent' ? 'arrow-down' : 'arrow-up'} size={24} color="black" />
+          <Text style={styles.filterText}>
+            {sortBy === 'recent' ? 'Mais recentes' : 'Menos recentes'}
+          </Text>
+        </TouchableOpacity>
 
-      {/* Mensagem de sucesso após criar roteiro */}
-      {successMessageVisible && (
-        <View style={styles.successMessageContainer}>
-          <Image source={require('@/assets/images/B (2).png')} style={styles.successMessageImage} />
-          <Text style={styles.successMessageText}>Roteiro criado com sucesso!</Text>
-        </View>
-      )}
-    </ScrollView>
+        
+      <Modal
+  visible={modalVisible}
+  animationType="slide"
+  transparent={true}
+  onRequestClose={() => setModalVisible(!modalVisible)}
+>
+  <View style={styles.modalOverlay}>
+    <View style={styles.modalContent}>
+      <Pressable  onPress={() => setModalVisible(false)} style={{zIndex: 10}}>
+          <Entypo name="cross" size={30} color="black" />
+        </Pressable>
+      <ImageBackground source={require('@/assets/images/B (3).png')} style={styles.imageSmall1} />
+      <Text style={styles.modalTitle}>Crie aqui o seu próprio Roteiro!</Text>
+      <Text style={styles.label}>Título do Roteiro</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Adicione um título para o seu roteiro"
+        onChangeText={setTitulo}
+      />
+      <Link href="/resultadoBusca" style={styles.bottomLink} onPress={toggleModal}>
+  <Text style={styles.bottomLinkText}>Veja aqui lugares para adicionar ao seu novo roteiro</Text>
+</Link>
+      <TouchableOpacity style={styles.createButton} onPress={handleSubmit}>
+        <Text style={styles.createButtonText}>Criar roteiro</Text>
+      </TouchableOpacity>
+      
+    </View>
+  </View>
+</Modal>
+    </View>
   );
 };
 
@@ -429,4 +412,4 @@ successMessageImage: {
 
 });
 
-export default BottomModalExample;
+export default Roteiro;

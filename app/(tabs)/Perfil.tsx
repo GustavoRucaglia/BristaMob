@@ -1,39 +1,46 @@
-import { View, Text, Image, StyleSheet, ScrollView, Alert, TouchableOpacity } from 'react-native';
-import { Link, useRouter } from 'expo-router';
-import Entypo from '@expo/vector-icons/Entypo'; // Biblioteca de ícones
 
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import Entypo from '@expo/vector-icons/Entypo';
+import { Link } from 'expo-router';
+import { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useQuery } from '@tanstack/react-query';
+import { fetchUserDetails, User } from '../utils/auth';
+ 
 export default function ProfilePage() {
-  const router = useRouter(); // Hook para navegação
+  const [token, setToken] = useState<string | null>(null);
 
-  // Função para exibir a mensagem de confirmação
-  const handleLogout = () => {
-    Alert.alert(
-      "Deseja sair deste perfil?",
-      "Você perderá suas informações de sessão.",
-      [
-        {
-          text: "Cancelar",
-          onPress: () => console.log("Logout cancelado"),
-          style: "cancel"
-        },
-        { 
-          text: "Sim", 
-          onPress: () => router.replace('/login') // Redireciona para a página de login
-        }
-        
-      ]
-    );
+  const getUserData = async () => {
+    const token = await AsyncStorage.getItem('@user_token');
+    setToken(token);
   };
+
+  getUserData();
+
+    
+    if(!token){
+      return (
+        <div>
+          <p>Carregando...</p>
+        </div>
+      );
+    }
+    const { isLoading, isError, data, error } = useQuery<User>({
+        queryKey: ['userData'],
+        queryFn: () => fetchUserDetails(token),
+        enabled: !!token, 
+    });
+
 
   return (
     <View style={styles.container}>
       <ScrollView>
         {/* Title and Logo Section */}
         <View style={styles.header}>
-          <Image 
-            source={require('@/assets/images/brazurismotuc.png')} // Logo grande
-            style={styles.logoGrande} // Estilo ajustado para a logo grande
-          />
+        <Image 
+          source={require('@/assets/images/brazurismotuc.png')} // Logo gran
+          style={styles.logoGrande} // Estilo ajustado para a logo grande
+        />
         </View>
 
         {/* Profile Section */}
@@ -45,7 +52,7 @@ export default function ProfilePage() {
           </View>
            {/* Ícone de Sair na parte inferior */}
            <Link href='/login'>
-        <TouchableOpacity style={styles.logoutContainer} onPress={handleLogout}>
+        <TouchableOpacity style={styles.logoutContainer} >
           <Entypo name="log-out" size={24} color="#0056B3" />
           <Text style={styles.logoutText}>Sair da Conta</Text>
         </TouchableOpacity>

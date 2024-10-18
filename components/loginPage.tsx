@@ -1,23 +1,28 @@
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground, ScrollView, GestureResponderEvent } from 'react-native';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { loginRequest } from '@/app/utils/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function LoginPage() {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState(''); // Adicionando o estado para armazenar o erro de e-mail
+  const [emailError, setEmailError] = useState('');
+  const router = useRouter();
 
   const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expressão regular para validar o formato do e-mail
-    return emailRegex.test(email);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
   };
 
   const handleSubmit = async (e: GestureResponderEvent) => {
     e.preventDefault();
     try {
-      //const data = await loginRequest({ login, password });
+      const data = await loginRequest({ login, password });
+      await AsyncStorage.setItem('@user_token', data.token);
+      console.log('Login realizado com sucesso!');
+      router.push('/');
+      
  
     } catch (error) {
       console.error('Erro ao fazer login:', error);

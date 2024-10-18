@@ -4,10 +4,25 @@ import React, { useState } from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const [ login, setLogin ] = useState(true);
+  const [ login, setLogin ] = useState(false);
+  const getUserData = async () => {
+    const token = await AsyncStorage.getItem('@user_token');
+     if(token){
+       setLogin(true);
+       console.log('Dado de usuário encontrado:', token);
+     }
+   else {
+      console.log('Nenhum dado de usuário encontrado.');
+      setLogin(false);
+    }
+  };
+
+  getUserData();
+
 
   return (
     <Tabs
@@ -40,14 +55,14 @@ export default function TabLayout() {
         name="roteiro"
         options={{
           title: 'Roteiro',
-          href: '/roteiro',
+          href: login ?  '/roteiro' : null, 
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon  name={focused ? 'heart' : 'heart-outline'}  color={'#0056B3'} />
           ),
         }}
       />
         <Tabs.Screen
-          name="login" // Nome diferente para evitar conflito
+          name="login" 
           options={{
             title: 'Login',
             href: login ?  null : '/login', 
@@ -61,6 +76,16 @@ export default function TabLayout() {
           options={{
             title: 'Perfil',
             href: login ? '/Perfil' : null, 
+            tabBarIcon: ({ color, focused }) => (
+              <TabBarIcon name={focused ? 'person' : 'person-outline'} color={ '#0056B3'} />
+            ),
+          }}
+        />
+          <Tabs.Screen
+          name="criarRoteirou"
+          options={{
+            title: 'Criar Roteiro',
+            href: login ?  '/criarRoteirou': null, 
             tabBarIcon: ({ color, focused }) => (
               <TabBarIcon name={focused ? 'person' : 'person-outline'} color={ '#0056B3'} />
             ),
