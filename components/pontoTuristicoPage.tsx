@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Image, ImageBackground, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, ImageBackground, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput,  View } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useQuery } from '@tanstack/react-query';
 import { getPontoInterreseById, PontoInterrese } from '@/app/utils/api-request';
@@ -7,6 +7,7 @@ import { useRoute } from '@react-navigation/native';
 import { Carrossel } from './carrossel';
 import { Link, useRouter } from 'expo-router';
 import { Entypo } from '@expo/vector-icons';
+import { TouchableOpacity } from 'react-native';
 
 interface RouteParams {
   id: string;
@@ -57,9 +58,11 @@ export default function PontoTuristicoPage() {
 
   return (
     <ScrollView contentContainerStyle={styles.container1}>
-      <View style={styles.header}>
-        <Image source={require('@/assets/images/brazurismotuc.png')} style={styles.logoGrande} />
-      </View>
+    <View style={styles.header}>
+  <TouchableOpacity onPress={() => router.push('/')}>
+    <Image source={require('@/assets/images/brazurismotuc.png')} style={styles.logoGrande} />
+  </TouchableOpacity>
+</View>
 
       <Modal visible={modalVisible} animationType="slide" transparent={true} onRequestClose={toggleModal}>
         <View style={styles.modalOverlay}>
