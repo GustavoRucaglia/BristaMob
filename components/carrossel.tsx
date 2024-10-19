@@ -1,7 +1,7 @@
 import { getPontoInterreseFilter, getPontoInterreseFilterRegiao, PontoInterrese } from '@/app/utils/api-request';
 import Header from '@/components/Header';
-import { useQuery } from '@tanstack/react-query';
-import { Link, useNavigation, useRouter } from 'expo-router';
+import { useQuery } from '@tanstack/react-query';import { useRouter } from 'expo-router';
+;
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { ScrollView, View, Image, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
@@ -15,9 +15,9 @@ interface propsCarrossel{
 
 const { width } = Dimensions.get('window');
 export const Carrossel = ({title, category}: propsCarrossel) => {
+  const route = useRouter()
 
-  const navigation = useNavigation(); 
-    
+
   const { data, error, isLoading } = useQuery({
     queryKey: ["pontos", category],
     queryFn: category === 'sul' || category === 'norte' || category === 'nordeste' || category === 'sudeste' || category === 'centro-oeste'
@@ -35,23 +35,22 @@ export const Carrossel = ({title, category}: propsCarrossel) => {
     return <Text>Erro ao carregar os pontos turísticos.</Text>
    
   }
+
   return (
    
-          <View style={styles.col}>
-            <Text style={styles.title}>{title }</Text>
-            <ScrollView horizontal={true} style={styles.row} showsHorizontalScrollIndicator={false}>
-                 {data?.map((pontos: PontoInterrese) => (
-                   <Link  href={{
-                    pathname: '/pontoTuristico',
-                    params: { id: [pontos.id] }
-                  }} key={pontos.id}>
-                    <ImageBackground key={pontos.id} source={{ uri: pontos.fotos }} style={styles.imageSmall}>
-                      <Text style={styles.text}>{pontos.nome}</Text>
-                  </ImageBackground>
-                  </Link>
-                ))} 
-            </ScrollView>
-          </View>
+    <View style={styles.col}>
+    <Text style={styles.title}>{title}</Text>
+    <ScrollView horizontal={true} style={styles.row} showsHorizontalScrollIndicator={false}>
+      {data?.map((pontos: PontoInterrese) => (
+        <TouchableOpacity key={pontos.id} onPress={() => route.push(`/pontoTuristico?id=${pontos.id}`)}>
+          <ImageBackground source={{ uri: pontos.fotos }} style={styles.imageSmall}>
+            <Text style={styles.text}>{pontos.nome}</Text>
+          </ImageBackground>
+        </TouchableOpacity>
+      ))}
+    </ScrollView>
+  </View>
+  
          
   );
 };
@@ -96,12 +95,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   imageSmall: {
-    width: 145,
+    width: 158,
     height: 135,
     borderRadius: 20,
     marginHorizontal: 6,
     justifyContent: 'flex-end',
     alignItems: 'center',
+    padding: 10,
   },
   text: {
     textAlign: 'center',

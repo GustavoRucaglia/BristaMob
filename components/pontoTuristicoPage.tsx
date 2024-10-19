@@ -15,15 +15,15 @@ interface RouteParams {
 export default function PontoTuristicoPage() {
   const route = useRoute();
   const { id } = route.params as RouteParams;
-
+  const router = useRouter()
   const [validId, setValidId] = useState<number | null>(null);
-  const router = useRouter();
   const [modalVisible, setModalVisible] = useState(false);
   const [titulo, setTitulo] = useState('');
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
+  
   const [secondModalVisible, setSecondModalVisible] = useState(false);
 
 const toggleSecondModal = () => {
@@ -126,13 +126,13 @@ const toggleSecondModal = () => {
           <Text style={styles.modalTitle1}>Adicione dentro de roteiros já criados por você!</Text>
           <Link href="/dentroRoteiro" onPress={toggleModal}>
       
-          <View style={styles.itemContainer}>
+          <TouchableOpacity onPress={() => router.push("/")} style={styles.itemContainer}>
             <Image 
               source={{ uri: 'https://tourb.com.br/img/lugares/rio-de-janeiro/praia-vermelha.jpg' }} 
               style={styles.itemImage} 
             />
             <Text style={styles.roteiro}>Roteiro para o Rio de Janeiro</Text>
-          </View>
+          </TouchableOpacity>
           </Link>
         
           <Text style={styles.modalTitle}>Adicione a um novo Roteiro!</Text>
@@ -154,15 +154,15 @@ const toggleSecondModal = () => {
 
 
       <View style={styles.header}>
-        <Text style={styles.a}>Explore {data?.nome}</Text>
-        <MaterialIcons name="bookmark-border" size={24} color="black" style={styles.icon} />
+        <Text style={styles.a}> {data?.nome}</Text>
+       
       </View>
 
       <View style={styles.lugar2}>
         {data?.fotos && <Image source={{ uri: data?.fotos }} style={styles.image} />}
       </View>
 
-      <Text style={styles.titulo}>Conheça mais sobre {data?.nome}</Text>
+      <Text style={styles.titulo}>Explore mais sobre </Text>
       <Text style={[styles.b, styles.textCenter]}>{data?.descricao}</Text>
 
       <Text style={styles.titulo}>Localização e Contato</Text>
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   titulo: {
-    fontSize: 24,
+    fontSize: 29,
     marginTop: 15,
     marginBottom: 15,
     marginLeft: 15,
@@ -258,22 +258,25 @@ const styles = StyleSheet.create({
   },
   a: {
     fontSize: 25,
-    marginLeft: 10,
+    marginLeft: 17,
     fontWeight: 'bold',
+    marginBottom:"5%",
+    marginTop:"2%"
   },
   image: {
-    width: 337,
-    height: 230,
+    width: 370,
+    height: 270,
     borderRadius: 4,
     marginBottom: 10,
   },
   textCenter: {
-    textAlign: 'left',
-    padding: 10,
+    textAlign: 'justify',
+    paddingLeft: '0.5%',
+    paddingRight:'2%'
   },
   b: {
-    marginLeft: 10,
-    fontSize: 16,
+    marginLeft: 12,
+    fontSize: 19,
   },
   col: {
     flexDirection: 'column',
