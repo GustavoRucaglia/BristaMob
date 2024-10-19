@@ -11,50 +11,50 @@ const itineraryItems = [
     id: '1',
     name: 'Roteiro Rio De Janeiro',
     image: require('@/assets/images/cristo.jpg'),
-    description: 'Incluídos: Leblon, Ipanema, Lapa e mais outros,',
+    description: 'Incluídos: Leblon, Ipanema, Lapa e mais outros.',
     link:'/dentroRoteiro',
   },
   {
     id: '2',
     name: 'Roteiro São Paulo',
     image: require('@/assets/images/MASP.jpg'),
-    description: 'Incluídos: Leblon, Ipanema, Lapa e mais outros,',
+    description: 'Incluídos: Avenida Paulista, Vila Madalena, e mais.',
   },
   {
     id: '3',
     name: 'Roteiro Sul',
     image: require('@/assets/images/curitiba.jpg'),
-    description: 'Incluídos: Leblon, Ipanema, Lapa e mais outros,',
+    description: 'Incluídos: Gramado, Canela, e outros lugares do sul.',
   },
   {
     id: '4',
     name: 'Roteiro Norte',
     image: require('@/assets/images/jalapao.jpg'),
-    description: 'Incluídos: Leblon, Ipanema, Lapa e mais outros,',
+    description: 'Incluídos: Jalapão, Manaus, Belém, e mais.',
   },
   {
     id: '5',
     name: 'Roteiro Jericoacoara',
     image: require('@/assets/images/recife.jpg'),
-    description: 'Incluídos: Leblon, Ipanema, Lapa e mais outros,',
+    description: 'Incluídos: Duna do Pôr do Sol, Pedra Furada, e mais.',
   },
   {
     id: '6',
     name: 'Roteiro Lençóis Maranhenses',
     image: require('@/assets/images/maranhao.jpg'),
-    description: 'Incluídos: Leblon, Ipanema, Lapa e mais outros,',
+    description: 'Incluídos: Parque Nacional dos Lençóis Maranhenses.',
   },
   {
     id: '7',
     name: 'Roteiro Piaui',
     image: require('@/assets/images/sm.jpg'),
-    description: 'Incluídos: Leblon, Ipanema, Lapa e mais outros,',
+    description: 'Incluídos: Serra da Capivara, Teresina, e mais.',
   },
   {
     id: '8',
     name: 'Roteiro Pernambuco',
     image: require('@/assets/images/pernambuco.jpg'),
-    description: 'Incluídos: Leblon, Ipanema, Lapa e mais outros,',
+    description: 'Incluídos: Recife, Olinda, Porto de Galinhas, e mais.',
   },
 ];
 
@@ -131,12 +131,7 @@ const Roteiro = () => {
     console.log('Botão flutuante pressionado!');
   };
 
-  const sortedItems = [...itineraryItems].sort((a, b) => {
-    if (sortBy === 'recent') {
-      return b.id.localeCompare(a.id); 
-    }
-    return a.id.localeCompare(b.id);
-  });
+ 
 
   return (
     <View style={styles.container}>
@@ -159,13 +154,7 @@ const Roteiro = () => {
           </Text>
         </TouchableOpacity>
 
-        <FlatList
-          data={sortedItems}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          numColumns={1} 
-          contentContainerStyle={styles.grid}
-        />
+        
       <Modal
   visible={modalVisible}
   animationType="slide"
@@ -268,6 +257,7 @@ const styles = StyleSheet.create({
     height:40,
     marginLeft:'5%',
     marginBottom:'3%',
+    marginTop:'-9%'
   },
 
   itemContainer: {
@@ -399,7 +389,32 @@ imageSmall: {
     justifyContent: 'flex-end',
     alignItems: 'center',
 },
-
+successMessageContainer: {
+  position: 'absolute',
+  top: '40%',
+  left: 0,
+  right: 0,
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: 'white',
+  padding: 20,
+  borderRadius: 10,
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.3,
+  shadowRadius: 3,
+  elevation: 5,
+},
+successMessageText: {
+  fontSize: 18,
+  color: '#0056B3',
+  marginTop: 10,
+  fontWeight: 'bold',
+},
+successMessageImage: {
+  width: 100,
+  height: 100,
+},
 
 });
 

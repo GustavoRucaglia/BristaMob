@@ -76,7 +76,7 @@ const SearchResults = () => {
   const renderItem = ({ }) => (
     <View style={styles.resultContainer}>
       <Link href={'/'}>
-        <Image source={require('@/assets/images/bahia.jpg')}  style={styles.image} />
+        <Image source={require('@/assets/images/MASP.jpg')}  style={styles.image} />
       </Link>
       <View style={styles.infoContainer}>
         <Text style={styles.title}>bahia</Text>
@@ -157,8 +157,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: 150,
-    height: 125,
+    width: 100,
+    height: 200,
     marginRight: 10,
     borderRadius: 10,
   },
@@ -168,6 +168,13 @@ const styles = StyleSheet.create({
   },
   addButton: {
     paddingLeft: 10,
+    backgroundColor:'#c9c9c9',
+    width:'15%',
+    height:'30%',
+    marginTop:"7%",
+    alignItems:'flex-start',
+    borderRadius:500,
+
   },
   searchInput1: {
     height: 40,
@@ -195,6 +202,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 8,
+    
   },
   listContent: {
     paddingBottom: 20,

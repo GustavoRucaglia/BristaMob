@@ -1,8 +1,8 @@
 import Header from '@/components/Header';
-import { Link } from 'expo-router';
+import { Link, router, useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { ScrollView, View, Image, Text, StyleSheet, ImageBackground } from 'react-native';
+import { ScrollView, View, Image, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 import { Dimensions } from 'react-native';
 import { Carrossel } from './carrossel';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -18,17 +18,21 @@ export const HomePage = () => {
   };
 
   getUserData();
+
+ const route = useRouter()
+
+  
   return (
     <>
- <ScrollView>
-      <Link href={'/quemSomos'}>
-      <View style={styles.azul}>
+ <ScrollView >
+    
+      <TouchableOpacity style={styles.azul} onPress={() => route.push("/quemSomos")}>
         <Image 
           source={require('@/assets/images/brazurismotuc.png')}
           style={styles.logoGrande}
         />
-      </View>
-      </Link>
+      </TouchableOpacity >
+
    
       <StatusBar hidden={false} />
       <ScrollView style={styles.container}>
@@ -50,16 +54,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
+    width: width
+  },
+  link:{
+    width: width
   },
   azul: {
     backgroundColor: '#0056B3',
     height: 120,
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%', // Mudança aqui
+    width: width,
   },
   logoGrande: {
-    width: 250,
+    width: 280,
     height: 180,
     marginTop: 36,
     borderRadius: 50,

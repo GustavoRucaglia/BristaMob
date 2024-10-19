@@ -77,46 +77,66 @@ const Buscar = () => {
 
                 {/* Seção: Descubra destinos */}
                 <View style={styles.container1}>
-                    <View style={styles.section}>
-                        <Text style={styles.title}>Descubra destinos</Text>
-                        
-                        <View style={styles.grid}>
-                            <View style={styles.gridItem}>
-                                <ImageBackground source={require('@/assets/images/MASP.jpg')} style={styles.image1}>
-                                    <Text style={styles.gridText}>Museus</Text>
-                                </ImageBackground>
-                            </View>
-                            <View style={styles.gridItem}>
-                                <ImageBackground source={require('@/assets/images/restaurante.jpg')} style={styles.image1}>
-                                    <Text style={styles.gridText}>Restaurantes</Text>
-                                </ImageBackground>
-                            </View>
-                        </View>
-                        <View style={styles.grid}>
-                            <View style={styles.gridItem}>
-                                <ImageBackground source={require('@/assets/images/parque.jpg')} style={styles.image1}>
-                                    <Text style={styles.gridText}>Natureza</Text>
-                                </ImageBackground>
-                            </View>
-                            <View style={styles.gridItem}>
-                                <ImageBackground source={require('@/assets/images/cristo.jpg')} style={styles.image1}>
-                                    <Text style={styles.gridText}>Monumentos</Text>
-                                </ImageBackground>
-                            </View>
-                            <View style={styles.gridItem}>
-                                <ImageBackground source={require('@/assets/images/diversao.jpg')} style={styles.image1}>
-                                    <Text style={styles.gridText}>Parques</Text>
-                                </ImageBackground>
-                            </View>
-                            <View style={styles.gridItem}>
-                                <ImageBackground source={{ uri: 'https://tourb.com.br/img/lugares/rio-de-janeiro/praia-vermelha.jpg' }} style={styles.image1}>
-                                    <Text style={styles.gridText}>Praias</Text>
-                                </ImageBackground>
-                            </View>
-                        </View>
-                    </View>
-                </View>
-               
+  <View style={styles.section}>
+    <Text style={styles.title}>Descubra destinos</Text>
+
+    <View style={styles.grid}>
+      <Link href="/resultadoBusca">
+        <View style={styles.gridItem}>
+          <ImageBackground source={require('@/assets/images/MASP.jpg')} style={styles.image1}>
+            <Text style={styles.gridText}>Museus</Text>
+          </ImageBackground>
+        </View>
+      </Link>
+      
+      <Link href="/resultadoBusca">
+        <View style={styles.gridItem}>
+          <ImageBackground source={require('@/assets/images/restaurante.jpg')} style={styles.image1}>
+            <Text style={styles.gridText}>Restaurantes</Text>
+          </ImageBackground>
+        </View>
+      </Link>
+    </View>
+
+    <View style={styles.grid}>
+      <Link href="/resultadoBusca">
+        <View style={styles.gridItem}>
+          <ImageBackground source={require('@/assets/images/parque.jpg')} style={styles.image1}>
+            <Text style={styles.gridText}>Natureza</Text>
+          </ImageBackground>
+        </View>
+      </Link>
+    </View>
+
+    <View style={styles.grid}>
+      <Link href="/resultadoBusca">
+        <View style={styles.gridItem}>
+          <ImageBackground source={require('@/assets/images/cristo.jpg')} style={styles.image1}>
+            <Text style={styles.gridText}>Monumentos</Text>
+          </ImageBackground>
+        </View>
+      </Link>
+      
+      <Link href="/resultadoBusca">
+        <View style={styles.gridItem}>
+          <ImageBackground source={require('@/assets/images/diversao.jpg')} style={styles.image1}>
+            <Text style={styles.gridText}>Parques</Text>
+          </ImageBackground>
+        </View>
+      </Link>
+
+      <Link href="/resultadoBusca">
+        <View style={styles.gridItem}>
+          <ImageBackground 
+            source={{ uri: 'https://tourb.com.br/img/lugares/rio-de-janeiro/praia-vermelha.jpg' }} 
+            style={styles.image1}>
+            <Text style={styles.gridText}>Praias</Text>
+          </ImageBackground>
+        </View>
+      </Link>
+    </View>
+  </View>
+</View>
 
                 <View style={styles.section}>
                     <View style={styles.row}>
@@ -218,7 +238,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#f5f5f5',
     },
     imageSmall: {
-        width: 250,
+        width: 280,
         height: 180,
         marginTop: 36,
         borderRadius: 50,
