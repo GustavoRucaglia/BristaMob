@@ -8,6 +8,7 @@ const App = () => {
   const numColumns = 2;
   const screenWidth = Dimensions.get('window').width;
   const itemWidth = screenWidth / numColumns - 20;
+  
 
   // Função para alternar entre mais recentes e menos recentes
   const toggleSortOrder = () => {
