@@ -18,10 +18,6 @@ export const HomePage = () => {
   };
 
   getUserData();
-
-
-
-  
   return (
     <>
  <ScrollView>

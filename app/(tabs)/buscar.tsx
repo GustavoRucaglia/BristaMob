@@ -1,21 +1,21 @@
 import React from 'react';
-import { ScrollView, View, Image, Text, StyleSheet, TextInput, ImageBackground } from 'react-native';
+import { ScrollView, View, Image, Text, StyleSheet, TextInput, ImageBackground, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 
 
 const Buscar = () => {
+ const router = useRouter()
     return (
         <>
             <StatusBar hidden={true} />
             <ScrollView style={styles.container}>
                 {/* Imagem de Cabeçalho */}
-                <Link href='/login'>
-                <View style={styles.azul}>
+                <TouchableOpacity style={styles.azul} onPress={() => router.push('/')} >
                     <ImageBackground source={require('@/assets/images/brazurismotuc.png')} style={styles.imageSmall} />
-                </View>
-                </Link>
+               
+                </TouchableOpacity>
                 {/* Barra de Pesquisa */}
                
                 <View style={styles.searchContainer}>

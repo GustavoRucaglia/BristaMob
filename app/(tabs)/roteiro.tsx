@@ -6,6 +6,7 @@ import { PostRoteiro } from '../utils/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const itineraryItems = [
+  
   {
     id: '1',
     name: 'Roteiro Rio De Janeiro',
@@ -61,12 +62,14 @@ const numColumns = 2;
 const screenWidth = Dimensions.get('window').width;
 const itemWidth = screenWidth / numColumns - 20;
 
+
 const Roteiro = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [titulo, setTitulo] = useState('');
   const [sortBy, setSortBy] = useState('recent');
   const [token, setToken] = useState('');
   const router = useRouter();
+
 
   const getToken = async () => {
     const token1 = await AsyncStorage.getItem('@user_token');
@@ -108,11 +111,14 @@ const Roteiro = () => {
 
   
   const renderItem = () => (
+
+    <TouchableOpacity  onPress={() => router.push('/dentroRoteiro')} >
     <View style={styles.itemContainer}>
       <Image source={{ uri: 'https://tourb.com.br/img/lugares/rio-de-janeiro/praia-vermelha.jpg' }} style={styles.itemImage} />
       <Text style={styles.itemText}> Roteiro para Rio de janeiro</Text>
-      <Text style={styles.itemDescription}>Explore o Rio de Janeiro: visite o Cristo Redentor, relaxe nas praias de Copacabana e Ipanema, e descubra a vibrante cultura da Lapa com sua vida noturna animada.</Text>
-    </View>
+        <Text style={styles.itemDescription}>Explore o Rio de Janeiro: visite o Cristo Redentor, relaxe nas praias de Copacabana e Ipanema, e descubra a vibrante cultura da Lapa com sua vida noturna animada.</Text>
+      </View>
+      </TouchableOpacity>
 
   );
 

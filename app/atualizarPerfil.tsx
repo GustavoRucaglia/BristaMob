@@ -24,8 +24,7 @@ export default function ProfilePage() {
         />
         </View>
         </View>
-<View style={styles.container2} >
-<Text style={styles.textAtual}>Atualizar Perfil</Text>
+
 
             <View style={styles.container2}>
                 <Text style={styles.textAtual}>Atualizar Perfil</Text>
@@ -40,50 +39,50 @@ placeholder="URL:"
 <View style={styles.blueLine}/> 
  
 
-
-                <Text>Email:</Text>
-                <TextInput
-                    style={styles.input1}
-                    placeholder="Email"
-                    keyboardType="email-address"
-                    value={email}
-                    onChangeText={setEmail}
-                />
-
-<View style={styles.secaoatuali}>
   
+
+<Text style={styles.escrita}>Email:</Text>
+<View style={styles.secaoatuali}>
 <TextInput
 style={styles.input1}
 placeholder="Email"
 keyboardType="email-address"
 />
-
+</View>
+<Text style={styles.escrita}>Senha:</Text>
+<View style={styles.secaoatuali}>
 <TextInput
 style={styles.input1}
 placeholder="Senha"
 secureTextEntry
 />
+</View>
 
+<Text style={styles.escrita}>Username:</Text>
+<View style={styles.secaoatuali}>
 <TextInput
 style={styles.input1}
 placeholder="Username"
 />
+</View>
 
+<Text style={styles.escrita}>Telefone:</Text>
+<View style={styles.secaoatuali}>
 <TextInput
 style={styles.input1}
 placeholder="Telefone"
 keyboardType="phone-pad"
 />
-
+</View>
+<View style={styles.secaoatuali}>
 <TouchableOpacity
   style={styles.button}
   onPress={() => {}}
 >
   <Text style={styles.buttonText}>Atualizar</Text>
 </TouchableOpacity>
+</View>
 
-</View>
-</View>
 </ScrollView>
     );
 }
@@ -192,10 +191,10 @@ keyboardType="phone-pad"
         },
         textAtual: {
           fontSize: 28,
-          marginBottom: 20,
+         
           textAlign: 'center',
           fontWeight: 'bold',
-          marginTop: 30,
+          marginTop: 16,
         },
         input: {
           height: 40,
@@ -211,7 +210,7 @@ keyboardType="phone-pad"
           backgroundColor:  '#0056B3',
           marginVertical: 10,
           alignSelf: 'center',
-          marginTop: 10,
+          marginTop: 4,
           marginBottom: 50,
         },
         input1: {
@@ -221,10 +220,9 @@ keyboardType="phone-pad"
           borderWidth: 1,
           paddingLeft: 12,
           borderRadius: 10,
-          marginTop: 10,
-          marginBottom: 10,
-          marginHorizontal: 20,
-          marginVertical: 10,
+          marginTop: 4,
+          marginBottom: 4,
+          
         },
         logoGrande: {
           width: 250,
@@ -236,7 +234,7 @@ keyboardType="phone-pad"
           alignItems: 'center',
         },
         button: {
-          height: 40,
+          height: 48,
           width: '80%',
           backgroundColor: '#0056B3',
           borderRadius: 10,
@@ -248,7 +246,7 @@ keyboardType="phone-pad"
           paddingHorizontal: 40,
         },
         buttonText: {
-          fontSize: 20,
+          fontSize: 18,
           color: '#fff',
           textAlign: 'center',
           fontWeight: 'bold',
@@ -256,7 +254,11 @@ keyboardType="phone-pad"
         secaoatuali:{
           alignItems: 'center',
           justifyContent: 'center',
-         
-          marginBottom: 20,
-        }
+          marginBottom: 18,
+        },
+          escrita:{
+          fontSize: 14,
+          marginHorizontal: 66,
+          marginBottom: 2,
+          }
       });
