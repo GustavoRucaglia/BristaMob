@@ -22,7 +22,7 @@ const TokenVerificationScreen = () => {
 
     // Verifica se todos os campos estão preenchidos corretamente
     if (token.length !== 4) {
-      Alert.alert('Erro', 'O token deve conter exatamente 4 dígitos');
+      Alert.alert('Erro', 'O token deve conter exatamente 6 dígitos');
       return;
     }
 
@@ -134,21 +134,21 @@ alignItems:'center',
 marginTop:40,
   },
   titulo: {
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: 'bold',
-    marginTop: 10,
+    marginTop: '10%',
     marginBottom: 40,
     textAlign: 'center',
   },
   azul: {
     backgroundColor: '#0056B3',
-    height: 150,
+    height: 120,
     alignItems: 'center',
     justifyContent: 'center',
   },
   imageSmall: {
-    width: 240,
-    height: 160,
+    width: 280,
+    height: 180,
     marginTop: 36,
     borderRadius: 50,
     marginHorizontal: 6,
@@ -156,7 +156,7 @@ marginTop:40,
     alignItems: 'center',
   },
   instructions: {
-    fontSize: 16,
+    fontSize: 19,
     color: '#666',
     textAlign: 'center',
     marginBottom: 40,
@@ -166,7 +166,7 @@ marginTop:40,
     flexDirection: 'row', // Alinha os campos lado a lado
     justifyContent: 'space-between',
     width: '80%',
-    marginBottom: 20,
+    marginBottom: "10%",
   },
   input: {
     height: 48,
@@ -180,7 +180,7 @@ marginTop:40,
   registerText: {
     color: '#0056b3',
     marginTop: 100,
-    fontSize: 16,
+    fontSize: 18,
     textAlign: 'center', // Alinhamento horizontal: 'center', 'left', ou 'right'
     fontWeight: 'bold',
     alignItems: 'center',

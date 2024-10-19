@@ -35,7 +35,7 @@ export default function RecuperarSenhaScreen() {
 
         {/* Instruções */}
         <Text style={styles.instructions}>
-          Se você esqueceu a sua senha, insira o seu email para enviar um token de recuperação de senha.
+          Se você esqueceu a sua senha, insira o seu email enviaremos um token de recuperação de conta.
         </Text>
 
         {/* Campo de Email */}
@@ -77,13 +77,13 @@ const styles = StyleSheet.create({
   },
   azul: {
     backgroundColor: '#0056B3',
-    height: 150,
+    height: 120,
     alignItems: 'center',
     justifyContent: 'center',
   },
   logo: {
-    width: 240,
-    height: 160,
+    width: 280,
+    height: 180,
     marginTop: 36,
     borderRadius: 50,
     justifyContent: 'flex-end',
@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     width: '93%',
     backgroundColor: '#fff',
+    marginBottom:"5%"
   },
   button: {
     backgroundColor: '#0056B6',
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
   },
   registerLinkText: {
     color: '#0056B6',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
     marginLeft:30,
   },

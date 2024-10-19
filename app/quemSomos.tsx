@@ -26,7 +26,7 @@ export default function TabTwoScreen() {
         </Text>
         <ImageBackground source={require('@/assets/images/Design sem nome.png')} style={styles.imageSmall1} />
         <Text style={styles.instructions}>
-          No Brazurista, entendemos que não há uma única maneira "certa" de viajar. Por isso, oferecemos a liberdade para que você crie seu próprio roteiro de viagem, personalizado de acordo com seus interesses, estilo e orçamento.
+          No Brazurista, entendemos que não há uma única maneira "certa" de viajar. Por isso, oferecemos a liberdade para que você crie seu próprio roteiro de viagem, personalizado de acordo com seus interesses e estilo.
         </Text>
       </View>
 
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imageSmall: {
-    width: 250,
+    width: 280,
     height: 180,
     marginTop: 36,
     borderRadius: 50,

@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     height:40,
     marginLeft:'5%',
     marginBottom:'3%',
-    marginTop:'-9%'
+    marginTop:'2%'
   },
 
   itemContainer: {
@@ -379,9 +379,10 @@ const styles = StyleSheet.create({
     height: 120,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop:"-5%"
 },
 imageSmall: {
-    width: 250,
+    width: 280,
     height: 180,
     marginTop: 36,
     borderRadius: 50,

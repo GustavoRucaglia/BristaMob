@@ -33,9 +33,9 @@ export default function RootLayout() {
           header: () => <Header />,
         }}>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="buscar" options={{ headerShown: false }} />
+       
         <Stack.Screen name="FaleConosco" options={{ headerShown: false }} />
-        <Stack.Screen name="esqueceuSenha" options={{ headerShown: false }} />
+        
         <Stack.Screen name="regiaoSudeste" options={{ headerShown: false }} />
         <Stack.Screen name="cadastro" options={{ headerShown: false }} />
         <Stack.Screen name="redefinirSenha" options={{ headerShown: false }} />

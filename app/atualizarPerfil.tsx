@@ -27,21 +27,20 @@ export default function ProfilePage() {
 
 
             <View style={styles.container2}>
-                <Text style={styles.textAtual}>Atualizar Perfil</Text>
+                <Text style={styles.textAtual}>Atualizar Seu Perfil</Text>
 </View>
-<View style={styles.profileSection}>     
-<Image source={require('@/assets/images/brazurista2.png')} style={styles.profileImage} />
-<TextInput
-style={styles.input1}
-placeholder="URL:"
-/>
-</View>
-<View style={styles.blueLine}/> 
- 
-
-  
-
-<Text style={styles.escrita}>Email:</Text>
+<View style={styles.profileContainer}>
+        <Image source={require('@/assets/images/brazurista2.png')} style={styles.profileImage} />
+        
+        <Text style={styles.escrita}> URL da imagem</Text>
+        <TextInput
+          style={styles.input1}
+          placeholder="URL"
+          value={url}
+          onChangeText={setUrl}
+        />
+     
+<Text style={styles.escrita}>Email</Text>
 <View style={styles.secaoatuali}>
 <TextInput
 style={styles.input1}
@@ -49,7 +48,7 @@ placeholder="Email"
 keyboardType="email-address"
 />
 </View>
-<Text style={styles.escrita}>Senha:</Text>
+<Text style={styles.escrita}>Senha</Text>
 <View style={styles.secaoatuali}>
 <TextInput
 style={styles.input1}
@@ -58,7 +57,7 @@ secureTextEntry
 />
 </View>
 
-<Text style={styles.escrita}>Username:</Text>
+<Text style={styles.escrita}>Username</Text>
 <View style={styles.secaoatuali}>
 <TextInput
 style={styles.input1}
@@ -66,13 +65,14 @@ placeholder="Username"
 />
 </View>
 
-<Text style={styles.escrita}>Telefone:</Text>
+<Text style={styles.escrita}>Telefone</Text>
 <View style={styles.secaoatuali}>
 <TextInput
 style={styles.input1}
 placeholder="Telefone"
 keyboardType="phone-pad"
 />
+</View>
 </View>
 <View style={styles.secaoatuali}>
 <TouchableOpacity
@@ -82,6 +82,7 @@ keyboardType="phone-pad"
   <Text style={styles.buttonText}>Atualizar</Text>
 </TouchableOpacity>
 </View>
+
 
 </ScrollView>
     );
@@ -100,7 +101,7 @@ keyboardType="phone-pad"
         },
         header: {
           backgroundColor: '#0056B3',
-          height: 140,
+          height: 120,
           alignItems: 'center',
           justifyContent: 'center',
         },
@@ -111,9 +112,10 @@ keyboardType="phone-pad"
         },
         
         profileImage: {
-          width: 100,
-          height: 100,
+          width: 200,
+          height: 200,
           borderRadius: 25,
+          marginLeft:"15%"
         },
         profileInfo: {
           marginLeft: 16,
@@ -191,7 +193,7 @@ keyboardType="phone-pad"
         },
         textAtual: {
           fontSize: 28,
-         
+         color:"#0056b3",
           textAlign: 'center',
           fontWeight: 'bold',
           marginTop: 16,
@@ -215,7 +217,7 @@ keyboardType="phone-pad"
         },
         input1: {
           height: 36,
-          width: 240,
+          width: 290,
           borderColor: '#0056B3',
           borderWidth: 1,
           paddingLeft: 12,
@@ -225,7 +227,7 @@ keyboardType="phone-pad"
           
         },
         logoGrande: {
-          width: 250,
+          width: 280,
           height: 180,
           marginTop: 46,
           borderRadius: 50,
@@ -235,7 +237,7 @@ keyboardType="phone-pad"
         },
         button: {
           height: 48,
-          width: '80%',
+          width: '50%',
           backgroundColor: '#0056B3',
           borderRadius: 10,
           alignItems: 'center',
@@ -256,9 +258,23 @@ keyboardType="phone-pad"
           justifyContent: 'center',
           marginBottom: 18,
         },
-          escrita:{
+        escrita: {
           fontSize: 14,
-          marginHorizontal: 66,
+          textAlign: 'left', // Alinha o texto à esquerda
           marginBottom: 2,
-          }
+          marginLeft: "-80%", // Use um valor positivo para garantir que o texto fique visível e no local desejado
+        },
+          profileContainer: {
+            backgroundColor: '#FFFFFF',
+            borderRadius: 10,
+            padding: 20,
+            marginHorizontal: 20,
+            marginTop: 20,
+            alignItems: 'center',
+            shadowColor: '#000',
+            shadowOpacity: 0.1,
+            shadowRadius: 5,
+            shadowOffset: { width: 0, height: 2 },
+            marginBottom:"5%"
+          },
       });

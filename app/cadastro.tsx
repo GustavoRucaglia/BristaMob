@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
   titulo: {
     fontSize: 32,
     fontWeight: 'bold',
-    marginTop: 4,
+    marginTop: -15,
     marginBottom: 34,
     textAlign: 'center',
   },
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
-    marginTop: 20,
+    marginTop: 10,
     paddingVertical: 10,
     paddingHorizontal: 20,
   },
@@ -218,8 +218,8 @@ const styles = StyleSheet.create({
     
   },
   imageSmall: {
-    width: 240,
-    height: 160,
+    width: 280,
+    height: 180,
     marginTop: 36,
     borderRadius: 50,
     marginHorizontal: 6,
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
   },
   azul: {
     backgroundColor: '#0056B3',
-    height: 150,
+    height: 120,
     alignItems: 'center',
     justifyContent: 'center',
   },

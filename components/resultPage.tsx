@@ -1,87 +1,89 @@
 import React, { useState } from 'react';
-import { View, Image, Text, StyleSheet, TextInput, ImageBackground, FlatList, TouchableOpacity } from 'react-native';
+import { View, Image, Text, StyleSheet, TextInput, ImageBackground, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
-import { Link, useLocalSearchParams, useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { getPontoInterreseSearch, PontoInterrese } from '@/app/utils/api-request';
 import { useQuery } from '@tanstack/react-query';
 import { useRoute } from '@react-navigation/native';
 
-// Lista de resultados com imagens locais
-
 const SearchResults1 = () => {
-    const router = useRouter()
+  const router = useRouter(); // useRouter hook to navigate
+  const route = useRoute();
+  const { search } = useLocalSearchParams();
+  const [value, setValue] = useState('');
+  const [showMore, setShowMore] = useState(false);
 
-    const route = useRoute();
-   
-    const { search } = useLocalSearchParams();
-   
-   const [value, setValue] = useState('')
-   
-    const [showMore, setShowMore] = useState(false);
-   
-   
-    const handleShowMore = () => {
-      setShowMore(!showMore);
-    };
-   
-   
-    const handleSearch = () => {
-      router.push(`/buscar?search=${value}`);
-    };
-    const search2 = search? search.toString() : ""
-     const { data, error, isLoading, refetch } = useQuery({
-       queryKey: ["pontosSearch", search],
-       queryFn: () => getPontoInterreseSearch(search2),
-       staleTime: 5 * 60 * 1000,
-     });
-   
-    
+  const handleShowMore = () => {
+    setShowMore(!showMore);
+  };
+
+  const handleSearch = () => {
+    router.push(`/buscar?search=${value}`); // Search route
+  };
+
+  // Function to navigate to the home page when clicking the logo
+  const handleLogoPress = () => {
+    router.push('/'); // Navigate to the home page
+  };
+
+  const search2 = search ? search.toString() : '';
+  const { data, error, isLoading, refetch } = useQuery({
+    queryKey: ['pontosSearch', search],
+    queryFn: () => getPontoInterreseSearch(search2),
+    staleTime: 5 * 60 * 1000,
+  });
+
   const renderItem = ({ item }: { item: PontoInterrese }) => (
     <View style={styles.resultContainer}>
-     <TouchableOpacity  onPress={() => router.push(`/buscar?search=museu`)}>
+      <TouchableOpacity onPress={() => router.push(`/buscar?search=${item.nome}`)}>
         <Image source={{ uri: item.fotos }} style={styles.image} />
-    </TouchableOpacity>
+      </TouchableOpacity>
       <View style={styles.infoContainer}>
         <Text style={styles.title}>{item.nome}</Text>
         <Text style={styles.address}>{item.regiao}</Text>
       </View>
-        <TouchableOpacity style={styles.addButton}>
-          <Entypo name="plus" size={24} color="black" />
-        </TouchableOpacity>
-
+      <TouchableOpacity style={styles.addButton}>
+        <Entypo name="plus" size={24} color="black" />
+      </TouchableOpacity>
     </View>
   );
 
   return (
     <>
       <StatusBar hidden={true} />
+      <ScrollView>
+        {/* Imagem de Cabeçalho (Logo) com navegação para home */}
+        <TouchableOpacity onPress={handleLogoPress}>
+          <View style={styles.header}>
+            <ImageBackground source={require('@/assets/images/brazurismotuc.png')} style={styles.imageSmall} />
+          </View>
+        </TouchableOpacity>
 
-      {/* Imagem de Cabeçalho */}
-      <View style={styles.azul}>
-        <ImageBackground source={require('@/assets/images/brazurismotuc.png')} style={styles.imageSmall} />
-      </View>
+        {/* Barra de Pesquisa */}
+        <View style={styles.searchContainer}>
+          <AntDesign style={styles.icon} name="search1" size={24} color="black" />
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Pontos turísticos no sudeste"
+            placeholderTextColor="black"
+            value={value}
+            onChangeText={setValue}
+            onSubmitEditing={handleSearch}
+          />
+        </View>
 
-      {/* Barra de Pesquisa */}
-      <View style={styles.searchContainer}>
-        <AntDesign style={styles.icon} name="search1" size={24} color="black" />
-        <TextInput
-          style={styles.searchInput1}
-          placeholder="Pontos turísticos no sudeste"
-          placeholderTextColor="black"
+        {/* Resultados da Busca */}
+        <Text style={styles.title}>Resultados da busca por "{search}"</Text>
+
+        {/* FlatList para renderizar os resultados */}
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={(item) => 'id-' + item.id}
+          contentContainerStyle={styles.listContent}
         />
-      </View>
-
-      {/* Resultados da Busca */}
-      <Text style={styles.title}>Resultados da busca por "{search}"</Text>
-
-      {/* FlatList para renderizar os resultados */}
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={(item) => 'id-' + item.id}
-        contentContainerStyle={styles.listContent}
-      />
+      </ScrollView>
     </>
   );
 };
@@ -92,7 +94,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   imageSmall: {
-    width: 250,
+    width: 280,
     height: 180,
     marginTop: 36,
     borderRadius: 50,
@@ -121,8 +123,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: 100,
-    height: 200,
+    width: 150,
+    height: 110,
     marginRight: 10,
     borderRadius: 10,
   },
@@ -131,23 +133,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   addButton: {
-    paddingLeft: 10,
-    backgroundColor:'#c9c9c9',
-    width:'15%',
-    height:'30%',
-    marginTop:"7%",
-    alignItems:'flex-start',
-    borderRadius:500,
-
+    backgroundColor: '#c9c9c9',
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  searchInput1: {
+  searchInput: {
+    flex: 1,
     height: 40,
     borderColor: 'gray',
     fontSize: 18,
     paddingLeft: 7,
     color: 'black',
   },
-  azul: {
+  header: {
     backgroundColor: '#0056B3',
     height: 120,
     alignItems: 'center',
@@ -166,7 +167,6 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 8,
-    
   },
   listContent: {
     paddingBottom: 20,

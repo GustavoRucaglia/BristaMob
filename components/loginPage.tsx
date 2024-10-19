@@ -40,7 +40,7 @@ export function LoginPage() {
           <Text style={styles.titulo}>Que bom que você voltou ao Brazurista!</Text>
             
           <View style={styles.passwordContainer}>
-            <Text style={styles.label}>Email:</Text>
+            <Text style={styles.label}>Email</Text>
             <TextInput
               style={styles.input}
               placeholder="exemplo@gmail.com"
@@ -58,11 +58,11 @@ export function LoginPage() {
               placeholderTextColor="#888"
             />
          
-            {emailError ? <Text style={{ color: 'red' }}>{emailError}</Text> : null}
+            {emailError ? <Text style={{ color: 'red', marginLeft:"7%" }}>{emailError}</Text> : null}
           </View>
 
           <View style={styles.passwordContainer}>
-            <Text style={styles.label}>Senha:</Text>
+            <Text style={styles.label}>Senha</Text>
             <TextInput
               style={styles.input}
               placeholder="**********"
@@ -74,7 +74,7 @@ export function LoginPage() {
             />
           </View>
           
-          <Link href="/redefinirSenha" style={styles.link}>Esqueceu senha? Redefinir senha</Link>
+          <Link href="/redefinirSenha" style={styles.link}>Esqueceu senha?Clique aqui</Link>
           
           <TouchableOpacity
             style={styles.button}
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#0056B3',
     marginBottom: 8,
-    marginTop: 14,
+    marginTop: 6,
   },
   link2: {
     fontSize: 18,
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 20,
+    marginBottom: "-8%",
     marginTop: 30,
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -164,8 +164,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   imageSmall: {
-    width: 240,
-    height: 160,
+    width: 280,
+    height: 180,
     marginTop:36,
     borderRadius: 50,
     marginHorizontal: 6,
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   },
   azul: {
     backgroundColor: '#0056B3',
-    height:150, 
+    height:120, 
     alignItems: 'center',
     justifyContent: 'center',
   },
