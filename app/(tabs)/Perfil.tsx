@@ -20,9 +20,9 @@ export default function ProfilePage() {
     
     if(!token){
       return (
-        <div>
-          <p>Carregando...</p>
-        </div>
+        <View>
+          <>Carregando...</>
+        </View>
       );
     }
     const { isLoading, isError, data, error } = useQuery<User>({

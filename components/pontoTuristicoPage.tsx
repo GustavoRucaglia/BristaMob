@@ -15,7 +15,7 @@ interface RouteParams {
 export default function PontoTuristicoPage() {
   const route = useRoute();
   const { id } = route.params as RouteParams;
-  const router = useRouter()
+  const router = useRouter();
   const [validId, setValidId] = useState<number | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [titulo, setTitulo] = useState('');
@@ -23,16 +23,15 @@ export default function PontoTuristicoPage() {
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
-  
+
   const [secondModalVisible, setSecondModalVisible] = useState(false);
 
-const toggleSecondModal = () => {
-  setSecondModalVisible(!secondModalVisible);
-};
-
+  const toggleSecondModal = () => {
+    setSecondModalVisible(!secondModalVisible);
+  };
 
   const handleCreateRoteiro = () => {
-    console.log("Roteiro criado com título:", titulo);
+    console.log('Roteiro criado com título:', titulo);
     toggleModal(); // Fechar modal após criar o roteiro
   };
 
@@ -46,10 +45,7 @@ const toggleSecondModal = () => {
     queryKey: ['pontosByIds', id],
     queryFn: () => getPontoInterreseById(validId || 0),
     staleTime: 10 * 1000,
-  }, 
-);
-
-
+  });
 
   if (isLoading) {
     return <Text>Carregando...</Text>;
@@ -61,125 +57,84 @@ const toggleSecondModal = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container1}>
-      <View style={styles.azul}>
-        <Image 
-          source={require('@/assets/images/brazurismotuc.png')} 
-          style={styles.logoGrande} 
-        />
-      </View>
-      <Modal
-  visible={modalVisible}
-  animationType="slide"
-  transparent={true}
-  onRequestClose={toggleModal}
->
-  <View style={styles.modalOverlay}>
-    <View style={styles.modalContent}>
-      {/* Cabeçalho do Modal */}
-      <View style={styles.modalHeader}>
-      <Pressable onPress={toggleModal}>
-          <Entypo name="cross" size={24} color="black" />
-        </Pressable>
-      </View>
-
-      <Image 
-        source={require('@/assets/images/B (3).png')} 
-        style={styles.modalLogo} 
-      />
-      
-      <Modal
-  visible={secondModalVisible}
-  animationType="slide"
-  transparent={true}
-  onRequestClose={toggleSecondModal}
->
-  <View style={styles.modalOverlay1}>
-    <View style={styles.modalContent1}>
-      <View style={styles.modalHeader1}>
-        <TouchableOpacity onPress={toggleSecondModal}>
-          <Entypo name="cross" size={24} color="black" />
-        </TouchableOpacity>
-      </View>
-
-      {/* Conteúdo do novo modal aqui */}
-      <ImageBackground source={require('@/assets/images/B (3).png')} style={styles.modalLogo} />
-      <Text style={styles.modalTitle}>Crie aqui um novo Roteiro!</Text>
-      <Text style={styles.label}>Título do Roteiro</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Adicione um título para o seu roteiro"
-        value={titulo}
-        onChangeText={setTitulo}
-      />
-    
-      <TouchableOpacity style={styles.createButton}>
-        <Text style={styles.createButtonText}>Criar roteiro</Text>
-      </TouchableOpacity>
-      
-    </View>
-      </View>
-    </Modal>
-
-        
-
-          {/* Adicione dentro de Roteiro já criados por você! */}
-          <Text style={styles.modalTitle1}>Adicione dentro de roteiros já criados por você!</Text>
-          <Link href="/dentroRoteiro" onPress={toggleModal}>
-      
-          <TouchableOpacity onPress={() => router.push("/")} style={styles.itemContainer}>
-            <Image 
-              source={{ uri: 'https://tourb.com.br/img/lugares/rio-de-janeiro/praia-vermelha.jpg' }} 
-              style={styles.itemImage} 
-            />
-            <Text style={styles.roteiro}>Roteiro para o Rio de Janeiro</Text>
-          </TouchableOpacity>
-          </Link>
-        
-          <Text style={styles.modalTitle}>Adicione a um novo Roteiro!</Text>
-
-          
-          <TouchableOpacity onPress={toggleSecondModal}>
-      <View style={styles.itemContainer1}>
-        <View style={styles.iconCircle3}>
-          <Entypo name="plus" size={24} color="black" />
-        </View>
-      </View>
-    </TouchableOpacity>
-    <Text style={styles.roteiro1}>Novo Roteiro</Text>
-
-            
-        </View>
-      </View>
-    </Modal>
-
-
       <View style={styles.header}>
-        <Text style={styles.a}> {data?.nome}</Text>
-       
+        <Image source={require('@/assets/images/brazurismotuc.png')} style={styles.logoGrande} />
       </View>
 
-      <View style={styles.lugar2}>
-        {data?.fotos && <Image source={{ uri: data?.fotos }} style={styles.image} />}
-      </View>
+      <Modal visible={modalVisible} animationType="slide" transparent={true} onRequestClose={toggleModal}>
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Pressable onPress={toggleModal}>
+                <Entypo name="cross" size={24} color="black" />
+              </Pressable>
+            </View>
 
-      <Text style={styles.titulo}>Explore mais sobre </Text>
-      <Text style={[styles.b, styles.textCenter]}>{data?.descricao}</Text>
+            <Image source={require('@/assets/images/B (3).png')} style={styles.modalLogo} />
 
-      <Text style={styles.titulo}>Localização e Contato</Text>
-      <Text style={[styles.b, styles.textCenter]}>Av. Paulista, 1578 - Bela Vista, São Paulo - SP</Text>
-      <Text style={[styles.b, styles.textCenter]}>(11) 95678-1353</Text>
+            <Modal visible={secondModalVisible} animationType="slide" transparent={true} onRequestClose={toggleSecondModal}>
+              <View style={styles.modalOverlay1}>
+                <View style={styles.modalContent1}>
+                  <View style={styles.modalHeader1}>
+                    <TouchableOpacity onPress={toggleSecondModal}>
+                      <Entypo name="cross" size={24} color="black" />
+                    </TouchableOpacity>
+                  </View>
 
-      <View style={styles.blueLine} />
+                  <ImageBackground source={require('@/assets/images/B (3).png')} style={styles.modalLogo} />
+                  <Text style={styles.modalTitle}>Crie aqui um novo Roteiro!</Text>
+                  <Text style={styles.label}>Título do Roteiro</Text>
+                  <TextInput style={styles.input} placeholder="Adicione um título para o seu roteiro" value={titulo} onChangeText={setTitulo} />
 
-      <View style={styles.col}>
+                  <TouchableOpacity style={styles.createButton} onPress={handleCreateRoteiro}>
+                    <Text style={styles.createButtonText}>Criar roteiro</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </Modal>
+
+            <Text style={styles.modalTitle1}>Adicione dentro de roteiros já criados por você!</Text>
+            <Link href="/dentroRoteiro" onPress={toggleModal}>
+              <TouchableOpacity onPress={() => router.push('/')} style={styles.itemContainer}>
+                <Image source={{ uri: 'https://tourb.com.br/img/lugares/rio-de-janeiro/praia-vermelha.jpg' }} style={styles.itemImage} />
+                <Text style={styles.roteiro}>Roteiro para o Rio de Janeiro</Text>
+              </TouchableOpacity>
+            </Link>
+
+            <Text style={styles.modalTitle}>Adicione a um novo Roteiro!</Text>
+
+            <TouchableOpacity onPress={toggleSecondModal}>
+              <View style={styles.itemContainer1}>
+                <View style={styles.iconCircle}>
+                  <Entypo name="plus" size={24} color="black" />
+                </View>
+              </View>
+            </TouchableOpacity>
+            <Text style={styles.roteiro1}>Novo Roteiro</Text>
+          </View>
+        </View>
+      </Modal>
+
+      <View style={styles.content}>
+        <Text style={styles.title}>Explore {data?.nome}</Text>
+        <View style={styles.imageContainer}>
+          {data?.fotos && <Image source={{ uri: data?.fotos }} style={styles.image} />}
+        </View>
+
+        <Text style={styles.sectionTitle}>Veja mais sobre</Text>
+        <Text style={styles.description}>{data?.descricao}</Text>
+
+        <Text style={styles.sectionTitle}>Localização e Contato</Text>
+        <Text style={styles.contact}>Av. Paulista, 1578 - Bela Vista, São Paulo - SP</Text>
+        <Text style={styles.contact}>(11) 95678-1353</Text>
+
+        <View style={styles.separator} />
+
         <Carrossel title={`Conheça mais ${data?.categoria}`} category={data?.categoria || ''} />
-      </View>
-
-      <View style={styles.col}>
-        <ScrollView horizontal style={styles.row} showsHorizontalScrollIndicator={false}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <Carrossel title={`Explore pelo ${data?.regiao}`} category={data?.regiao || ''} />
         </ScrollView>
-        <View style={styles.blueLine} />
+        <View style={styles.separator} />
       </View>
     </ScrollView>
   );
@@ -189,154 +144,63 @@ const styles = StyleSheet.create({
   container1: {
     padding: 0,
   },
+  header: {
+    backgroundColor: '#0056B3',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 120,
+  },
   logoGrande: {
-    width: 250,
-    height: 180,
+    width: 280,
+    height: 160,
     marginTop: 36,
     borderRadius: 50,
-    marginHorizontal: 6,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
   },
-  itemImage: {
-    width: 60, // Largura da imagem
-    height: 60, // Altura da imagem
-    borderRadius: 5, // Bordas arredondadas na imagem
-    marginRight: 10, // Espaçamento entre a imagem e o texto
+  content: {
+    paddingHorizontal: 20,
   },
-  roteiro: {
-    fontSize: 16, // Tamanho do texto
-    fontWeight: 'bold', // Texto em negrito
-    color: '#333', // Cor do texto
-    flex: 1, // O texto ocupa o espaço restante
-  },
-  roteiro1:{
-    fontSize: 15, // Tamanho reduzido do texto
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: '-56%',
-    color: '#333',
-    marginLeft: '-18%'
-    
-  
-  },
-  azul: {
-    backgroundColor: '#0056B3',
-    height: 120,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginVertical: 15,
-  },
-  lugar2: {
+  imageContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: 20,
-  },
-  blueLine: {
-    height: 2.5,
-    width: 300,
-    backgroundColor: '#0056B3',
-    marginVertical: 10,
-    alignSelf: 'center',
-    marginTop: 40,
-    marginBottom: 10,
-  },
-  titulo: {
-    fontSize: 29,
-    marginTop: 15,
-    marginBottom: 15,
-    marginLeft: 15,
-    fontWeight: 'bold',
-  },
-  icon: {
-    marginRight: 20,
-  },
-  a: {
-    fontSize: 25,
-    marginLeft: 17,
-    fontWeight: 'bold',
-    marginBottom:"5%",
-    marginTop:"2%"
   },
   image: {
-    width: 370,
+    width: 350,
     height: 270,
-    borderRadius: 4,
-    marginBottom: 10,
-  },
-  textCenter: {
-    textAlign: 'justify',
-    paddingLeft: '0.5%',
-    paddingRight:'2%'
-  },
-  b: {
-    marginLeft: 12,
-    fontSize: 19,
-  },
-  col: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    marginTop: 20,
-    marginBottom: 10,
+    borderRadius: 10,
+    marginVertical: 10,
   },
   title: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
+    color: '#333',
+    textAlign: 'center',
     marginVertical: 10,
-    marginLeft: 10,
-    marginTop: 10,
   },
-  text: {
-    textAlign: 'center',
-    color: 'white',
-    marginBottom: 6,
-    fontSize: 14,
+  sectionTitle: {
+    fontSize: 25,
     fontWeight: 'bold',
+    marginVertical: 15,
+    color: '#0056B3',
+    alignItems: 'center',
+    marginBottom: '5%',
   },
-  text1: {
+  description: {
+    fontSize: 16,
+    lineHeight: 24,
+    textAlign: 'justify',
+    color: '#333',
+  },
+  contact: {
+    fontSize: 16,
+    color: '#555',
     textAlign: 'center',
-    color: 'white',
-    marginBottom: 6,
-    fontSize: 14,
-    fontWeight: 'bold',
+    marginBottom: '5%',
   },
-  imageSmall: {
-    width: 170,
-    height: 150,
-    marginHorizontal: 5,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    borderRadius: 7,
-    overflow: 'hidden',
-  },
-  row: {
-    flexDirection: 'row',
-  },
- 
-  iconCircle: {
-    width: 50,
-    height: 50,
-    backgroundColor: 'lightgray',
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 5,
-    marginRight: 15,
-  },
-  iconCircle3: {
-    width: 50,
-    height: 50,
-    backgroundColor: 'lightgray',
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 5,
-    marginRight: 15,
+  separator: {
+    height: 2,
+    backgroundColor: '#0056B3',
+    marginVertical: 20,
+    marginBottom: '10%',
   },
   modalOverlay: {
     flex: 1,
@@ -345,18 +209,78 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
-    width: '100%',
-    height:'100%',
     backgroundColor: 'white',
+    borderRadius: 20,
     padding: 20,
-    borderRadius: 15,
     alignItems: 'center',
-    marginTop:'140%'
+    width: '90%',
   },
   modalHeader: {
+    alignSelf: 'flex-end',
+  },
+  modalLogo1: {
+    width: 90,
+    height: 70,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 10,
+    color: '#0056B3',
+  },
+  modalTitle1: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 15,
+    textAlign: 'center',
+  },
+  itemContainer: {
+    marginVertical: 10,
+  },
+  itemContainer1: {
+    marginVertical: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  iconCircle: {
+    width: 60,
+    height: 60,
+    backgroundColor: '#0056B3',
+    borderRadius: 30, // Torna o ícone circular
+    marginLeft:"100%"
+  },
+  roteiro: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#555',
+  },
+  roteiro1: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#0056B3',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    padding: 10,
+    marginVertical: 10,
     width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
+  },
+  createButton: {
+    backgroundColor: '#0056B3',
+    padding: 12,
+    borderRadius: 8,
+    marginVertical: 10,
+  },
+  createButtonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
   },
   modalOverlay1: {
     flex: 1,
@@ -365,101 +289,71 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent1: {
-    width: '100%',
-    height:'60%',
     backgroundColor: 'white',
+    borderRadius: 20,
     padding: 20,
-    borderRadius: 15,
     alignItems: 'center',
-    marginTop:'140%'
+    width: '90%',
   },
   modalHeader1: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
+    alignSelf: 'flex-end',
   },
   modalLogo: {
-    width: 600,
-    height: 180,
-    marginTop: -105, // Margem superior para o espaçamento
-    borderRadius: 50,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    alignSelf: 'center', // Centraliza a imagem
-    marginBottom: -50,
+    width: 90,
+    height: 70,
+    marginBottom: 10,
   },
-  modalTitle1: {
-    fontSize: 16,
+  modalTitle3: {
+    fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 20,
-    color:'black',
-    marginLeft:'-3%',
-    marginTop:'7%'
-  },
-  modalTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center', 
-    marginVertical: 10, 
-    marginTop: '7%',
-    color:'black',
+    textAlign: 'center',
+    marginVertical: 10,
+    color: '#0056B3',
   },
   label: {
     fontSize: 16,
-    marginTop: 20,
-    marginBottom: 10,
-    fontWeight: 'bold',
-    marginRight:'60%'
+    marginVertical: 10,
+    color: '#333',
   },
-
-  input: {
-    height: 40,
-    borderColor: 'black',
+  input4: {
     borderWidth: 1,
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    marginBottom: 20,
-    width:'96%'
+    borderColor: '#ddd',
+    borderRadius: 8,
+    padding: 10,
+    marginVertical: 10,
+    width: '100%',
   },
-  createButton: {
-    backgroundColor: '#0056b3',
-    padding: 15,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 180,
-    height: 48,
-    marginLeft: '2%',
-    marginTop: 20,
+  createButton5: {
+    backgroundColor: '#0056B3',
+    padding: 12,
+    borderRadius: 8,
+    marginVertical: 10,
   },
-  createButtonText: {
-    color: '#fff',
-    fontSize: 14,
+  createButtonText6: {
+    fontSize: 16,
     fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
   },
-
-  itemContainer: {
-    width: '100%', 
-    flexDirection: 'row', 
-    alignItems: 'center', 
-    marginBottom: 20,
-    backgroundColor: '#fff', 
-    borderRadius: 10, 
-    overflow: 'hidden',
-    elevation: 5, 
-    padding: 10, 
-    marginHorizontal: 0, 
+  modalTitle2: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 15,
+    textAlign: 'center',
   },
-  itemContainer1: {
-    width: 302, 
-    marginBottom: 20,
-    marginHorizontal: 0,
-    backgroundColor: '#fff', 
-    borderRadius: 15, 
-    overflow: 'hidden',
-    elevation: 5,
-    padding: 10, 
-    height: '35%',
-    marginLeft:10,
-  }
+  itemContainer2: {
+    marginVertical: 10,
+  },
+  itemImage: {
+    width: 350,
+    height: 200,
+    borderRadius: 10,
+  },
+  roteiro2: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#555',
+    marginTop: 5,
+  },
 });

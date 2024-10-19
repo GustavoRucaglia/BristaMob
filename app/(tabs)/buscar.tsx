@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#f5f5f5',
     },
     imageSmall: {
-        width: 290,
+        width: 280,
         height: 180,
         marginTop: 36,
         borderRadius: 50,
