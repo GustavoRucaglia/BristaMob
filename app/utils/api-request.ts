@@ -14,7 +14,7 @@ export type PontoInterrese = {
   regiao: string;
 };
 
-const API = 'https://9212-200-148-158-242.ngrok-free.app';
+const API = 'https://f64e-200-155-154-206.ngrok-free.app';
 
 const defaultHeaders = {
   "ngrok-skip-browser-warning": "69420",

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { PontoInterrese } from "./api-request";
 
  
 interface Credentials {
@@ -25,16 +26,20 @@ export interface User {
   role?: string
   telefone?: string | null;
   comentarios?: Comment[];
-  roteiro?: any;
+  roteiro?: Roteiro[];
   state?: boolean
 }
- 
+ export interface Roteiro {
+  id: string;
+  name: string;
+  pontosTuristicos: PontoInterrese[];
+ }
 interface Recover{
   login: string
 }
 
 
-const API = 'https://9212-200-148-158-242.ngrok-free.app';
+const API = 'https://f64e-200-155-154-206.ngrok-free.app';
 
 const defaultHeaders = {
   "ngrok-skip-browser-warning": "69420",
@@ -134,6 +139,33 @@ export const loginRequest = async (credentials: Credentials) => {
   
     if (!response.ok) {
       throw new Error('Erro ao buscar detalhes do usuário');
+    }
+  
+    return response.json();
+  };
+
+  export const roteiroDetails = async (id: string, token: string) => {
+    const response = await fetch(`${API}/brazu/pontos/roteiro/${id}/pontos`, {
+      method: 'GET',
+      headers: HeaderAuth(token),
+    });
+  
+    if (!response.ok) {
+      throw new Error('Erro ao buscar detalhes do usuário');
+    }
+  
+    return response.json();
+  };
+
+  export const AddInRoteiro = async (id: string, addId: string, token: string) => {
+    const response = await fetch(`${API}/brazu/pontos/roteiro/${id}/ponto`, {
+      method: 'POST',
+      headers: HeaderAuth(token),
+      body: JSON.stringify(addId)
+    });
+  
+    if (!response.ok) {
+      throw new Error('Erro ao adicionar em roteiro 1');
     }
   
     return response.json();

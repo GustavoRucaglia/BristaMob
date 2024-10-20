@@ -81,16 +81,6 @@ export default function TabLayout() {
             ),
           }}
         />
-          <Tabs.Screen
-          name="criarRoteirou"
-          options={{
-            title: 'Criar Roteiro',
-            href: login ?  '/criarRoteirou': null, 
-            tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon name={focused ? 'person' : 'person-outline'} color={ '#0056B3'} />
-            ),
-          }}
-        />
     </Tabs>
   );
 }

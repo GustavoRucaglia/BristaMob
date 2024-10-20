@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackgr
 import { Link, router, useRouter } from 'expo-router';
 import Checkbox from 'expo-checkbox';
 import { loginRequest, RegisterRequest } from './utils/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const LoginScreen = () => {
@@ -27,7 +28,8 @@ const validateEmail = (email: string) => {
       e.preventDefault();
       try {
         await RegisterRequest({ login, password, role, name, telefone });
-        await loginRequest({ login, password });
+        const data = await loginRequest({ login, password });
+        await AsyncStorage.setItem('@user_token', data.token);
         router.push('/');
         
       } catch (error) {

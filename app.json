@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#0056b3"
-      }
+      },
+      "package": "com.gustavorucaglia.brazurista"
     },
     "web": {
       "bundler": "metro",
@@ -31,6 +32,12 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "eed2f293-8c05-4ccd-9064-42d69f356b04"
+      }
+    },
+    "owner": "gustavorucaglia"
   }
 }

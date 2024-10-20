@@ -6,20 +6,35 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { getPontoInterreseSearch, PontoInterrese } from '@/app/utils/api-request';
 import { useQuery } from '@tanstack/react-query';
 import { useRoute } from '@react-navigation/native';
+import { AddInRoteiro } from '@/app/utils/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SearchResults1 = () => {
   const router = useRouter(); // useRouter hook to navigate
   const route = useRoute();
-  const { search } = useLocalSearchParams();
+  const { search, id } = useLocalSearchParams();
   const [value, setValue] = useState('');
   const [showMore, setShowMore] = useState(false);
+  const [token, setToken] = useState('');
+
+  const getToken = async () => {
+    const token1 = await AsyncStorage.getItem('@user_token');
+    if(token1){
+      setToken(token1);
+    }
+    else{
+      console.log('Token não encontrado');
+    }
+  }
+
+  getToken();
 
   const handleShowMore = () => {
     setShowMore(!showMore);
   };
 
   const handleSearch = () => {
-    router.push(`/buscar?search=${value}`); // Search route
+    router.push(`/criarRoteirou?search=${value}`); // Search route
   };
 
   // Function to navigate to the home page when clicking the logo
@@ -34,6 +49,11 @@ const SearchResults1 = () => {
     staleTime: 5 * 60 * 1000,
   });
 
+  const   handleADDInROteiro =  async ({ addId }: { addId: string }) => {
+    await AddInRoteiro(id.toString(), addId, token);
+    router.push(`/dentroRoteiro?id=${id.toString()}`);
+  }
+
   const renderItem = ({ item }: { item: PontoInterrese }) => (
     <View style={styles.resultContainer}>
       <TouchableOpacity onPress={() => router.push(`/buscar?search=${item.nome}`)}>
@@ -43,7 +63,7 @@ const SearchResults1 = () => {
         <Text style={styles.title}>{item.nome}</Text>
         <Text style={styles.address}>{item.regiao}</Text>
       </View>
-      <TouchableOpacity style={styles.addButton}>
+      <TouchableOpacity style={styles.addButton} onPress={() => handleADDInROteiro({ addId: item.id.toString() })}>
         <Entypo name="plus" size={24} color="black" />
       </TouchableOpacity>
     </View>
@@ -52,8 +72,7 @@ const SearchResults1 = () => {
   return (
     <>
       <StatusBar hidden={true} />
-      <ScrollView>
-        {/* Imagem de Cabeçalho (Logo) com navegação para home */}
+      <View>
         <TouchableOpacity onPress={handleLogoPress}>
           <View style={styles.header}>
             <ImageBackground source={require('@/assets/images/brazurismotuc.png')} style={styles.imageSmall} />
@@ -65,7 +84,7 @@ const SearchResults1 = () => {
           <AntDesign style={styles.icon} name="search1" size={24} color="black" />
           <TextInput
             style={styles.searchInput}
-            placeholder="Pontos turísticos no sudeste"
+            placeholder="Pontos turísticos"
             placeholderTextColor="black"
             value={value}
             onChangeText={setValue}
@@ -83,7 +102,7 @@ const SearchResults1 = () => {
           keyExtractor={(item) => 'id-' + item.id}
           contentContainerStyle={styles.listContent}
         />
-      </ScrollView>
+      </View>
     </>
   );
 };
