@@ -33,11 +33,6 @@
     "experiments": {
       "typedRoutes": true
     },
-    "extra": {
-      "eas": {
-        "projectId": "eed2f293-8c05-4ccd-9064-42d69f356b04"
-      }
-    },
     "owner": "gustavorucaglia"
   }
 }

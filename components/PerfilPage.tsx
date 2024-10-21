@@ -3,18 +3,19 @@ import Entypo from '@expo/vector-icons/Entypo';
 import { Link, router } from 'expo-router';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useQuery } from '@tanstack/react-query';
-import { fetchUserDetails, User } from '@/app/utils/auth';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { API, fetchUserDetails, UpdateRequest, User } from '@/app/utils/auth';
 import { FontAwesome } from '@expo/vector-icons';
+import axios from 'axios'; // Certifique-se de que o axios está importado
 
 export default function ProfilePage() {
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
     const getUserData = async () => {
-      const token = await AsyncStorage.getItem('@user_token');
-      setToken(token);
-      console.log(token);
+      const userToken = await AsyncStorage.getItem('@user_token');
+      setToken(userToken);
+      console.log(userToken);
     };
 
     getUserData();
@@ -23,7 +24,7 @@ export default function ProfilePage() {
   const { isLoading, isError, data, error } = useQuery<User>({
     queryKey: ['userData'],
     queryFn: () => fetchUserDetails(token as string),
-    enabled: !!token,
+    enabled: !!token, // Só habilita a query se o token estiver disponível
   });
 
   const logout = async () => {
@@ -32,22 +33,69 @@ export default function ProfilePage() {
     router.push('/login');
   };
 
-  // Função para navegar para a rota raiz
   const navigateToHome = () => {
     router.push('/');
+  };
+
+  const [formData, setFormData] = useState<User>({
+    id: data?.id ?? '',
+    login: data?.login ?? '',
+    password: data?.password ?? '',
+    username: data?.username ?? '',
+    name: data?.name ?? '',
+    photo: data?.photo ?? '',
+    telefone: data?.telefone ?? '',
+  });
+
+  useEffect(() => {
+    if (data) {
+      setFormData({
+        id: data?.id,
+        login: data?.login,
+        password: data?.password,
+        username: data?.username,
+        name: data?.name,
+        photo: data?.photo,
+        telefone: data?.telefone,
+      });
+    }
+  }, [data]);
+
+  const handleChange = (name: keyof User, value: string) => {
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  // Corrigir a função de atualização usando axios
+  const handleState = useMutation({
+    mutationFn: (ponto: User) => {
+      return axios.put(`${API}}/auth/user`, ponto, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      }).then(response => response.data);
+    },
+    onSuccess: () => {
+      console.log('Perfil atualizado com sucesso');
+    },
+  });
+
+  const handleSubmit = () => {
+    handleState.mutate(formData); // Enviar dados do formulário
   };
 
   return (
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.header}>
-          {/* Envolver a logo com TouchableOpacity */}
           <TouchableOpacity onPress={navigateToHome}>
             <Image source={require('@/assets/images/brazurismotuc.png')} style={styles.logoGrande} />
           </TouchableOpacity>
         </View>
 
-        {/* Profile Section */}
         <View style={styles.profileContainer}>
           <View style={styles.profileSection}>
             <Image source={require('@/assets/images/brazurista2.png')} style={styles.profileImage} />
@@ -57,42 +105,16 @@ export default function ProfilePage() {
             </View>
           </View>
 
-          {/* Logout Button */}
           <TouchableOpacity style={styles.logoutButton1} onPress={logout}>
             <Entypo name="log-out" size={20} color="#0056B3" style={styles.logoutIcon} />
             <Text style={styles.logoutButtonText}>Sair da conta</Text>
           </TouchableOpacity>
         </View>
 
-        <View style={styles.lineContainer}>
-          <FontAwesome name="globe" size={24} color="#0056b3" />
-          <View style={styles.line}></View>
-        </View>
-
         <Text style={styles.sectionTitle}>Alguns Pontos Turísticos</Text>
         <ScrollView horizontal={true} style={styles.reviewsSection}>
-          {[
-            {
-              image: require('@/assets/images/cristo.jpg'),
-              title: 'Cristo Redentor',
-              text: 'O Cristo Redentor é um dos símbolos mais famosos do Brasil e uma das Sete Maravilhas do Mundo Moderno.',
-            },
-            {
-              image: require('@/assets/images/MASP.jpg'),
-              title: 'MASP',
-              text: 'O Museu de Arte de São Paulo Assis Chateaubriand (MASP) é um dos mais importantes e icônicos museus do Brasil e da América Latina.',
-            },
-            {
-              image: require('@/assets/images/recife.jpg'),
-              title: 'Recife',
-              text: 'Uma cidade vibrante com rica cultura e história.',
-            },
-            {
-              image: require('@/assets/images/lapa.jpg'),
-              title: 'Lapa',
-              text: 'Famosa por sua vida noturna e arquitetura histórica.',
-            },
-          ].map((review, index) => (
+          {/* Mapear itens turísticos */}
+          {[{ image: require('@/assets/images/cristo.jpg'), title: 'Cristo Redentor', text: 'O Cristo Redentor é um dos símbolos mais famosos do Brasil.' }].map((review, index) => (
             <View key={index} style={styles.reviewItem}>
               <Image source={review.image} style={styles.reviewImage} />
               <View style={styles.reviewTextContainer}>
@@ -103,10 +125,9 @@ export default function ProfilePage() {
           ))}
         </ScrollView>
 
-        {/* Bottom Section */}
         <View style={styles.bottomSection}>
           <View style={styles.bottomItem}>
-            <ImageBackground source={require('@/assets/images/Design sem nome.png')} style={styles.imageSmall1} />
+            <View style={styles.imageSmall1} />
             <Link href="/roteiro" style={styles.bottomLink}>
               <Text style={styles.bottomLinkText}>Acesse seus roteiros</Text>
             </Link>
@@ -123,8 +144,6 @@ export default function ProfilePage() {
     </View>
   );
 }
-
-
 
 const styles = StyleSheet.create({
   container: {

@@ -39,7 +39,7 @@ interface Recover{
 }
 
 
-const API = 'https://f64e-200-155-154-206.ngrok-free.app';
+export const API = 'https://f64e-200-155-154-206.ngrok-free.app';
 
 const defaultHeaders = {
   "ngrok-skip-browser-warning": "69420",
@@ -87,6 +87,18 @@ export const loginRequest = async (credentials: Credentials) => {
       method: 'POST',
       headers:defaultHeaders,
       body: JSON.stringify(credentials)
+    });
+ 
+    if (!response.ok) {
+      throw new Error('Login failed');
+    }
+  };
+
+  export const UpdateRequest = async (user: User, token: string ) => {
+    const response = await fetch(`${API}/auth/user`, {
+      method: 'PUT',
+      headers: HeaderAuth(token),
+      body: JSON.stringify(user)
     });
  
     if (!response.ok) {
