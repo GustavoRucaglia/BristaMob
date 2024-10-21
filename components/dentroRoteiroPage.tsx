@@ -90,7 +90,7 @@ const DentroRoteiroPage = () => {
       </View>
 
       <View style={styles.container}>
-        <Text style={styles.title}>Roteiro {data?.name}</Text>
+        <Text style={styles.title}>{data?.name}</Text>
 
         
           <TouchableOpacity  onPress={() => router.push(`/criarRoteirou?search=&id=${id1}`)} style={styles.iconCircle}>
@@ -194,14 +194,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
     elevation: 5,
-    marginLeft: 20,
+    marginLeft: "80%",
     marginTop:10,
     marginBottom:20,
 
   },
   imageSmall: {
-    width: 240,
-    height: 160,
+    width: 280,
+    height: 180,
     marginTop: 36,
     borderRadius: 50,
     marginHorizontal: 6,
