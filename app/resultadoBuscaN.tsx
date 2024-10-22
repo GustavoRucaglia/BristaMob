@@ -1,57 +1,52 @@
-import React, { useState } from 'react';
-import { View, Image, Text, StyleSheet, TextInput, ImageBackground, FlatList, TouchableOpacity, ScrollView } from 'react-native';
-import { AntDesign, Entypo } from '@expo/vector-icons';
+import React, { useEffect, useState } from 'react';
+import { View, Image, Text, StyleSheet, TextInput, ImageBackground, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { getPontoInterreseSearch, PontoInterrese } from '@/app/utils/api-request';
 import { useQuery } from '@tanstack/react-query';
-import { useRoute } from '@react-navigation/native';
-import { AddInRoteiro } from '@/app/utils/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SearchResults1 = () => {
-  const router = useRouter(); // useRouter hook to navigate
-  const route = useRoute();
-  const { search, id } = useLocalSearchParams();
+  const router = useRouter();
+  const { search } = useLocalSearchParams();
   const [value, setValue] = useState('');
-  const [showMore, setShowMore] = useState(false);
-  const [token, setToken] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Inicializando como false
 
-  const getToken = async () => {
-    const token1 = await AsyncStorage.getItem('@user_token');
-    if(token1){
-      setToken(token1);
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const token = await AsyncStorage.getItem('@user_token');
+        console.log('Token encontrado:', token); // Verificação de token
+        setIsLoggedIn(!!token); // Verifica se o token existe
+      } catch (error) {
+        console.error('Erro ao verificar token:', error); // Mensagem de erro
+      }
+    };
+
+    checkLoginStatus();
+  }, []);
+
+  // Redireciona se o usuário estiver logado
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push('/'); // Redireciona para a página inicial
     }
-    else{
-      console.log('Token não encontrado');
-    }
-  }
-
-  getToken();
-
-  const handleShowMore = () => {
-    setShowMore(!showMore);
-  };
+  }, [isLoggedIn, router]);
 
   const handleSearch = () => {
-    router.push(`/criarRoteirou?search=${value}`); // Search route
-  };
-
-  // Function to navigate to the home page when clicking the logo
-  const handleLogoPress = () => {
-    router.push('/'); // Navigate to the home page
+    // Manter a função se quiser que o usuário ainda possa buscar
   };
 
   const search2 = search ? search.toString() : '';
-  const { data, error, isLoading, refetch } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['pontosSearch', search],
     queryFn: () => getPontoInterreseSearch(search2),
     staleTime: 5 * 60 * 1000,
   });
 
-  const   handleADDInROteiro =  async ({ addId }: { addId: string }) => {
-    await AddInRoteiro(id.toString(), addId, token);
-    router.push(`/dentroRoteiro?id=${id.toString()}`);
+  if (isLoading) {
+    return <ActivityIndicator size="large" color="#0000ff" />; // Mostra um indicador de carregamento enquanto os dados estão sendo buscados
   }
 
   const renderItem = ({ item }: { item: PontoInterrese }) => (
@@ -70,7 +65,7 @@ const SearchResults1 = () => {
     <>
       <StatusBar hidden={true} />
       <View>
-        <TouchableOpacity onPress={handleLogoPress}>
+        <TouchableOpacity onPress={() => router.push('/')}>
           <View style={styles.header}>
             <ImageBackground source={require('@/assets/images/brazurismotuc.png')} style={styles.imageSmall} />
           </View>
