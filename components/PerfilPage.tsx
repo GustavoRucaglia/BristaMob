@@ -127,7 +127,8 @@ export default function ProfilePage() {
 
         <View style={styles.bottomSection}>
           <View style={styles.bottomItem}>
-            <View style={styles.imageSmall1} />
+          <Image source={require('@/assets/images/Design sem nome.png')} style={styles.imageSmall1} />
+            
             <Link href="/roteiro" style={styles.bottomLink}>
               <Text style={styles.bottomLinkText}>Acesse seus roteiros</Text>
             </Link>
@@ -203,13 +204,13 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 20,
     borderRadius: 10,
-    width: '58%',
+    width: '103%',
     alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#f2f2f2',
-    marginLeft:"35%"
+    marginLeft:"5%"
   },
 
   logoutButtonText: {

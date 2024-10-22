@@ -1,6 +1,6 @@
 import { Link, useRouter } from 'expo-router';
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground, ScrollView, GestureResponderEvent } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground, ScrollView, GestureResponderEvent } from 'react-native';
 import { loginRequest } from '@/app/utils/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -8,12 +8,20 @@ export function LoginPage() {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
+  const [isFormValid, setIsFormValid] = useState(false); // Estado para validar o formulário
   const router = useRouter();
 
   const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(email)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
+
+  // Efeito para monitorar as mudanças nos campos e validar o formulário
+  useEffect(() => {
+    const isEmailValid = validateEmail(login);
+    const isPasswordValid = password.length > 0;
+    setIsFormValid(isEmailValid && isPasswordValid); // Ativa o botão se ambos forem válidos
+  }, [login, password]);
 
   const handleSubmit = async (e: GestureResponderEvent) => {
     e.preventDefault();
@@ -22,80 +30,78 @@ export function LoginPage() {
       await AsyncStorage.setItem('@user_token', data.token);
       console.log('Login realizado com sucesso!');
       router.push('/');
-      
- 
     } catch (error) {
       console.error('Erro ao fazer login:', error);
     }
-  }; 
+  };
 
   return (
     <>
-    <ScrollView style={{backgroundColor: "#fff"}}>
-      <View style={styles.azul}>
-        <ImageBackground source={require('@/assets/images/brazurismotuc.png')} style={styles.imageSmall} />
-      </View>
-      <View style={styles.container}>
-        <View style={styles.form}>
-          <Text style={styles.titulo}>Que bom que você voltou ao Brazurista!</Text>
-            
-          <View style={styles.passwordContainer}>
-            <Text style={styles.label}>Email</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="exemplo@gmail.com"
-              keyboardType="email-address" // Configura o teclado para e-mail
-              value={login}
-              onChangeText={(text) => {
-                setLogin(text);
-                if (!validateEmail(text)) {
-                  setEmailError('E-mail inválido'); // Mostra mensagem de erro se o e-mail não for válido
-                } else {
-                  setEmailError('');
-                }
-              }}
-              autoCapitalize="none"
-              placeholderTextColor="#888"
-            />
-         
-            {emailError ? <Text style={{ color: 'red', marginLeft:"7%" }}>{emailError}</Text> : null}
+      <ScrollView style={{ backgroundColor: '#fff' }}>
+        <View style={styles.azul}>
+          <ImageBackground source={require('@/assets/images/brazurismotuc.png')} style={styles.imageSmall} />
+        </View>
+        <View style={styles.container}>
+          <View style={styles.form}>
+            <Text style={styles.titulo}>Que bom que você voltou ao Brazurista!</Text>
+
+            <View style={styles.passwordContainer}>
+              <Text style={styles.label}>Email</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="exemplo@gmail.com"
+                keyboardType="email-address"
+                value={login}
+                onChangeText={(text) => {
+                  setLogin(text);
+                  if (!validateEmail(text)) {
+                    setEmailError('E-mail inválido');
+                  } else {
+                    setEmailError('');
+                  }
+                }}
+                autoCapitalize="none"
+                placeholderTextColor="#888"
+              />
+              {emailError ? <Text style={{ color: 'red', marginLeft: '7%' }}>{emailError}</Text> : null}
+            </View>
+
+            <View style={styles.passwordContainer}>
+              <Text style={styles.label}>Senha</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="**********"
+                secureTextEntry
+                value={password}
+                onChangeText={setPassword}
+                autoCapitalize="none"
+                placeholderTextColor="#888"
+              />
+            </View>
+
+            <Link href="/redefinirSenha" style={styles.link}>Esqueceu a senha? Clique aqui</Link>
+
+            <TouchableOpacity
+              style={[styles.button, !isFormValid && { backgroundColor: '#888' }]} // Desativa o botão se o formulário for inválido
+              onPress={handleSubmit}
+              disabled={!isFormValid} // Desativa a função do botão se o formulário for inválido
+            >
+              <Text style={styles.buttonText}>Entrar</Text>
+            </TouchableOpacity>
           </View>
 
-          <View style={styles.passwordContainer}>
-            <Text style={styles.label}>Senha</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="**********"
-              secureTextEntry
-              value={password}
-              onChangeText={setPassword}
-              autoCapitalize="none"
-              placeholderTextColor="#888"
-            />
+          <View style={styles.ajudalink2}>
+            <Link href="/cadastro" style={styles.link2}>Não tem uma conta? Cadastre-se</Link>
           </View>
-          
-          <Link href="/redefinirSenha" style={styles.link}>Esqueceu senha?Clique aqui</Link>
-          
-          <TouchableOpacity
-            style={styles.button}
-            onPress={handleSubmit}
-          >
-            <Text style={styles.buttonText}>Entrar</Text>
-          </TouchableOpacity>
         </View>
-
-        <View style={styles.ajudalink2}>
-          <Link href="/cadastro" style={styles.link2}>Não tem uma conta? Cadastre-se</Link>
-        </View>
-      </View>
       </ScrollView>
     </>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,    
+    flex: 1,
     padding: 16,
     marginTop: 30,
     justifyContent: 'space-between',
@@ -132,7 +138,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginLeft: 20, // Ajuste a margem esquerda para alinhar o texto
+    marginLeft: 20,
   },
   link: {
     fontSize: 17,
@@ -152,7 +158,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: "-8%",
+    marginBottom: '-8%',
     marginTop: 30,
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -166,7 +172,7 @@ const styles = StyleSheet.create({
   imageSmall: {
     width: 280,
     height: 180,
-    marginTop:36,
+    marginTop: 36,
     borderRadius: 50,
     marginHorizontal: 6,
     justifyContent: 'flex-end',
@@ -174,11 +180,11 @@ const styles = StyleSheet.create({
   },
   azul: {
     backgroundColor: '#0056B3',
-    height:120, 
+    height: 120,
     alignItems: 'center',
     justifyContent: 'center',
   },
   ajudalink2: {
-    marginTop:60,
-  }
+    marginTop: 60,
+  },
 });

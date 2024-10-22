@@ -1,44 +1,50 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground, ScrollView, GestureResponderEvent } from 'react-native';
-import { Link, router, useRouter } from 'expo-router';
-import Checkbox from 'expo-checkbox';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground, ScrollView, GestureResponderEvent } from 'react-native';
+import { Link, useRouter } from 'expo-router';
 import { loginRequest, RegisterRequest } from './utils/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 
 const LoginScreen = () => {
   const router = useRouter();
   const [login, setLogin] = useState('');
-    const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    const [telefone, setTelefone] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [passwordsMatch, setPasswordsMatch] = useState(true);
-    const [role] = useState('USER');
- 
-   
-    const [emailError, setEmailError] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const [role] = useState('USER');
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [showPasswordError, setShowPasswordError] = useState(false); // Variável para controlar exibição da mensagem de erro
 
-const validateEmail = (email: string) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-};
- 
-    const handleSubmit = async (e:  GestureResponderEvent) => {
-      e.preventDefault();
-      try {
-        await RegisterRequest({ login, password, role, name, telefone });
-        const data = await loginRequest({ login, password });
-        await AsyncStorage.setItem('@user_token', data.token);
-        router.push('/');
-        
-      } catch (error) {
-        console.error('Falha no registro:', error);
-      }
-     
+  // Validação do email
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // UseEffect para monitorar mudanças nos campos do formulário e validar o formulário
+  useEffect(() => {
+    const isEmailValid = validateEmail(login);
+    const isPasswordValid = password === confirmPassword && password.length > 0;
+    const isFormFilled = login.length > 0 && password.length > 0 && confirmPassword.length > 0 && name.length > 0 && telefone.length > 0;
+
+    setPasswordsMatch(isPasswordValid);
+    setIsFormValid(isFormFilled && isEmailValid && isPasswordValid);
+  }, [login, password, confirmPassword, name, telefone]);
+
+  const handleSubmit = async (e: GestureResponderEvent) => {
+    e.preventDefault();
+    if (!isFormValid) return; // Impede o envio se o formulário não for válido
+    try {
+      await RegisterRequest({ login, password, role, name, telefone });
+      const data = await loginRequest({ login, password });
+      await AsyncStorage.setItem('@user_token', data.token);
+      router.push('/');
+    } catch (error) {
+      console.error('Falha no registro:', error);
     }
-   
-
+  };
 
   return (
     <ScrollView style={{ backgroundColor: "#fff" }}>
@@ -60,26 +66,27 @@ const validateEmail = (email: string) => {
               placeholderTextColor="#888"
             />
           </View>
+
           <View style={styles.passwordContainer}>
             <Text style={styles.label}>Email</Text>
             <TextInput
-               style={styles.input}
-               placeholder="exemplo@gmail.com"
-               keyboardType="email-address" // Configura o teclado para e-mail
-               value={login}
-               onChangeText={(text) => {
-                 setLogin(text);
-                 if (!validateEmail(text)) {
-                   setEmailError('E-mail inválido'); // Mostra mensagem de erro se o e-mail não for válido
-                 } else {
-                   setEmailError('');
-                 }
-               }}
-               autoCapitalize="none"
-               placeholderTextColor="#888"
-             />
-             
-             {emailError ? <Text style={{ color: 'red', paddingLeft:22, }}>{emailError}</Text> : null}
+              style={styles.input}
+              placeholder="exemplo@gmail.com"
+              keyboardType="email-address"
+              value={login}
+              onChangeText={(text) => {
+                setLogin(text);
+                if (!validateEmail(text)) {
+                  setEmailError('E-mail inválido');
+                } else {
+                  setEmailError('');
+                }
+              }}
+              autoCapitalize="none"
+              placeholderTextColor="#888"
+            />
+            {emailError ? <Text style={{ color: 'red', paddingLeft: 22 }}>{emailError}</Text> : null}
+          </View>
 
           <View style={styles.passwordContainer}>
             <Text style={styles.label}>Telefone</Text>
@@ -88,14 +95,15 @@ const validateEmail = (email: string) => {
               placeholder="+55 (00) 00000-0000"
               value={telefone}
               onChangeText={(text) => {
-                const numericText = text.replace(/[^0-9]/g, ''); // Remove todos os caracteres que não são números
+                const numericText = text.replace(/[^0-9]/g, '');
                 setTelefone(numericText);
               }}
-              keyboardType="numeric" // Apenas números serão exibidos no teclado
+              keyboardType="numeric"
               autoCapitalize="none"
               placeholderTextColor="#888"
             />
           </View>
+
           <View style={styles.passwordContainer}>
             <Text style={styles.label}>Senha</Text>
             <TextInput
@@ -103,11 +111,15 @@ const validateEmail = (email: string) => {
               placeholder="**********"
               secureTextEntry
               value={password}
-              onChangeText={setPassword}
+              onChangeText={(text) => {
+                setPassword(text);
+                setShowPasswordError(true); // Exibe a mensagem de erro se começar a digitar
+              }}
               autoCapitalize="none"
               placeholderTextColor="#888"
             />
           </View>
+
           <View style={styles.passwordContainer}>
             <Text style={styles.label}>Confirmar Senha</Text>
             <TextInput
@@ -115,15 +127,23 @@ const validateEmail = (email: string) => {
               placeholder="**********"
               secureTextEntry
               value={confirmPassword}
-              onChangeText={setConfirmPassword}
+              onChangeText={(text) => {
+                setConfirmPassword(text);
+                setShowPasswordError(true); // Exibe a mensagem de erro se começar a digitar
+              }}
               autoCapitalize="none"
               placeholderTextColor="#888"
             />
+            {/* Exibe a mensagem de erro apenas quando o campo de senha for preenchido */}
+            {showPasswordError && !passwordsMatch && (
+              <Text style={{ color: 'red', paddingLeft: 22 }}>As senhas não coincidem</Text>
+            )}
           </View>
-          </View>
+
           <TouchableOpacity
-            style={styles.button}
+            style={[styles.button, !isFormValid && { backgroundColor: '#888' }]} // Desativa o botão se o formulário for inválido
             onPress={handleSubmit}
+            disabled={!isFormValid}
           >
             <Text style={styles.buttonText}>Cadastre-se</Text>
           </TouchableOpacity>
@@ -131,9 +151,7 @@ const validateEmail = (email: string) => {
 
         <Link href="/login" style={styles.link2}>Já tem uma conta? Faça Login</Link>
       </View>
-      
     </ScrollView>
-
   );
 };
 
@@ -178,28 +196,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 20,
   },
-  textoCheck:{
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginLeft: 8,
-    marginTop:6,
-  },
-  
-  check: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  checkbox: {
-    marginRight: 10,
-    marginTop:6,
-  },
-  link2: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginTop: 30,
-    color: '#0056B3',
-  },
   button: {
     height: 44,
     width: 200,
@@ -217,7 +213,12 @@ const styles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
     fontWeight: 'bold',
-    
+  },
+  link2: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 30,
+    color: '#0056B3',
   },
   imageSmall: {
     width: 280,
